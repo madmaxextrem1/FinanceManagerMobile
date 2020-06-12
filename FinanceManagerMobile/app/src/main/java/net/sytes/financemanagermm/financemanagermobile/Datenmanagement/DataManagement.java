@@ -25,6 +25,11 @@ public class DataManagement {
     private LinkedHashMap<Integer, KooperationAnfrage> cooperationRequests;
     private LinkedHashMap<Integer, Kooperation> cooperations;
 
+    public DataManagement (Context context) {
+        this.context = context;
+        this.serverCommunication = new ServerCommunication(context);
+    }
+
     public DataManagement (Context context, User currentUser) {
         this.currentUser =  currentUser;
         this.context = context;
