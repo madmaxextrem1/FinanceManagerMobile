@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/Titel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:gravity="bottom"
+        android:text="Benutzer einladen"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/DividerTop"
+        style="@style/MaterialDivider"
+        android:layout_below="@id/Titel"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"></View>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DividerTop"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Email"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:endIconMode="none"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_error_black_24dp"
+        app:errorIconTint="@color/design_default_color_error"
+        app:errorTextColor="@color/design_default_color_error"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_email_white_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:textSize="14sp"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/lblAusgabenVerteilung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Email"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="Ausgabenverteilung"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sldAusgabenVerteilung"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_below="@id/lblAusgabenVerteilung"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@id/lblValue"
+        android:value="0.5"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        app:labelBehavior="floating" />
+
+    <TextView
+        android:id="@+id/lblValue"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblAusgabenVerteilung"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/Divider"
+        style="@style/MaterialDivider"
+        android:layout_below="@id/sldAusgabenVerteilung"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/ButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/Divider"
+        android:layout_marginTop="0dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLöschen"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="false"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="@dimen/TextButtonElevation"
+            android:text="Bestätigen"
+            app:cornerRadius="@dimen/ButtonCornerRadius" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAbbrechen"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toStartOf="@id/btnLöschen"
+            android:elevation="@dimen/TextButtonElevation"
+            android:text="Abbrechen"
+            app:cornerRadius="@dimen/ButtonCornerRadius" />
+    </RelativeLayout>
+
+</RelativeLayout>

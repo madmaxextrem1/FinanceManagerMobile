@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/StatusImage"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_check_white_24dp"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:text="Benutzername"
+        android:textStyle="bold"
+        android:textColor="@color/ListItem_HeaderTextColor"
+        android:layout_toEndOf="@id/StatusImage"
+        android:id="@+id/Benutzername"
+        android:textAlignment="viewStart"
+        android:gravity="bottom"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/Benutzername_Ersteller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/ListItem_HeaderTextColor"
+        android:layout_marginBottom="4dp"
+        android:layout_above="@id/Mail"
+        android:layout_toEndOf="@id/Benutzername"
+        android:text="(Ersteller)"
+        android:gravity="bottom"
+        android:textAlignment="viewStart"
+        android:textSize="10sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/Mail"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="bottom"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/ListItem_SubTextColor"
+        android:layout_toEndOf="@id/StatusImage"
+        android:layout_below="@id/Benutzername"
+        android:text="Mailadresse"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <com.xw.repo.BubbleSeekBar
+        android:id="@+id/sldVerteilung"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="8dp"
+        app:bsb_min="0"
+        app:bsb_bubble_color="@color/primary"
+        app:bsb_bubble_text_color="@color/white"
+        app:bsb_second_track_size="5dp"
+        app:bsb_track_size="4dp"
+        app:bsb_track_color="@color/md_grey_400"
+        app:bsb_second_track_color="@color/primary"
+        app:bsb_max="100"
+        app:bsb_thumb_color="@color/primary"
+        android:enabled="false"
+        app:bsb_thumb_radius="0dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_below="@id/Mail"
+        android:layout_toEndOf="@id/StatusImage">
+    </com.xw.repo.BubbleSeekBar>
+    <!--<com.google.android.material.slider.Slider
+        android:id="@+id/sldVerteilung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="0dp"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:layout_below="@id/Mail"
+        android:layout_toStartOf="@id/Verteilung"
+        android:layout_toEndOf="@id/Image"/>-->
+
+    <TextView
+        android:id="@+id/Verteilung"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_below="@id/Mail"
+        android:layout_marginTop="6dp"
+        android:layout_toEndOf="@id/sldVerteilung"
+        android:text="100%"
+        android:gravity="center_vertical"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textSize="16sp" />
+    <View
+        style="@style/MaterialDivider"
+        android:id="@+id/Divider"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true">
+    </View>
+</RelativeLayout>

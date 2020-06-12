@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:id="@+id/Layout_Ergebnis"
+        android:backgroundTint="@color/fm_Login_Background_Color"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblGesamtergebnis"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/fm_Login_Background_Color"
+            android:paddingTop="8dp"
+            android:text="0 €"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="top"
+            android:alignmentMode="alignMargins"
+            android:background="@color/fm_Login_Background_Color"
+            android:backgroundTint="@color/white"
+            android:columnCount="2"
+            android:columnOrderPreserved="true"
+            android:rowCount="1">
+
+            <TextView
+                android:id="@+id/lblEinnahmenÜberschrift"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="top"
+                android:layout_marginRight="0.2dp"
+                android:background="@color/fm_Login_Background_Color"
+                android:gravity="top"
+                android:paddingRight="5dp"
+                android:text="@string/Hauptmenu_Fragment_lblEinnahmenÜberschrift"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblAusgabenÜberschrift"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="top"
+                android:layout_marginLeft="0.2dp"
+                android:background="@color/fm_Login_Background_Color"
+                android:gravity="top"
+                android:paddingLeft="5dp"
+                android:text="@string/Hauptmenu_Fragment_lblAusgabenÜberschrift"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:background="@color/fm_Login_Background_Color"
+            android:backgroundTint="@color/white"
+            android:columnCount="2"
+            android:columnOrderPreserved="true"
+            android:rowCount="1">
+
+            <TextView
+                android:id="@+id/lblEinnahmen"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="0.2dp"
+                android:background="@color/fm_Login_Background_Color"
+                android:paddingRight="5dp"
+                android:text="0 €"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/hauptmenu_lblEinnahme_Forecolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/lblAusgaben"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="0.2dp"
+                android:background="@color/fm_Login_Background_Color"
+                android:paddingLeft="5dp"
+                android:text="0 €"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/hauptmenu_lblAusgaben_Forecolor"
+                android:textSize="20sp" />
+
+        </GridLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:backgroundTint="@color/fm_Login_Background_Color">
+        </View>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvBenutzerBilanzen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="7dp"
+        android:layout_below="@id/Layout_Ergebnis"
+        android:paddingTop="7dp"
+        android:paddingRight="7dp"
+        android:paddingBottom="7dp"/>
+</RelativeLayout>

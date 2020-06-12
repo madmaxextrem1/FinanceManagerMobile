@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cboKategorie"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/cboKooperation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Kategorie"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:endIconMode="clear_text"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_list_white_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="textCapSentences"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/cboKooperation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        android:layout_height="56dp"
+        app:hintEnabled="true"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        android:hint="Kooperation (optional)"
+        app:spinnerMode="dropdown"
+        app:endIconMode="custom"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_arrow_drop_down"
+        android:layout_below="@id/Layout_cboMerkmale"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:startIconDrawable="@drawable/ic_group_white_24dp"/>
+
+
+    <FrameLayout
+        android:id="@+id/Layout_cboMerkmale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/textfield_box_background"
+        android:fadeScrollbars="true"
+        android:minHeight="62dp"
+        android:nestedScrollingEnabled="true"
+        android:paddingStart="48dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="8dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarDefaultDelayBeforeFade="0">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/ChipGroupMerkmale"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:nestedScrollingEnabled="true"
+            android:scrollbars="horizontal"
+            app:chipSpacingHorizontal="4dp"
+            app:chipSpacingVertical="0dp"
+            app:lineSpacing="0dp"
+            app:singleLine="false"
+            app:singleSelection="true"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/ico_Merkmal"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/ic_merkmal_white_24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@id/ico_Merkmal"
+        android:gravity="top"
+        android:text="Merkmal auswählen (optional)"
+        android:textColor="#555555"
+        android:textSize="12sp"
+        android:visibility="visible"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtNächsteAusführung"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/cboKategorie"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Nächste Ausführung"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_date_white_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.sytes.financemanagermm.financemanagermobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".Globales_Sonstiges.ApplicationController"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_fm_appicon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Gemeinsame_Finanzen.Gemeinsame_Finanzen_Kooperation">
+        </activity>
+        <activity
+            android:name=".Sign_In_Up.Splash"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Sign_In_Up.Sing_In"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".Hauptmenu.Hauptmenu"
+            android:label="@string/title_activity_hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Buchungen.Buchung"
+            android:label="@string/title_activity_neue_buchung"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
+            android:name=".Sign_In_Up.Sign_Up"
+            android:label="@string/title_activity_SignUp"
+            android:parentActivityName=".Sign_In_Up.Sing_In"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.Sing_In" />
+        </activity>
+        <activity
+            android:name=".Buchungen.Umbuchung"
+            android:label="@string/title_activity_umbuchungen"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
+            android:name=".Verwaltung.Verwaltung_Daueraufträge_Übersicht"
+            android:label="@string/sidemenu_dauerauftraege_title"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
+            android:name=".Verwaltung.Verwaltung_Konten_Übersicht"
+            android:label="@string/title_activity_konten_uebersicht"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
+            android:name=".Verwaltung.Verwaltung_Kategorien_Übersicht"
+            android:label="@string/activity_title_kategorien"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
+            android:name=".Gemeinsame_Finanzen.Gemeinsame_Finanzen"
+            android:label="@string/title_activity_gemeinsame_finanzen"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+    </application>
+
+</manifest>

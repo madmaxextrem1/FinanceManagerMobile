@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/white"
+    tools:context=".Verwaltung.Verwaltung_Konten_Detailansicht">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Toolbar_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/Kontendetails_btnDialogClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_close_24dp_white" />
+
+            <TextView
+                android:id="@+id/Kontendetails_lblDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/Kontendetails_btnDialogClose"
+                android:text="@string/Verwaltung_Konten_Detailansicht_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/Kontendetails_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="-16dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        android:layout_below="@+id/Toolbar_CardView">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/KontoArtImage"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_account_balance_white_24dp">
+                </ImageView>
+
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_toEndOf="@id/KontoArtImage"
+                        android:text="Bestand"
+                        android:textStyle="normal"
+                        android:layout_toStartOf="@id/KontoEntwicklungImage"
+                    android:layout_marginEnd="8dp"
+                        android:id="@+id/KontoBestand"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/KontoEntwicklungImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_arrow_downward_white_24dp">
+
+                </ImageView>
+
+        <TextView
+            android:id="@+id/KontoEntwicklung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/KontoArtImage"
+            android:layout_below="@id/KontoBestand"
+            android:layout_toStartOf="@id/KontoEntwicklungImage"
+            android:text="Anzahl Buchungen"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionGroup="true"
+        android:layout_below="@id/Kontendetails_CardView"
+        android:visibility="visible">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Konto_Titel"
+            android:hint="Kontotitel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:endIconMode="clear_text"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@color/textfield_box_background"
+            app:boxBackgroundMode="filled"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxStrokeWidth="0.2dp"
+            app:startIconDrawable="@drawable/ic_edit_white_24dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxStrokeColor="@color/ButtonBackColor"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:textAlignment="textStart"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Kooperation"
+            android:hint="Kooperation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:endIconMode="clear_text"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@color/textfield_box_background"
+            app:boxBackgroundMode="filled"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxStrokeWidth="0.2dp"
+            android:layout_below="@id/Konto_Titel"
+            app:startIconDrawable="@drawable/ic_group_white_24dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxStrokeColor="@color/ButtonBackColor"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:textAlignment="textStart"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.tiper.MaterialSpinner
+            android:id="@+id/Kontendetails_cboKontoArt"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:hintEnabled="true"
+            app:boxBackgroundMode="filled"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxStrokeWidth="0.2dp"
+            app:boxStrokeColor="@color/ButtonBackColor"
+            app:hintAnimationEnabled="true"
+            app:boxBackgroundColor="@color/textfield_box_background"
+            android:hint="Kontoart"
+            app:spinnerMode="dropdown"
+            app:endIconMode="custom"
+            app:endIconCheckable="true"
+            app:endIconDrawable="@drawable/ic_arrow_drop_down"
+            android:layout_below="@id/Kooperation"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:startIconDrawable="@drawable/ic_account_balance_white_24dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Kontendetails_txtAnfangsbestand"
+            android:layout_below="@id/Kontendetails_cboKontoArt"
+            android:hint="Anfangsbestand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_euro_symbol_white_24dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@color/textfield_box_background"
+            app:boxBackgroundMode="filled"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxStrokeWidth="0.2dp"
+            app:boxStrokeColor="@color/ButtonBackColor"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textAlignment="textStart"
+                android:textSize="16sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Kontendetails_txtDatumAnfangsbestand"
+            android:layout_below="@id/Kontendetails_txtAnfangsbestand"
+            android:hint="Datum Anfangsbestand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="@color/textfield_box_background"
+            app:boxBackgroundMode="filled"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxStrokeWidth="0.2dp"
+            app:boxStrokeColor="@color/ButtonBackColor"
+            app:hintAnimationEnabled="true"
+            app:startIconDrawable="@drawable/ic_date_white_24dp"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:switchMinWidth="36dp"
+            android:textSize="16sp"
+            android:text="Aktiv"
+            android:id="@+id/Kontendetails_swtAktiv"
+            android:layout_below="@id/Kontendetails_txtDatumAnfangsbestand"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Kontendetails_btn_Speichern"
+            app:cornerRadius="@dimen/ButtonCornerRadius"
+            app:backgroundTint="@color/ButtonBackColor"
+            style="@style/Widget.MaterialComponents.Button"
+            android:elevation="@dimen/ButtonElevation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Speichern"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

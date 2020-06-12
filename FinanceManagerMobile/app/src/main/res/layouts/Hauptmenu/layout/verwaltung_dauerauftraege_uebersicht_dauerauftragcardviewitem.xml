@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginStart="@dimen/CardMarginLeft"
+        android:layout_marginEnd="@dimen/CardMarginRight"
+        android:layout_marginBottom="@dimen/CardMarginBottom"
+        app:cardCornerRadius="@dimen/CardCornerRadius"
+        app:cardElevation="@dimen/CardElevation"
+        style="@style/Widget.MaterialComponents.CardView">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/Konto_Image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="@color/colorPrimary"
+        android:foregroundTint="@color/white"
+        android:scaleType="centerInside" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Dauerauftragtitel"
+                android:id="@+id/Titel"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:lines="1"
+                android:layout_toEndOf="@id/Konto_Image"
+                android:layout_toStartOf="@id/Betrag"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="viewStart"
+                android:layout_alignParentTop="true"
+                android:maxLines="1"
+                android:textColor="@color/ListItem_HeaderTextColor"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_toEndOf="@id/Konto_Image"
+                android:layout_toStartOf="@id/Betrag"
+                android:layout_marginEnd="8dp"
+                android:layout_below="@id/Titel"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:text="Rhythmus"
+                android:textStyle="normal"
+                android:id="@+id/Rhythmus"
+                android:textAlignment="viewStart"
+                android:textColor="@color/ListItem_SubTextColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/Betrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:text="100,00 €"
+                android:textColor="@color/ListItem_HeaderTextColor"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textAlignment="viewStart">
+            </TextView>
+        <TextView
+            android:id="@+id/Naechste_Ausführung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Nächste Ausführung"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:layout_below="@id/Konto_Image"
+            android:textSize="13sp" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

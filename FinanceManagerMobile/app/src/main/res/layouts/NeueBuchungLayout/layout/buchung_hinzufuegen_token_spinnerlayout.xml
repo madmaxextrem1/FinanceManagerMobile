@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="center_vertical|right"
+        android:layout_height="40dp"
+        android:id="@+id/Buchung_Hinzufügen_Token_Spinnerlayout_Textview"
+        android:fontFamily="@font/segoeuil"
+        android:paddingLeft="10dp"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:text=""
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textColorHint="?attr/colorButtonNormal"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:textAlignment="textStart"/>
+

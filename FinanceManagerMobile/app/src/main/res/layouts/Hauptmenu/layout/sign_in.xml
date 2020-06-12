@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/fm_Login_Background_Color"
+    tools:context=".Sign_In_Up.Sing_In"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/FinanceManager_Image"
+            android:background="@drawable/ic_piggy_bank"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/app_name"
+            android:layout_below="@id/FinanceManager_Image"
+            android:textSize="28dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:id="@+id/lbl_FinanceManager"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+    android:layout_marginTop="30dp"
+            android:layout_below="@id/lbl_FinanceManager"
+    android:hint="Email"
+            app:startIconDrawable="@drawable/ic_email_white_24dp"
+            app:startIconTint="@color/white"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/white"
+    android:id="@+id/txtUsername"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    app:boxBackgroundColor="@color/fm_Login_Background_Color"
+    app:boxBackgroundMode="outline"
+    app:boxCollapsedPaddingTop="4dp"
+    app:boxStrokeWidth="1dp"
+    app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+    app:hintAnimationEnabled="true"
+            app:boxStrokeWidthFocused="2dp"
+    android:textColorHint="@color/white"
+    app:hintEnabled="true">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:textColor="@color/white"
+        android:textAlignment="textStart"
+        android:textSize="14sp" />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtUsername"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/Hint_Password"
+            android:id="@+id/txtPwd"
+            style="@style/LoginTextInputLayoutStyle"
+            app:startIconDrawable="@drawable/ic_lock_black_24dp"
+            app:startIconTint="@color/white"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/white"
+            android:theme="@style/LoginTextInputLayoutStyle"
+            app:boxBackgroundColor="@color/fm_Login_Background_Color"
+            app:boxBackgroundMode="outline"
+            app:boxCollapsedPaddingTop="4dp"
+            app:boxStrokeWidth="1dp"
+            app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+            app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+            app:boxStrokeColor="@color/white"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/lblPwVergessen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Login_PW_Vergessen"
+        android:layout_below="@id/txtPwd"
+        android:layout_alignParentEnd="true"
+        android:textSize="12sp"
+        android:gravity="start"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/white"
+        android:textAlignment="viewEnd"
+        android:textColorLink="@color/Login_Textbox_Underline"
+        android:layout_marginTop="4dp"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/chkRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@id/txtPwd"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            app:useMaterialThemeColors="true"
+            app:buttonTint="@color/Login_Textbox_Underline"
+            android:text="@string/chk_Remember"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            app:cornerRadius="@dimen/ButtonCornerRadius"
+            app:backgroundTint="@color/ButtonBackColor"
+            style="@style/Widget.MaterialComponents.Button"
+            android:elevation="@dimen/ButtonElevation"
+            android:gravity="center"
+            android:layout_below="@id/chkRemember"
+            android:id="@+id/btn_Login"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/Login_Textbox_Underline"
+            android:text="@string/btn_Login"
+            android:textColor="@color/white"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp" />
+
+        <TextView
+            android:id="@+id/Login_lblSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Login_SignUp"
+            android:layout_below="@id/btn_Login"
+            android:textSize="14sp"
+            android:gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
+            android:textAlignment="viewStart"
+            android:textColorLink="@color/Login_Textbox_Underline"
+            android:layout_marginTop="10dp"/>
+
+</RelativeLayout>
+</ScrollView>

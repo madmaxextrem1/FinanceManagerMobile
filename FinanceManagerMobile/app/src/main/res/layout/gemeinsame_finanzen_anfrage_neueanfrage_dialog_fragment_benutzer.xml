@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/lblAusgabenVerteilung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Ausgabenverteilung"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/rdbGleichverteilung"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/rdbGrpAusgabenverteilung"
+        android:layout_below="@id/lblAusgabenVerteilung"
+        android:orientation="vertical">
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rdbGleichverteilung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gleichverteilung"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rdbIndividuell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Individuell"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/lbl_Kategorie_Beschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/btnBenutzer_Hinzufügen"
+        android:text="Benutzer"
+        android:layout_below="@id/rdbGrpAusgabenverteilung"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnBenutzer_Hinzufügen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_alignParentStart="true"
+        app:maxImageSize="24dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/rdbGrpAusgabenverteilung"
+        android:layout_marginBottom="0dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:backgroundTint="@color/ButtonBackColor"
+        app:fabSize="mini"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/ic_add_white_24dp"/>
+
+    <View
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:id="@+id/Buchung_Seperator_Eingaben"
+        android:layout_below="@id/lbl_Kategorie_Beschreibung"
+        style="@style/MaterialDivider1_2"/>
+
+    <ListView
+        android:id="@+id/lvBenutzer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnBenutzer_Hinzufügen"
+        android:layout_gravity="top"
+        android:dividerHeight="0dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:scrollbars="vertical">
+    </ListView>
+
+</RelativeLayout>

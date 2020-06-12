@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/KontoArt_Image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_account_balance_white_24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/primary"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:id="@+id/KontoArt_Titel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Kontoart"
+        android:layout_gravity="center_vertical"
+        android:textAlignment="gravity"
+        android:textColor="@color/ListItem_HeaderTextColor"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/KontoArt_Image"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"/>
+</RelativeLayout>
+

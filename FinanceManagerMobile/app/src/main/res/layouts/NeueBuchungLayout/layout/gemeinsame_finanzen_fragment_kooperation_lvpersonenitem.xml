@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:layout_marginLeft="0dp"
+    android:layout_below="@id/Titel"
+    android:layout_toEndOf="@id/LeftImage"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/StatusImage"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_check_white_24dp"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        android:text="Benutzername"
+        android:layout_toEndOf="@id/StatusImage"
+        android:id="@+id/Benutzername"
+        android:textAlignment="viewStart"
+        style="Style"
+        android:gravity="bottom" />
+    <TextView
+        android:id="@+id/Benutzername_Ersteller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/ListItem_HeaderTextColor"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_above="@id/Mail"
+        android:layout_toEndOf="@id/Benutzername"
+        android:text="(Ersteller)"
+        android:gravity="bottom"
+        android:textAlignment="viewStart"
+        android:textSize="10sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/Mail"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="bottom"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/StatusImage"
+        android:layout_below="@id/Benutzername"
+        android:text="Mailadresse"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="viewStart" />
+    <TextView
+        android:id="@+id/Beitrittsdatum"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="bottom"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/StatusImage"
+        android:layout_below="@id/Mail"
+        android:text="Beitrittsdatum"
+        android:textAlignment="viewStart" />
+    <View
+        style="@style/MaterialDivider"
+        android:id="@+id/Divider"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true">
+    </View>
+</RelativeLayout>

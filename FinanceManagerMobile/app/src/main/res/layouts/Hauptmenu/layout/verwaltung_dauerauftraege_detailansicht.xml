@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Toolbar_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/Kontendetails_btnDialogClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_close_24dp_white" />
+
+            <TextView
+                android:id="@+id/Kontendetails_lblDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/Kontendetails_btnDialogClose"
+                android:text="Dauerauftragtitel"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/btnDelete"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/ic_delete_white_24dp"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/Dauerauftrag_Details_TopCardView"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="-16dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        android:layout_below="@+id/Toolbar_CardView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/KontoArtImage"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_account_balance_white_24dp">
+            </ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/KontoArtImage"
+                android:text="Nächste Ausführung"
+                android:textStyle="normal"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/NächsteAusführung"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/LetzteAusführung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@id/KontoArtImage"
+                android:layout_below="@id/NächsteAusführung"
+                android:text="Letzte Ausführung"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+   <com.ogaclejapan.smarttablayout.SmartTabLayout
+        android:layout_below="@id/Dauerauftrag_Details_TopCardView"
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:stl_indicatorAlwaysInCenter="false"
+        app:stl_indicatorWithoutPadding="false"
+        app:stl_indicatorInFront="false"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorGravity="bottom"
+        app:stl_indicatorColor="@color/Login_Textbox_Underline"
+        app:stl_indicatorThickness="4dp"
+        app:stl_indicatorWidth="auto"
+        app:stl_indicatorCornerRadius="2dp"
+        app:stl_overlineColor="@color/Login_Textbox_Underline"
+        app:stl_overlineThickness="0dp"
+        app:stl_underlineColor="@color/Login_Textbox_Underline"
+        app:stl_underlineThickness="1dp"
+        app:stl_dividerColor="@color/Login_Textbox_Underline"
+        app:stl_dividerThickness="1dp"
+        app:stl_defaultTabBackground="@color/fm_Login_Background_Color"
+        app:stl_defaultTabTextAllCaps="true"
+        app:stl_defaultTabTextColor="@color/white"
+        app:stl_defaultTabTextSize="12sp"
+        app:stl_defaultTabTextHorizontalPadding="16dp"
+        app:stl_defaultTabTextMinWidth="0dp"
+        app:stl_distributeEvenly="true"
+        app:stl_clickable="true"
+        app:stl_titleOffset="24dp"
+        app:stl_drawDecorationAfterTab="true"
+        />
+
+     <androidx.viewpager.widget.ViewPager
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_below="@id/tab_layout"
+         android:layout_marginTop="0dp"
+         android:layout_marginBottom="-5dp"
+         android:id="@+id/view_pager"
+         android:layout_above="@+id/Kontendetails_btn_Speichern">
+
+     </androidx.viewpager.widget.ViewPager>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Kontendetails_btn_Speichern"
+            app:cornerRadius="@dimen/ButtonCornerRadius"
+            app:backgroundTint="@color/ButtonBackColor"
+            style="@style/Widget.MaterialComponents.Button"
+            android:elevation="@dimen/ButtonElevation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:text="Speichern"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+    </RelativeLayout>

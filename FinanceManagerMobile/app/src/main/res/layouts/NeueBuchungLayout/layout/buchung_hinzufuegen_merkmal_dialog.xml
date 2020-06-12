@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="fill_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:nestedScrollingEnabled="true"
+    android:scrollbars="vertical"
+   android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar_Kategorie_Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/fm_Login_Background_Color"
+        android:foregroundTint="@color/white"
+        app:titleTextColor="@color/white"
+        app:title="@string/title_Kategorie_Dialog"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="top"
+        android:divider="@color/transparent_seperator_gray"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@null"
+        android:childDivider="@color/fm_Login_Background_Color"
+        android:choiceMode="singleChoice"
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_lv_Kategorien">
+    </ExpandableListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fm_Login_Background_Color"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingLeft="10dp"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_txtBetrag"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:fontFamily="@font/segoeuil"
+        android:textStyle="normal"
+        android:textSize="20sp"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:hint="Betrag"
+        android:textAlignment="textStart"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        android:textColorHint="?attr/colorButtonNormal"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="bottom"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <RadioButton
+            android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_rdbEinnahme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/rdb_Buchtp_Einnahme"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_rdbAusgabe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/rdb_Buchtyp_Ausgabe" />
+    </RadioGroup>
+
+
+</LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/fm_Login_Background_Color"
+        android:fontFamily="@font/segoeuil"
+        android:text="@string/Kategorie_Dialog_Button_Fertig"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColorHint="?attr/colorButtonNormal"
+        android:textColorLink="@android:color/holo_blue_bright" />
+
+</LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

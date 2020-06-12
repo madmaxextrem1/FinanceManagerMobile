@@ -1,0 +1,8 @@
+<chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:chipBackgroundColor="@color/colorPrimary"
+    app:chipIcon="@drawable/ic_user"
+    app:closeIconEnabled="true"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    style="@style/Widget.MaterialComponents.Chip.Entry"
+    app:closeIconTint="@android:color/white" />

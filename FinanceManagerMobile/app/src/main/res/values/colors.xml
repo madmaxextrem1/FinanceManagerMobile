@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#0055FF</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="fm_Login_Background_Color">#0a4d77</color>
+    <color name="fm_Login_Background_Color_Alt">#1F4769</color>
+    <color name="hauptmenu_cardview_background">#0055FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="Login_Textbox_Underline">#39daf7</color>
+    <color name="NeueBuchung_background">#4b65af</color>
+
+
+
+    <color name="ListItem_HeaderTextColor">#212121</color>
+    <color name="ListItem_SubTextColor">#A4A4A4</color>
+    <color name="ListItem_EditBackgroundColor">#54c0e4</color>
+    <color name="ListItem_DeleteBackgroundColor">#d70000</color>
+
+    <color name="MainColorApplication">#0055FF</color>
+    <color name="ChipBackGroundChecked">#0055FF</color>
+    <color name="ChipBackGroundUnchecked">#A9A9A9</color>
+    <color name="IconForegroundColor">#5F5F5F</color>
+    <color name="AlertDialog_Title_TextColor">#212121</color>
+    <color name="AlertDialog_Message_TextColor">#666666</color>
+
+    <color name="Transparent">#FFFFFFFF</color>
+    <color name="fab_Color_Hauptmenu">#FF1F9037</color>
+    <color name="betrag_negativ">#FFD90B0B</color>
+    <color name="buchung_view_label_textcolor">#A4A4A4</color>
+    <color name="buchung_view_headerlabel_textcolor">#212121</color>
+    <color name="transparent_seperator_gray">#60000000</color>
+    <color name="hauptmenu_lblEinnahme_Forecolor">#90C93F</color>
+    <color name="hauptmenu_lblAusgaben_Forecolor">#81D7F8</color>
+    <color name="textfield_box_background">#E8E8E8</color>
+    <color name="textfield_icon_foreground">#6A6A6A</color>
+    <color name="textfield_text_color">#000000</color>
+    <color name="ButtonBackColor">#0055FF</color>
+    <color name="SpinnerArrowColor">#A9A9A9</color>
+    <color name="Default_Activity_Background">#ff000000</color>
+    <color name="Activity_Background">#E5E5E5</color>
+    <color name="Navigationbar_Background">#FFFFFF</color>
+    <color name="Navigationbar_TextColor_Inactive">#FFC4C4C7</color>
+    <color name="Navigationbar_TextColor_Active">#303F9F</color>
+    <color name="CardViewInactiveBackground">#FFC4C4C7</color>
+    <color name="CardViewInactiveRest">#FF6F6F70</color>
+    <color name="MaterialDividerColor">#66C4C4C7</color>
+    <color name="ActiveKooperation">#FF2E8B57</color>
+    <color name="CardviewTopIconColor">#A3A3A3</color>
+    <color name="neueAnfrageDialog_BenutzerHinzufügenColor">#CCCCCC</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
+    <color name="colorLightGray">#9E9E9E</color>
+    <color name="colorDefaultBackground">#FFFFFFFF</color>
+</resources>

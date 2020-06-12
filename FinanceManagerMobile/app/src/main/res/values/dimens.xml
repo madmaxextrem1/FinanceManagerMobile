@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="design_fab_image_size" tools:override="true">42dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="CardHeight">120dp</dimen>
+    <dimen name="CardWidth">270dp</dimen>
+    <dimen name="CardMarginLeft">4dp</dimen>
+    <dimen name="CardMarginBottom">8dp</dimen>
+    <dimen name="CardMarginRight">4dp</dimen>
+    <dimen name="CardElevation">1dp</dimen>
+    <dimen name="CardCornerRadius">4dp</dimen>
+    <dimen name="InputLayoutHeight">56dp</dimen>
+    <dimen name="InputLayoutPaddingLeft">12dp</dimen>
+    <dimen name="InputLayoutPaddingRight">12dp</dimen>
+    <dimen name="ButtonCornerRadius">0dp</dimen>
+    <dimen name="ButtonElevation">2dp</dimen>
+    <dimen name="TextButtonElevation">0dp</dimen>
+    <dimen name="Card_Min_Height">120dp</dimen>
+    <dimen name="customMaterialDialog_title_textsize">20sp</dimen>
+    <dimen name="customMaterialDialog_message_textsize">14sp</dimen>
+    <dimen name="collapsed_size">48dp</dimen>
+    <dimen name="collapsed_icon_size">32dp</dimen>
+    <dimen name="expanded_icon_size">40dp</dimen>
+    <dimen name="icon_margin">8dp</dimen>
+    <dimen name="default_corner_radius">4dp</dimen>
+    <dimen name="expand_drawable_size">24dp</dimen>
+    <dimen name="side_sheet_peek_width_min">64dp</dimen>
+    <dimen name="Toolbar_Height">56dp</dimen>
+</resources>

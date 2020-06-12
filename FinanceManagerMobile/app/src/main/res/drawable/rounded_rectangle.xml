@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <solid android:color="#ffffff" />
+    <corners
+        android:topLeftRadius="16dp"
+        android:topRightRadius="16dp"/>
+
+<!--    <stroke
+    android:width="2dp"
+    android:color="@color/fm_Login_Background_Color"
+    android:dashWidth="2dp">
+
+</stroke>-->
+<!--    <size
+        android:height="60dp"
+        android:width="60dp" />-->
+
+</shape>

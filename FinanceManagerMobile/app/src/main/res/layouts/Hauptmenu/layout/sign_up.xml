@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sign_In_Up.Sign_Up">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Toolbar_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/Buchung_Toolbar_btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_back_white_24dp" />
+            <TextView
+                android:id="@+id/Toolbar_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/Buchung_Toolbar_btnClose"
+                android:text="@string/SignUpTitle"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/eMail"
+        android:hint="@string/Hint_eMail"
+        app:endIconMode="clear_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:startIconDrawable="@drawable/ic_email_white_24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/Toolbar_CardView"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:errorIconTint="@color/design_default_color_error"
+        app:errorIconDrawable="@drawable/ic_error_black_24dp"
+        app:errorTextColor="@color/design_default_color_error"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Benutzername"
+        android:hint="@string/Hint_Username"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_person_white_24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/eMail"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Password"
+        android:hint="@string/Hint_Password"
+        app:endIconMode="password_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:startIconDrawable="@drawable/ic_lock_black_24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/Benutzername"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:errorIconTint="@color/design_default_color_error"
+        app:errorIconDrawable="@drawable/ic_error_black_24dp"
+        app:errorTextColor="@color/design_default_color_error"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordWdh"
+        android:hint="@string/Hint_Password_Wdh"
+        app:endIconMode="password_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:errorIconTint="@color/design_default_color_error"
+        app:errorIconDrawable="@drawable/ic_error_black_24dp"
+        app:errorTextColor="@color/design_default_color_error"
+        app:errorEnabled="true"
+        app:startIconDrawable="@drawable/ic_lock_black_24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/Password"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusTopEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomEnd="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusBottomStart="@dimen/ButtonCornerRadius"
+        app:boxCornerRadiusTopStart="@dimen/ButtonCornerRadius"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.button.MaterialButton
+    android:layout_width="match_parent"
+    app:cornerRadius="@dimen/ButtonCornerRadius"
+    app:backgroundTint="@color/ButtonBackColor"
+    style="@style/Widget.MaterialComponents.Button"
+    android:elevation="@dimen/ButtonElevation"
+    android:gravity="center"
+    android:layout_below="@id/PasswordWdh"
+    android:id="@+id/btn_SignUp"
+    android:layout_height="50dp"
+    android:backgroundTint="@color/primary"
+    android:text="@string/btn_SignUp"
+    android:textColor="@color/white"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    android:textAlignment="center"
+    android:textSize="14sp"
+    android:layout_marginTop="0dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"  />
+
+        </RelativeLayout>

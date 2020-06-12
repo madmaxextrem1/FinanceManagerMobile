@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="fill_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:nestedScrollingEnabled="true"
+    android:scrollbars="vertical"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Toolbar_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/Kontendetails_btnDialogClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_close_24dp_white" />
+
+            <TextView
+                android:id="@+id/Kontendetails_lblDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/Kontendetails_btnDialogClose"
+                android:text="@string/Kategorie_Auswahl_Dialog_Title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="2dp"
+        android:scrollbars="vertical"
+        android:divider="@color/transparent_seperator_gray"
+        android:dividerHeight="0dp"
+        android:groupIndicator="@null"
+        android:childDivider="@color/fm_Login_Background_Color"
+        android:choiceMode="singleChoice"
+        android:id="@+id/Kategorie_Dialog_lv_Kategorien"
+        android:layout_above="@id/Kategorie_Dialog_Trennlinie_lvKategorien"
+        android:layout_below="@id/Toolbar_CardView">
+    </ExpandableListView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/Activity_Background"
+        android:id="@+id/Kategorie_Dialog_Trennlinie_lvKategorien"
+        android:layout_above="@id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"/>
+
+   <com.google.android.material.button.MaterialButton
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"
+        app:cornerRadius="@dimen/ButtonCornerRadius"
+        app:backgroundTint="@color/ButtonBackColor"
+        style="@style/Widget.MaterialComponents.Button"
+       android:layout_alignParentBottom="true"
+        android:elevation="@dimen/ButtonElevation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:text="Auswählen"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
+</RelativeLayout>

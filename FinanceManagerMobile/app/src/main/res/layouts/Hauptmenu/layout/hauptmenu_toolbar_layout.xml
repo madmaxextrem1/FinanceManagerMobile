@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/white"
+    android:layout_height="@dimen/Toolbar_Height">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="center_vertical|right"
+        android:layout_height="match_parent"
+        android:id="@+id/Hauptmenu_Toolbar_Title"
+        android:fontFamily="@font/segoeuil"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:text=""
+        android:textColor="@color/white"
+        android:textColorHint="?attr/colorButtonNormal"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:id="@+id/Hauptmenu_Toolbar_Month"
+        android:textSize="20sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:text="Aug 2019"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@id/Hauptmenu_Toolbar_FilterButton"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true"
+        android:textAlignment="viewStart"/>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/Hauptmenu_Toolbar_FilterButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_filter_list_white_24dp"
+        android:layout_alignParentEnd="true"
+        >
+    </androidx.appcompat.widget.AppCompatImageButton>
+
+</RelativeLayout>
+
+
+
+
+

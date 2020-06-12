@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:maxWidth="280dp"
+    android:minWidth="280dp">
+
+    <TextView
+        android:id="@+id/Titel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="bottom"
+        android:maxLines="1"
+        android:text="Titel"
+        android:textAlignment="viewStart"
+        android:textColor="@color/AlertDialog_Title_TextColor"
+        android:textSize="20sp" />
+
+    <View
+        style="@style/MaterialDivider"
+        android:id="@+id/TopDivider"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/Titel" />
+
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rdbGroup"
+    android:paddingStart="24dp"
+    android:orientation="vertical"
+    android:layout_below="@id/TopDivider">
+</RadioGroup>
+
+    <View
+        style="@style/MaterialDivider"
+        android:id="@+id/BotDivider"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/rdbGroup" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLöschen"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@id/BotDivider"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="@dimen/TextButtonElevation"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Löschen"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:cornerRadius="@dimen/ButtonCornerRadius" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAbbrechen"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@id/BotDivider"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@id/btnLöschen"
+        android:elevation="@dimen/TextButtonElevation"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Abbrechen"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:cornerRadius="@dimen/ButtonCornerRadius" />
+</RelativeLayout>

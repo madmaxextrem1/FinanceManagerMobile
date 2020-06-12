@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/mainmenu_bottomnav_home"
+    android:icon="@drawable/ic_home_white_24dp"
+    android:title="Home">
+    </item>
+    <item
+        android:id="@+id/mainmenu_bottomnav_buchungen"
+        android:icon="@drawable/ic_buchungen_white_24dp"
+        android:title="Buchungen">
+    </item>
+    <item
+        android:id="@+id/mainmenu_bottomnav_auswertung"
+        android:icon="@drawable/ic_auswertung_white_24dp"
+        android:title="Auswertung">
+    </item>
+
+</menu>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:padding = "10dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/hauptmenu_buchungen_lv_item_circle"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="bearbeiten"
+        android:scaleType="centerInside"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="@color/colorPrimary"
+        android:foregroundTint="@color/fm_Login_Background_Color"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/hauptmenu_buchungen_lv_item_beschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text=""
+        android:textStyle="bold"
+        android:textAlignment="viewStart"
+        android:fontFamily="@font/segoeuil"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/hauptmenu_buchungen_lv_item_datum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:fontFamily="@font/segoeuil"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="16dp" />
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/hauptmenu_buchungen_lv_item_betrag"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:fontFamily="@font/segoe_ui"
+        android:textStyle="bold"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="20dp" />
+        <TextView
+            android:id="@+id/hauptmenu_buchungen_lv_item_Konto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="viewStart"
+            android:fontFamily="@font/segoe_ui"
+            android:textStyle="bold"
+            android:textColor="@color/fm_Login_Background_Color"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>
+

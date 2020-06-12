@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/white"
+    android:layout_marginTop="10dp"
+    android:paddingStart="5dp"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/Rhythmus_Image"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/Rhythmus_Titel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="16sp" />
+
+
+</LinearLayout>
+

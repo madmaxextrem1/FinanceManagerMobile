@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_rowWeight="1"
+    android:layout_columnWeight="1"
+    android:layout_marginStart="@dimen/CardMarginLeft"
+    android:layout_marginEnd="@dimen/CardMarginRight"
+    android:layout_marginBottom="@dimen/CardMarginBottom"
+    android:elevation="@dimen/CardElevation"
+    app:cardCornerRadius="@dimen/CardCornerRadius">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/Image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+            android:backgroundTint="@color/colorPrimary"
+            android:foregroundTint="@color/white"
+            android:scaleType="centerInside" />
+
+
+        <TextView
+            android:id="@+id/Titel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/Bestand"
+            android:layout_toEndOf="@id/Image"
+            android:text="Kontotitel"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_HeaderTextColor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Art"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Titel"
+            android:layout_gravity="start"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/Bestand"
+            android:layout_toEndOf="@id/Image"
+            android:text="Konto Art"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/Anzahl_Buchungen"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/Image"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:text="Anzahl Buchungen"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/Bestand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:text="100,00 €"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_HeaderTextColor"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

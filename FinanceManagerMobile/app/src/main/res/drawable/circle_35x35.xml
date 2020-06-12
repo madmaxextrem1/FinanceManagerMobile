@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:layout_width="60dp"
+    android:layout_height="60dp" >
+
+    <solid android:color="#FFD3E9D8" />
+<stroke
+    android:width="2dp"
+    android:color="@color/fm_Login_Background_Color"
+    android:dashWidth="2dp">
+
+</stroke>
+<!--    <size
+        android:height="60dp"
+        android:width="60dp" />-->
+
+</shape>

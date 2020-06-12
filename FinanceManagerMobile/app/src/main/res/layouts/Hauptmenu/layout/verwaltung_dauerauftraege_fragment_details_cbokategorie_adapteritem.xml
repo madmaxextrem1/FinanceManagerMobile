@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="horizontal"
+    android:background="@color/textfield_box_background"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
+    android:id="@+id/Kategorie_Auswahl_ItemLayout">
+
+    <TextView
+        android:id="@+id/Kategorie_Auswahl_Image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="A"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:background="@drawable/verwaltung_dauerauftraege_fragment_details_cbokategorie_circletextview"
+        android:backgroundTint="#FFD3E9D8"
+        android:foregroundTint="@color/fm_Login_Background_Color"/>
+
+    <TextView
+        android:id="@+id/Kategorie_Auswahl_Titel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text=""
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:textAlignment="viewStart"
+        android:paddingLeft="10dp"
+        android:maxLines="2"
+        android:textStyle="normal"
+        android:fontFamily="@font/segoeuil"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="18sp" />
+
+</LinearLayout>
+

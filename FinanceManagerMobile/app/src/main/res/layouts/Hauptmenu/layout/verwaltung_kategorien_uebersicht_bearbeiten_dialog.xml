@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:nestedScrollingEnabled="true"
+    android:scrollbars="vertical">
+
+    <TextView
+        android:id="@+id/Titel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:gravity="bottom"
+        android:layout_marginTop="0dp"
+        android:text="Kategorie bearbeiten"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_width="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:id="@+id/btnDelete"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_delete_white_24dp"
+        android:tint="@color/md_red_600"
+        android:background="?android:attr/selectableItemBackground"
+        android:backgroundTint="@color/white"
+        android:layout_height="40dp">
+
+
+    </androidx.appcompat.widget.AppCompatImageButton>
+    <View
+        android:id="@+id/Seperator_Top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/Titel"
+        android:background="@color/Activity_Background" />
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:checkedButton="@id/rdbUnterkategorie"
+        android:layout_below="@id/Seperator_Top"
+        android:id="@+id/rdbGroupKategorieArt">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rdbUnterkategorie"
+            android:text="Normale Buchungskategorie">
+        </com.google.android.material.radiobutton.MaterialRadioButton>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rdbÜberkategorie"
+            android:layout_marginStart="0dp"
+            android:text="Überkategorie">
+        </com.google.android.material.radiobutton.MaterialRadioButton>
+
+    </RadioGroup>
+
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/Überkategorie"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:hintEnabled="true"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        android:hint="Überkategorie"
+        app:spinnerMode="dropdown"
+        app:endIconMode="custom"
+        app:endIconCheckable="true"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:endIconDrawable="@drawable/ic_arrow_drop_down"
+        android:layout_below="@id/rdbGroupKategorieArt"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:startIconDrawable="@drawable/ic_list_white_24dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/KategorieName"
+        android:scaleType="center"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/ButtonBackColor"
+        app:fabSize="normal"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        app:tint="@color/white"
+        app:maxImageSize="24dp"
+        app:fabCustomSize="40dp"
+        app:srcCompat="@drawable/ic_color_lens_black_24dp" />
+
+    <TextView
+        android:id="@+id/lblColorPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/KategorieName"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:text="Farbe"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+ />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/KategorieName"
+        android:hint="Kategoriename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@id/Überkategorie"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:endIconMode="clear_text"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:startIconDrawable="@drawable/ic_edit_white_24dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:switchMinWidth="36dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:text="Ausgabe"
+        android:id="@+id/swtAusgabe"
+        android:layout_below="@id/lblColorPicker"/>
+
+    <View
+        android:id="@+id/Seperator_Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/swtAusgabe"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/Activity_Background" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSpeichern"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/Seperator_Bottom"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="@dimen/TextButtonElevation"
+        android:gravity="center"
+        android:text="Speichern"
+        app:cornerRadius="@dimen/ButtonCornerRadius" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAbbrechen"
+        app:cornerRadius="@dimen/ButtonCornerRadius"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:elevation="@dimen/TextButtonElevation"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@id/Seperator_Bottom"
+        android:layout_toStartOf="@id/btnSpeichern"
+        android:text="Abbrechen" />
+
+</RelativeLayout>

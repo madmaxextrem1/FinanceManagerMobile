@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Buchungen.Buchung"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
+
+    <androidx.cardview.widget.CardView
+    android:id="@+id/Buchung_Toolbar_CardView"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:cardBackgroundColor="@color/fm_Login_Background_Color"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/Buchung_Toolbar_btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+        <TextView
+            android:id="@+id/Buchung_Toolbar_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/Buchung_Toolbar_btnClose"
+            android:text="@string/neue_buchung_title"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/Buchung_btn_Buchen"
+            android:layout_width="29dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/ic_check_white_24dp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+
+
+    <include layout="@layout/buchung_content"
+        android:layout_below="@id/Buchung_Toolbar_CardView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <include
+        android:id="@+id/lv_Buchung_Hinzufügen_SwipeLayout"
+        layout="@layout/umbuchung_neuekontostaende_lv_item"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

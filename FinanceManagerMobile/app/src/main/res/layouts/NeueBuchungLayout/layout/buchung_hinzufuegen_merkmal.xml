@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
+        android:gravity="center_vertical"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:id="@+id/Buchung_Hinzufügen_TokenMerkmal"
+        android:fontFamily="@font/segoeuil"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:background="@drawable/token_layout"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textColorHint="?attr/colorButtonNormal"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:textAlignment="textStart"/>
+

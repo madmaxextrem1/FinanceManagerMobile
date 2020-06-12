@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtAnfrage_Beschreibung"
+        android:layout_below="@id/Toolbar_CardView"
+        android:hint="Kooperationsbeschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_edit_white_24dp"
+        app:endIconMode="clear_text"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeWidth="0.1dp"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnKonto_Hinzufügen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_alignParentStart="true"
+        app:maxImageSize="24dp"
+        android:layout_below="@id/txtAnfrage_Beschreibung"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:backgroundTint="@color/ButtonBackColor"
+        app:fabSize="mini"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/ic_add_white_24dp"/>
+
+    <TextView
+        android:id="@+id/lbl_Kategorie_Beschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/btnKonto_Hinzufügen"
+        android:text="Konten"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_below="@id/txtAnfrage_Beschreibung"/>
+
+    <View
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:id="@+id/Buchung_Seperator_Eingaben"
+        android:layout_below="@id/lbl_Kategorie_Beschreibung"
+        style="@style/MaterialDivider1_2"/>
+
+    <ListView
+        android:id="@+id/lvKonten"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnKonto_Hinzufügen"
+        android:layout_gravity="top"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:scrollbars="vertical">
+    </ListView>
+
+</RelativeLayout>

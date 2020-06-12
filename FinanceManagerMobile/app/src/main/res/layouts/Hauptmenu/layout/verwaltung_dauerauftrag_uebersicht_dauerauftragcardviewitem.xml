@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="@dimen/CardMarginLeft"
+        android:layout_marginRight="@dimen/CardMarginRight"
+        android:layout_marginBottom="@dimen/CardMarginBottom"
+        android:backgroundTint="@color/white"
+        android:id="@+id/Dauerauftrag_CardViewBackground"
+        style="@style/Widget.MaterialComponents.CardView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical|start"
+                android:id="@+id/KontoArtImage"
+                android:src="@drawable/ic_account_balance_wallet_blue_24dp">
+
+            </ImageView>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_weight="1"
+        android:paddingTop="0dp"
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:text="Test"
+                android:id="@+id/KontoTitel"
+                android:fontFamily="@font/segoeuil"
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                android:textColor="@color/fm_Login_Background_Color"
+                android:textSize="24sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Test"
+                android:fontFamily="@font/segoeuil"
+                android:textStyle="normal"
+                android:id="@+id/KontoBestand"
+                android:textAlignment="viewStart"
+                android:textColor="@color/fm_Login_Background_Color"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/KontoEntwicklungImage"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|end"
+                android:paddingLeft="0dp"
+                android:layout_marginBottom="5dp"
+                android:foregroundTint="@color/colorPrimary"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_user_icon">
+
+            </ImageView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/KontoEntwicklung"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="bottom"
+        android:fontFamily="@font/segoeuil"
+        android:text="Test"
+        android:textAlignment="viewStart"
+        android:textColor="@color/fm_Login_Background_Color"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+</com.google.android.material.card.MaterialCardView>

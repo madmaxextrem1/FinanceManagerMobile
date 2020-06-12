@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animateLayoutChanges="true"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/white"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="false">
+
+    <TextView
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_lv_item_Circle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center_vertical"
+        android:text="A"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="#FFD3E9D8" />
+
+    <TextView
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_lv_item_Titel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toRightOf="@id/Buchung_Hinzufügen_Kategorie_Dialog_lv_item_Circle"
+        android:text="Überkategorie"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:maxLines="2" />
+<View
+    style="@style/MaterialDivider"
+    android:layout_alignParentBottom="true"
+    android:layout_toEndOf="@id/Buchung_Hinzufügen_Kategorie_Dialog_lv_item_Circle">
+
+</View>
+
+</RelativeLayout>
+

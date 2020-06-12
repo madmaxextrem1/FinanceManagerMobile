@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:animateLayoutChanges="false"
+    android:id="@+id/topView"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:backgroundTint="@color/white"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/Konto_Image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+        android:backgroundTint="@color/colorPrimary"
+        android:foregroundTint="@color/white"
+        android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/Konto_Titel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_toStartOf="@id/Betrag"
+            android:text="Kontotitel"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/Konto_Image"
+            android:textColor="@color/ListItem_HeaderTextColor"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/Konto_AlterBestand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@id/Konto_Titel"
+            android:layout_toStartOf="@id/Betrag"
+            android:text="Kontostand_Alt"
+            android:visibility="gone"
+            android:textAlignment="viewStart"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/Konto_Image"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/Betrag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:text="100,00 €"
+            android:textSize="22sp"
+            android:textAlignment="viewStart">
+        </TextView>
+
+    </RelativeLayout>
+

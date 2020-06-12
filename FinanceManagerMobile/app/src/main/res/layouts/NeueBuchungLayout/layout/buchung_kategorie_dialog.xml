@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="fill_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:nestedScrollingEnabled="true"
+    android:scrollbars="vertical"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Toolbar_CardView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/fm_Login_Background_Color"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/Kontendetails_btnDialogClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_close_24dp_white" />
+
+            <TextView
+                android:id="@+id/Kontendetails_lblDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/Kontendetails_btnDialogClose"
+                android:text="@string/Verwaltung_Konten_Detailansicht_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <ImageButton
+                android:id="@+id/btnEditKategorien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_edit_white_24dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill"
+        android:scrollbars="vertical"
+        android:groupIndicator="@null"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:choiceMode="singleChoice"
+        android:id="@+id/Kategorie_Dialog_lv_Kategorien"
+        android:layout_below="@id/Toolbar_CardView"
+        android:layout_above="@id/Buchung_Hinzufügen_Kategorie_Dialog_txtBetrag"
+        android:layout_marginBottom="8dp">
+    </ExpandableListView>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_txtBetrag"
+        android:hint="Betrag"
+        android:layout_above="@id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeWidth="0.2dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:lines="1"
+            android:maxLines="1"
+            android:minLines="1"
+            android:paddingLeft="12dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
+            android:paddingRight="12dp"
+            android:singleLine="true"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="normal"  />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"
+        android:layout_toEndOf="@+id/Buchung_Hinzufügen_Kategorie_Dialog_txtBetrag">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_rdbEinnahme"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="start"
+            app:useMaterialThemeColors="true"
+            android:text="@string/rdb_Buchtp_Einnahme"
+            android:checked="true" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_rdbAusgabe"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            app:useMaterialThemeColors="true"
+            android:layout_gravity="start"
+            android:text="@string/rdb_Buchtyp_Ausgabe" />
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Buchung_Hinzufügen_Kategorie_Dialog_btn_Hinzufügen"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Hinzufügen"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+</RelativeLayout>

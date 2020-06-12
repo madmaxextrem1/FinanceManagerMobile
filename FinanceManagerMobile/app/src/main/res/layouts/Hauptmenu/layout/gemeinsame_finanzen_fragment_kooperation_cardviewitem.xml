@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CardView"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_rowWeight="1"
+    android:layout_columnWeight="1"
+    android:layout_marginLeft="@dimen/CardMarginLeft"
+    android:layout_marginRight="@dimen/CardMarginRight"
+    android:layout_marginBottom="@dimen/CardMarginBottom">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/LeftImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+            android:backgroundTint="@color/primary"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_group_white_24dp"></ImageView>
+
+        <TextView
+            android:id="@+id/Titel"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/LeftImage"
+            android:gravity="bottom"
+            android:lines="1"
+            android:singleLine="true"
+            android:text="Titel"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_HeaderTextColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Erstelldatum"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_below="@id/Titel"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/LeftImage"
+            android:gravity="bottom"
+            android:text="Erstelldatum"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/Divider"
+            style="@style/MaterialDivider"
+            android:layout_below="@id/Erstelldatum"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="0dp"></View>
+
+        <net.sytes.financemanagermm.financemanagermobile.MaterialExpansionPanel.Expandable
+            android:id="@+id/TitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Divider"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:paddingBottom="0dp"
+            app:exp_animateExpand="true"
+            app:exp_backgroundColor="@color/white"
+            app:exp_expandIndicator="@drawable/ic_arrow_drop_down_white_24dp"
+            app:exp_headerBackgroundColor="@color/white"
+            app:exp_iconStyle="circle">
+
+            <TextView
+                android:id="@+id/PartnerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:text="Headertext"
+                android:textAlignment="viewStart"
+                android:textColor="@color/ListItem_HeaderTextColor"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <ListView
+                android:id="@+id/lvPersonen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/transparent"
+                android:dividerHeight="0dp"
+                android:fadeScrollbars="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:isScrollContainer="true"
+                android:nestedScrollingEnabled="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="vertical">
+            </ListView>
+
+        </net.sytes.financemanagermm.financemanagermobile.MaterialExpansionPanel.Expandable>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

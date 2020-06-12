@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Finance Manager</string>
+    <string name="Hint_Password">Passwort</string>
+    <string name="Hint_Password_Wdh">Passwort wiederholen</string>
+    <string name="Hint_Username">Benutzername</string>
+    <string name="btn_Login">Login</string>
+    <string name="chk_Remember">Remember me?</string>
+    <string name="title_activity_hauptmenu">Hauptmenü</string>
+    <string name="Login_Fehler">"Username oder Passwort inkorrekt."</string>
+    <string name="title_activity_neue_buchung">Neue Buchung</string>
+    <string name="title_Kategorie_Dialog">Kategorie wählen</string>
+    <string name="title_Merkmal_Dialog">Merkmale wählen</string>
+    <string name="btn_Buchen">Buchen</string>
+    <string name="rdb_Buchtyp_Ausgabe">Ausgabe</string>
+    <string name="rdb_Buchtp_Einnahme">Einnahme</string>
+    <string name="Kategorie_Dialog_Button_Fertig">Hinzufügen</string>
+    <string name="title_activity_SignUp">""</string>
+    <string name="SignUpTitle">Account erstellen</string>
+    <string name="Hint_eMail">Email-Adresse</string>
+    <string name="btn_SignUp">Erstellen</string>
+    <string name="SignUpFehler">Bitte überprüfen Sie ihre Eingaben</string>
+    <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_umbuchung">Umbuchungen</string>
+    <string name="title_activity_umbuchungen">Umbuchung</string>
+    <string name="Umbuchungen_lblVonKonto">Von-Konto auswählen</string>
+    <string name="Umbuchungen_lblNachKonto">Nach-Konto auswählen</string>
+    <string name="Umbuchungen_lblBetrag">Betrag erfassen</string>
+    <string name="mainmenu_toolbar_starttitle">Home</string>
+    <string name="Hauptmenu_Fragment_lblEinnahmenÜberschrift">Einnahmen</string>
+    <string name="Hauptmenu_Fragment_lblAusgabenÜberschrift">Ausgaben</string>
+    <string name="Outline_Filled_Textbox">filled</string>
+    <string name="Login_SignUp">Noch keinen Account? Erstelle einen
+        <a href=""
+            target="_top">hier</a>.</string>
+    <string name="dash">-</string>
+    <string name="Login_PW_Vergessen"><a href=""
+            target="_top">Passwort vergessen?</a></string>
+    <string-array name="Daueraufträge_Rhythmus_Auswahl">
+        <item>monatlich</item>
+        <item>Quartal</item>
+        <item>halbjährlich</item>
+        <item>jährlich</item>
+    </string-array>
+    <string-array name="Konten_Kontoart_Auswahl">
+        <item>Bargeld</item>
+        <item>Bankkarte</item>
+        <item>Kreditkarte</item>
+    </string-array>
+    <string name="title_activity_konten_uebersicht">Konten</string>
+    <string name="Verwaltung_Konten_Detailansicht_title">Kontendetails</string>
+    <string name="hauptmenu_sidedrawer_daueraufträge">Daueraufträge</string>
+    <string name="sidemenu_dauerauftraege_title">Daueraufträge</string>
+    <string name="Kategorie_Auswahl_Dialog_Title">Kategorie auswählen</string>
+    <string name="neue_buchung_title">Neue Buchung</string>
+    <string name="hauptmenu_sidedrawer_gemeinsamefinanzen">Gemeinsame Finanzen</string>
+    <string name="hauptmenu_sidedrawer_logout">Abmelden</string>
+    <string name="title_activity_gemeinsame_finanzen">Gemeinsame Finanzen</string>
+    <string name="anfrage_löschen_dialog_message">Wollen Sie diese Anfrage wirklich löschen?</string>
+    <string name="anfrage_bestätigen_dialog_message">Wollen Sie diese Anfrage wirklich bestätigen?</string>
+    <string name="anfrage_starten_dialog_message">Wollen Sie diese Kooperation wirklich beginnen?</string>
+    <string name="anfrage_beitreten_dialog_message">Wollen Sie dieser Kooperation wirklich beitreten?</string>
+    <string name="agree">Löschen</string>
+    <string name="disagree">Abbrechen</string>
+    <string name="DatePickerDialogTitle_Zeitraum">Zeitraum auswählen</string>
+    <string name="DatePickerDialogTitle_Zeitpunkt">Datum auswählen</string>
+    <string name="title_umbuchung">Umbuchung</string>
+    <string name="activity_title_kategorien">Kategorien</string>
+    <string name="side_sheet_behavior" translatable="false">net.sytes.financemanagermm.financemanagermobile.Steuerelemente.SideSheetBehavior</string>
+    <string name="PHP_Scripts_Login">http://financemanagermm.sytes.net/fmclient/login.php</string>
+    <string name="PHP_Scripts_Konten_Abfragen">http://financemanagermm.sytes.net/fmclient/konten_abfragen.php</string>
+    <string name="PHP_Scripts_Daueraufträge_Abfragen">http://financemanagermm.sytes.net/fmclient/dauerauftrag_abfragen.php</string>
+    <string name="PHP_Scripts_DaueraufträgeUmbuchungen_Abfragen">http://financemanagermm.sytes.net/fmclient/dauerauftrag_umbuchung_abfragen.php</string>
+    <string name="PHP_Scripts_Dauerauftrag_Anlegen">http://financemanagermm.sytes.net/fmclient/dauerauftrag_anlegen.php</string>
+    <string name="PHP_Scripts_Dauerauftrag_Umbuchung_Anlegen">http://financemanagermm.sytes.net/fmclient/dauerauftrag_umbuchung_anlegen.php</string>
+    <string name="PHP_Scripts_DaueraufträgeUmbuchungen_Update">http://financemanagermm.sytes.net/fmclient/dauerauftrag_umbuchung_updaten.php</string>
+    <string name="PHP_Scripts_Daueraufträge_Update">http://financemanagermm.sytes.net/fmclient/dauerauftrag_updaten.php</string>
+    <string name="PHP_Scripts_Daueraufträge_Löschen">http://financemanagermm.sytes.net/fmclient/dauerauftrag_löschen.php</string>
+    <string name="PHP_Scripts_Buchungskategorien_Abfragen">http://financemanagermm.sytes.net/fmclient/hauptkategorien_abfragen.php</string>
+    <string name="PHP_Scripts_Kooperationen_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_abfragen.php</string>
+    <string name="PHP_Scripts_Anfragen_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_anfrage_abfragen.php</string>
+    <string name="PHP_Scripts_Tokens_Abfragen">"http://financemanagermm.sytes.net/fmclient/tokens_abfragen.php"</string>
+    <string name="PHP_Scripts_Finanzbuchungen_Abfragen">http://financemanagermm.sytes.net/fmclient/buchungen_abfragen.php</string>
+    <string name="PHP_Scripts_Kooperation_Anfrage_Benutzer_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_anfrage_benutzer_abfragen.php</string>
+    <string name="PHP_Scripts_Kategorie_Update">http://financemanagermm.sytes.net/fmclient/kategorie_update.php</string>
+    <string name="PHP_Scripts_Kategorie_Anlegen">http://financemanagermm.sytes.net/fmclient/kategorie_anlegen.php</string>
+    <string name="PHP_Scripts_Kategorie_Löschen">http://financemanagermm.sytes.net/fmclient/kategorie_löschen.php</string>
+</resources>

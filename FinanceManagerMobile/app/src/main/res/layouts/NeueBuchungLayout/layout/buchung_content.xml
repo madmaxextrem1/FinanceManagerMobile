@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Buchungen.Buchung"
+    tools:showIn="@layout/buchung_activity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Buchung_txtTitel"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Titel hinzufügen"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_mode_edit_white_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:textSize="16sp"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Buchung_txtDatum"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/Buchung_txtTitel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Buchungsdatum auswählen"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_date_white_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:theme="@style/Widget.MaterialComponents.TextInputEditText.FilledBox" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/Layout_txtMerkmale"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/Buchung_txtDatum"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/textfield_box_background"
+        android:fadeScrollbars="true"
+        android:paddingEnd="8dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarDefaultDelayBeforeFade="0">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/Buchung_chgMerkmale"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="48dp"
+            android:paddingTop="16dp"
+            app:lineSpacing="0dp"
+            app:singleLine="true"/>
+    </HorizontalScrollView>
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/cboKooperation"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/Layout_txtMerkmale"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Kooperation (optional)"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_arrow_drop_down"
+        app:endIconMode="custom"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:spinnerMode="dropdown"
+        app:startIconDrawable="@drawable/ic_group_white_24dp" />
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/Buchung_cboKonto"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/cboKooperation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Konto auswählen"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:boxBackgroundColor="@color/textfield_box_background"
+        app:boxBackgroundMode="filled"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/ButtonBackColor"
+        app:boxStrokeWidth="0.2dp"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_arrow_drop_down"
+        app:endIconMode="custom"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:spinnerMode="dropdown"
+        app:startIconDrawable="@drawable/ic_account_balance_white_24dp" />
+
+    <ImageView
+        android:id="@+id/ico_Merkmal"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/Buchung_txtDatum"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_merkmal_white_24dp"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Buchung_txtDatum"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/ico_Merkmal"
+        android:gravity="top"
+        android:text="Merkmal auswählen"
+        android:textSize="12sp"
+        android:visibility="visible"></TextView>
+
+    <TextView
+        android:id="@+id/lbl_Kategorie_Beschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Buchung_cboKonto"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@id/fab_kategorie_hinzufügen"
+        android:text="Kategorien"
+        android:textColor="@color/buchung_view_headerlabel_textcolor"
+        android:textSize="21sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_kategorie_hinzufügen"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Buchung_cboKonto"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:backgroundTint="@color/ButtonBackColor"
+        app:fabSize="mini"
+        app:maxImageSize="24dp"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:tint="@color/white" />
+
+    <View
+        android:id="@+id/Buchung_Seperator_Eingaben"
+        style="@style/MaterialDivider1_2"
+        android:layout_below="@id/lbl_Kategorie_Beschreibung"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="0dp" />
+
+    <ListView
+        android:id="@+id/Buchung_lvBuchungszeilen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/Buchung_Seperator_lvBuchungszeilen"
+        android:layout_below="@id/Buchung_Seperator_Eingaben"
+        android:layout_gravity="fill"
+        android:layout_marginTop="16dp"
+        android:dividerHeight="1dp"
+        android:fadeScrollbars="false"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="false"
+        android:listSelector="@color/colorPrimary"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"></ListView>
+
+    <View
+        android:id="@+id/Buchung_Seperator_lvBuchungszeilen"
+        style="@style/MaterialDivider"
+        android:layout_above="@id/Buchung_lblSummeZusammenfassung"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/Buchung_lblSummeZusammenfassung"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center_vertical"
+        android:singleLine="false"
+        android:text="GESAMT"
+        android:textAlignment="viewStart"
+        android:textColor="@color/buchung_view_label_textcolor"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Buchung_SummeZusammenfassung"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_vertical|end"
+        android:singleLine="false"
+        android:text="Summe"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/buchung_view_headerlabel_textcolor"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</RelativeLayout>

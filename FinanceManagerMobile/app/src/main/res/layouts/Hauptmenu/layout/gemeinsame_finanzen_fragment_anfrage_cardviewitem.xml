@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CardView"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_rowWeight="1"
+    android:layout_columnWeight="1"
+    android:layout_marginLeft="@dimen/CardMarginLeft"
+    android:layout_marginRight="@dimen/CardMarginRight"
+    android:layout_marginBottom="@dimen/CardMarginBottom">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/LeftImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/hauptmenu_buchungen_lv_item_circletextview"
+            android:backgroundTint="@color/CardviewTopIconColor"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_questionmark_thin"></ImageView>
+
+        <TextView
+            android:id="@+id/Titel"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/LeftImage"
+            android:gravity="bottom"
+            android:lines="1"
+            android:singleLine="true"
+            android:text="Titel"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_HeaderTextColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Erstelldatum"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_below="@id/Titel"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/LeftImage"
+            android:gravity="bottom"
+            android:text="Erstelldatum"
+            android:textAlignment="viewStart"
+            android:textColor="@color/ListItem_SubTextColor"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/Divider"
+            style="@style/MaterialDivider"
+            android:layout_below="@id/Erstelldatum"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="0dp"></View>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp"
+            android:id="@+id/ExpandableLayout"
+            android:layout_below="@id/Divider">
+
+            <com.github.florent37.expansionpanel.ExpansionHeader
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:expansion_headerIndicator="@id/headerIndicator"
+                android:layout_marginTop="4dp"
+                android:id="@+id/TitleLayout"
+
+                app:expansion_layout="@id/expansionLayout"
+                app:expansion_toggleOnClick="true">
+
+                <!-- HEADER -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:text="Details"/>
+                ...
+                <!-- HEADER INDICATOR -->
+                <ImageView
+                    android:adjustViewBounds="true"
+                    android:id="@+id/headerIndicator"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_width="wrap_content"
+                    app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+            </com.github.florent37.expansionpanel.ExpansionHeader>
+
+            <com.github.florent37.expansionpanel.ExpansionLayout
+                android:id="@+id/expansionLayout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <!-- CONTENT -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/BenutzerHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:text="Benutzer mit Ausgabenverteilung"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <View
+                        android:id="@+id/DividerBenutzer"
+                        style="@style/MaterialDivider"
+                        android:layout_below="@id/BenutzerHeader"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="0dp"/>
+
+                    <ListView
+                        android:id="@+id/lvPersonen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@color/transparent"
+                        android:dividerHeight="0dp"
+                        android:fadeScrollbars="false"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="0dp"
+                        android:footerDividersEnabled="false"
+                        android:headerDividersEnabled="false"
+                        android:isScrollContainer="true"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbarAlwaysDrawVerticalTrack="true"
+                        android:layout_below="@id/DividerBenutzer"
+                        android:scrollbars="vertical"/>
+
+                    <TextView
+                        android:id="@+id/KontenHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/lvPersonen"
+                        android:text="Konten"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <View
+                        android:id="@+id/DividerKonten"
+                        style="@style/MaterialDivider"
+                        android:layout_below="@id/KontenHeader"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="0dp"/>
+
+                    <ListView
+                        android:id="@+id/lvKonten"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:divider="@color/transparent"
+                        android:dividerHeight="0dp"
+                        android:fadeScrollbars="false"
+                        android:layout_marginTop="0dp"
+                        android:footerDividersEnabled="false"
+                        android:headerDividersEnabled="false"
+                        android:isScrollContainer="true"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbarAlwaysDrawVerticalTrack="true"
+                        android:layout_below="@id/DividerKonten"
+                        android:scrollbars="vertical"/>
+
+                </RelativeLayout>
+            </com.github.florent37.expansionpanel.ExpansionLayout>
+        </LinearLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBestätigen"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_below="@id/ExpandableLayout"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_toEndOf="@id/btnLöschen"
+            android:elevation="@dimen/TextButtonElevation"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Bestätigen"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/ButtonCornerRadius" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLöschen"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_below="@id/ExpandableLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="4dp"
+            android:elevation="@dimen/TextButtonElevation"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Ablehnen"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/ButtonCornerRadius" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBenutzer_Hinzufügen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/ExpandableLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_add_user_black"
+            android:backgroundTint="@color/md_grey_600"
+            android:padding="4dp"
+            android:scaleType="centerInside"></androidx.appcompat.widget.AppCompatImageButton>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
