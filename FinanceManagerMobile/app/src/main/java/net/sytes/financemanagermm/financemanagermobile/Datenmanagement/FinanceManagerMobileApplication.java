@@ -7,15 +7,27 @@ public class FinanceManagerMobileApplication extends Application {
     private DataManagement dataManagement;
 
     public static FinanceManagerMobileApplication getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             synchronized (FinanceManagerMobileApplication.class) {
                 instance = new FinanceManagerMobileApplication();
+                instance.dataManagement = new DataManagement(instance.getApplicationContext());
             }
         }
-            return instance;
+        return instance;
     }
 
-    public FinanceManagerMobileApplication () {
-        this.dataManagement = new DataManagement(getApplicationContext());
+    public FinanceManagerMobileApplication() {
+
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        instance.dataManagement = new DataManagement(instance.getApplicationContext());
+    }
+
+    public DataManagement getDataManagement() {
+        return dataManagement;
     }
 }

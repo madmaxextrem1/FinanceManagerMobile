@@ -49,8 +49,10 @@ import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Umbuchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
@@ -68,7 +70,6 @@ import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Kooper
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.Sing_In;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.CustomAlertDialog;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto_Adapter;
@@ -109,20 +110,17 @@ public class Hauptmenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
 
-        if(extras != null) {
-            currentUser = extras.getParcelable("User");
-            globVars = GlobaleVariablen.getInstance();
-            globVars.setUserId(currentUser.getUserId());
-            globVars.setPwd(currentUser.getPassword());
-            globVars.setUserName(currentUser.getUserName());
-            globVars.setEmail(currentUser.getEmail());
-        }
-
         setContentView(R.layout.hauptmenu_activity_layout);
+
+        //Initialisierung des Repository
+        FinanceManagerMobileApplication.getInstance().getDataManagement().initializeData();
+
         context = Hauptmenu.this;
         bottomNav = findViewById(R.id.mainmenu_navigation_bottom);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {;
+        fab.setOnClickListener(new View.OnClickListener() {
+            ;
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Hauptmenu.this, Buchung.class);
@@ -133,7 +131,7 @@ public class Hauptmenu extends AppCompatActivity {
                     public void onBuchungCreated(Finanzbuchung_Buchung buchung) {
                         Finanzbuchungen.addBuchung(buchung);
                         System.out.println(selectedFragment);
-                        if(selectedFragment instanceof Hauptmenu_Fragment_Buchungen) {
+                        if (selectedFragment instanceof Hauptmenu_Fragment_Buchungen) {
                             System.out.println(selectedFragment);
                             ((Hauptmenu_Fragment_Buchungen) selectedFragment).getBuchungAdapter().notifyDataSetChanged();
                         }
@@ -245,7 +243,7 @@ public class Hauptmenu extends AppCompatActivity {
                 .withSelectedTextColor(getResources().getColor(R.color.Login_Textbox_Underline))
                 .withName(getString(R.string.hauptmenu_sidedrawer_logout));
 
-        Integer BackgroundColor = getResources().getColor(R.color.fm_Login_Background_Color,null);
+        Integer BackgroundColor = getResources().getColor(R.color.fm_Login_Background_Color, null);
 
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
@@ -275,9 +273,9 @@ public class Hauptmenu extends AppCompatActivity {
                             case 2:
                                 Intent intent = new Intent(Hauptmenu.this, Umbuchung.class);
                                 startActivity(intent);
-                            break;
+                                break;
                             case 4:
-                                if(!Buchungskategorien.getBuchungskategorienInitialized()) {
+                                if (!Buchungskategorien.getBuchungskategorienInitialized()) {
                                     Buchungskategorien.initializeBuchungskategorien(new BuchungskategorienCallback() {
                                         @Override
                                         public void onBuchungskategorienSuccessfullyLoaded(LinkedHashMap<Integer, Buchungshauptkategorie> Buchungskategorien) {
@@ -289,9 +287,9 @@ public class Hauptmenu extends AppCompatActivity {
                                     intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
                                     startActivity(intent);
                                 }
-                            break;
+                                break;
                             case 3:
-                                if(!Konten.getKontenInitialized()) {
+                                if (!Konten.getKontenInitialized()) {
                                     Konten.initializeKonten(new FinanceManagerCallback<Integer, Konto>() {
                                         @Override
                                         public void onDataUpdated(LinkedHashMap<Integer, Konto> linkedHashMap) {
@@ -305,23 +303,23 @@ public class Hauptmenu extends AppCompatActivity {
                                 }
                                 break;
                             case 5:
-                            if(!Daueraufträge.getDaueraufträgeInitialized()) {
-                                Daueraufträge.initializeDaueraufträge(new DauerauftragCallback() {
-                                    @Override
-                                    public void onDaueraufträgeSuccessfullyLoaded(LinkedHashMap<Integer, Dauerauftrag> daueraufträge) {
-                                        Intent intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
-                                        startActivity(intent);
-                                    }
-                                });
-                            } else {
-                                intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
-                                startActivity(intent);
-                            }
-                            break;
+                                if (!Daueraufträge.getDaueraufträgeInitialized()) {
+                                    Daueraufträge.initializeDaueraufträge(new DauerauftragCallback() {
+                                        @Override
+                                        public void onDaueraufträgeSuccessfullyLoaded(LinkedHashMap<Integer, Dauerauftrag> daueraufträge) {
+                                            Intent intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                } else {
+                                    intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
+                                    startActivity(intent);
+                                }
+                                break;
                             case 6:
                                 intent = new Intent(Hauptmenu.this, Gemeinsame_Finanzen.class);
                                 startActivity(intent);
-                            break;
+                                break;
                             case 7:
                                 CustomAlertDialog logOutDialog = new CustomAlertDialog(Hauptmenu.this, "Abmelden",
                                         "Möchten Sie sich wirklich abmelden?", "Abmelden", "Abbrechen", new View.OnClickListener() {
@@ -337,18 +335,19 @@ public class Hauptmenu extends AppCompatActivity {
                                     }
                                 });
                                 logOutDialog.show();
-                            break;
+                                break;
                         }
 
                         return false;
                     }
                 })
                 .build();
-          result.setGravity(Gravity.START);
+        result.setGravity(Gravity.START);
 
-          result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+        result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
 
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -357,17 +356,17 @@ public class Hauptmenu extends AppCompatActivity {
 
             switch (menuItem.getItemId()) {
                 case R.id.mainmenu_bottomnav_home:
-                selectedFragment = new Hauptmenu_Fragment_Home();
-                Tag = "Home";
+                    selectedFragment = new Hauptmenu_Fragment_Home();
+                    Tag = "Home";
                     toolbarFilterButton.setVisibility(View.GONE);
                     toolbarMonth.setVisibility(View.VISIBLE);
-                fab.show();
-                break;
+                    fab.show();
+                    break;
                 case R.id.mainmenu_bottomnav_buchungen:
 
                     toolbarFilterButton.setVisibility(View.VISIBLE);
                     toolbarMonth.setVisibility(View.GONE);
-                    View filterfragment = getLayoutInflater().inflate(R.layout.hauptmenu_fragment_buchungen_filterfragment,null);
+                    View filterfragment = getLayoutInflater().inflate(R.layout.hauptmenu_fragment_buchungen_filterfragment, null);
                     TextInputLayout txtBuchungstitel = (TextInputLayout) filterfragment.findViewById(R.id.txtBuchungstitel);
                     ChipGroup chipGroup = (ChipGroup) filterfragment.findViewById(R.id.ChipGroupMerkmale);
                     ChipGroup chipGroupBuchungstitelFilter = (ChipGroup) filterfragment.findViewById(R.id.ChipGroupFilterBuchungstitel);
@@ -425,7 +424,7 @@ public class Hauptmenu extends AppCompatActivity {
                     Hauptmenu_Fragment_Buchungen_Filter.setFilterDataTitelfilterTyp(GlobaleVariablen.BuchungstitelFilter.GLEICH);
 
                     ArrayList<Integer> ArrayToken = new ArrayList<Integer>();
-                    for(FinanzbuchungToken Eintrag: FinanzbuchungTokens.getTokens()) {
+                    for (FinanzbuchungToken Eintrag : FinanzbuchungTokens.getTokens()) {
                         View chipView = (View) getLayoutInflater().inflate(R.layout.hauptmenu_fragment_buchungen_filterfragment_merkmalchip, null);
                         Chip chip = (Chip) chipView.findViewById(R.id.Chip);
                         chip.setText(Eintrag.getBeschreibung());
@@ -448,7 +447,7 @@ public class Hauptmenu extends AppCompatActivity {
                     TextInputLayout txtZeitraumLayout = (TextInputLayout) filterfragment.findViewById(R.id.txtZeitraum);
                     Calendar calendar = Calendar.getInstance();
                     Date Heute = calendar.getTime();
-                    calendar.set(calendar.get(YEAR),calendar.get(Calendar.MONTH) - 1, 1);
+                    calendar.set(calendar.get(YEAR), calendar.get(Calendar.MONTH) - 1, 1);
                     Date initialDatumVon = calendar.getTime();
                     String sInitialDatumVon = GlobaleVariablen.getInstance().getDE_DateFormat().format(initialDatumVon);
                     String sInitialDatumBis = GlobaleVariablen.getInstance().getDE_DateFormat().format(Heute);
@@ -459,7 +458,7 @@ public class Hauptmenu extends AppCompatActivity {
                     txtZeitraum.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            MaterialDatePicker.Builder<Pair<Long, Long>> builder =  MaterialDatePicker.Builder.dateRangePicker();
+                            MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
                             builder.setTitleText(R.string.DatePickerDialogTitle_Zeitraum);
                             //CalendarConstraints calendarConstraints = CalendarConstraints.Builder.DEFAULT_END;
                             //builder.setCalendarConstraints(CalendarConstraints.Builder.)
@@ -474,7 +473,7 @@ public class Hauptmenu extends AppCompatActivity {
                                     Hauptmenu_Fragment_Buchungen_Filter.setFilterDataZeitraum(DatumVon, DatumBis);
                                 }
                             });
-                            picker.show(getSupportFragmentManager(),"Test");
+                            picker.show(getSupportFragmentManager(), "Test");
                         }
                     });
 
@@ -508,7 +507,7 @@ public class Hauptmenu extends AppCompatActivity {
                     Konto_Adapter konto__adapter;
                     konto__adapter = new Konto_Adapter(getBaseContext());
                     cboKonto.setAdapter(konto__adapter);
-                    Konto keinKontoFilter = new Konto(0, "Kein Kontofilter", Konto.KontoArt.BANKKONTO, 0.00,0.00,Date.from(Instant.now()),false,0,0.00);
+                    Konto keinKontoFilter = new Konto(0, "Kein Kontofilter", Konto.KontoArt.BANKKONTO, 0.00, 0.00, Date.from(Instant.now()), false, 0, 0.00);
                     konto__adapter.getLinkedMap().put(keinKontoFilter.getIdentifier(), keinKontoFilter);
                     konto__adapter.getLinkedMap().putAll(Konten.getAktiveKonten());
                     konto__adapter.notifyDataSetChanged();
@@ -516,12 +515,11 @@ public class Hauptmenu extends AppCompatActivity {
                     cboKonto.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(MaterialSpinner materialSpinner, View view, int i, long l) {
-                            if(konto__adapter.getItem(i).getIdentifier()==0) {
+                            if (konto__adapter.getItem(i).getIdentifier() == 0) {
                                 materialSpinner.getEditText().setText("");
                                 materialSpinner.setTag(null);
                                 Hauptmenu_Fragment_Buchungen_Filter.setFilterDataKonto(null);
-                            }
-                            else {
+                            } else {
                                 materialSpinner.getEditText().setText(konto__adapter.getItem(i).getKontoTitel());
                                 materialSpinner.setTag(konto__adapter.getItem(i));
                                 Hauptmenu_Fragment_Buchungen_Filter.setFilterDataKonto(konto__adapter.getItem(i));
@@ -567,7 +565,7 @@ public class Hauptmenu extends AppCompatActivity {
                                 GleichChipBetrag.setChipBackgroundColorResource(R.color.ChipBackGroundChecked);
                                 Hauptmenu_Fragment_Buchungen_Filter.setFilterDataBetrag(
                                         (txtBetrag.getEditText().getText().toString().equals("")) ? 0.0 : Double.parseDouble(txtBetrag.getEditText().getText().toString()
-                                ));
+                                        ));
                                 Hauptmenu_Fragment_Buchungen_Filter.setFilterDataBetragFilterTyp(Hauptmenu_Fragment_Buchungen_Filter.BetragFilterTyp.GLEICH);
                             } else {
                                 GleichChipBetrag.setChipBackgroundColorResource(R.color.ChipBackGroundUnchecked);
@@ -676,13 +674,13 @@ public class Hauptmenu extends AppCompatActivity {
                     Tag = "Auswertungen";
                     toolbarFilterButton.setVisibility(View.GONE);
                     toolbarMonth.setVisibility(View.GONE);
-                    if(fab.getVisibility() == View.VISIBLE) {
+                    if (fab.getVisibility() == View.VISIBLE) {
                         fab.hide();
                     }
                     break;
             }
             String finalTag = Tag;
-            if(!Finanzbuchungen.getFinanzbuchungenInitialized()) {
+            if (!Finanzbuchungen.getFinanzbuchungenInitialized()) {
                 Finanzbuchungen.initializeFinanzbuchungen(new FinanzbuchungenCallback() {
                     @Override
                     public void onFinanzbuchungenSuccessfullyLoaded(ArrayList<Finanzbuchung_Buchung> finanzbuchungen) {
@@ -714,7 +712,7 @@ public class Hauptmenu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().findFragmentByTag("Home").isVisible()) {
+        if (getSupportFragmentManager().findFragmentByTag("Home").isVisible()) {
             CustomAlertDialog appBeendenDialog = new CustomAlertDialog(this, "Beenden",
                     "Möchten Sie die App wirklich beenden?", "Beenden", "Abbrechen", new View.OnClickListener() {
                 @Override
@@ -730,10 +728,10 @@ public class Hauptmenu extends AppCompatActivity {
             appBeendenDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                        ApplicationController.getInstance().resetAllVariableInitializations();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        finishAndRemoveTask();
-                        System.exit(0);
+                    ApplicationController.getInstance().resetAllVariableInitializations();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    finishAndRemoveTask();
+                    System.exit(0);
                 }
             });
             appBeendenDialog.show();

@@ -59,7 +59,7 @@ public final class Buchungskategorien {
     public static boolean getBuchungskategorienInitialized() {return kategorienAlreadyLoaded;}
     private static LinkedHashMap<Integer, Buchungshauptkategorie> kategorieDaten_Verarbeiten(JSONObject Kategoriedaten) {
         LinkedHashMap<Integer, Buchungshauptkategorie> returnListKategorien = new LinkedHashMap<>();
-        //Log.d("Test123!", Kategoriedaten.toString());
+
         try {
             JSONObject jsonObj = Kategoriedaten;
 

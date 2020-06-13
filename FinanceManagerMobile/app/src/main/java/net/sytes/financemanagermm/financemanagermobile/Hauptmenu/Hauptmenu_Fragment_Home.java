@@ -27,6 +27,7 @@ import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.BuchungskategorienCallback;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.DauerauftragCallback;
@@ -95,33 +96,7 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         chartEinnahmen.setExtraOffsets(0, 0, 0, 0);
         chartEinnahmen.setBackgroundColor(Color.TRANSPARENT);
 
-        if(!Konten.getKontenInitialized()) {
-            Konten.initializeKonten(new FinanceManagerCallback<Integer, Konto>() {
-                @Override
-                public void onDataUpdated(LinkedHashMap<Integer, Konto> linkedHashMap) {
-                    if(!Daueraufträge.getDaueraufträgeInitialized()) {
-                        Daueraufträge.initializeDaueraufträge(new DauerauftragCallback() {
-                            @Override
-                            public void onDaueraufträgeSuccessfullyLoaded(LinkedHashMap<Integer, Dauerauftrag> daueraufträge) {
-
-                            }
-                        });
-                    }
-                    KontenAufstellungGenerieren();
-                }
-            });
-        } else {
-            KontenAufstellungGenerieren();
-        }
-
-        if(!Buchungskategorien.getBuchungskategorienInitialized()) {
-            Buchungskategorien.initializeBuchungskategorien(new BuchungskategorienCallback() {
-                @Override
-                public void onBuchungskategorienSuccessfullyLoaded(LinkedHashMap<Integer, Buchungshauptkategorie> Buchungskategorien) {
-
-                }
-            });
-        }
+        KontenAufstellungGenerieren();
 
         if(!Kooperationen.getKooperationenInitialized()) {
             Kooperationen.initializeKooperationen(new KooperationenCallback() {
@@ -148,7 +123,7 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
     }
 
     private void KontenAufstellungGenerieren() {
-        rcvKontenAufstellungAdapter  = new Hauptmenu_Fragment_Home_KontenRecyclerViewAdapter(getContext(), Konten.getKonten());
+        rcvKontenAufstellungAdapter  = new Hauptmenu_Fragment_Home_KontenRecyclerViewAdapter(getContext(), FinanceManagerMobileApplication.getInstance().getDataManagement().getAccounts());
         rcvKontenAufstellung.setAdapter(rcvKontenAufstellungAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         rcvKontenAufstellung.setLayoutManager(layoutManager);
@@ -351,10 +326,12 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         chartEinnahmen.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         chartEinnahmen.invalidate();
     }
+
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
     }
+
     @Override
     public void onNothingSelected() {
 

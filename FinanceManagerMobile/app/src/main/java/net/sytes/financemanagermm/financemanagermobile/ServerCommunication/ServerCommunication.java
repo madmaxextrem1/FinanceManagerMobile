@@ -11,6 +11,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
@@ -136,6 +141,159 @@ public final class ServerCommunication implements ServerCommunicationInterface {
 
         addToRequestQueue(request);
     }
+
+    @Override
+    public void queryCategories(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, Buchungshauptkategorie>> callback) {
+        HashMap<String, String> postData = new HashMap<>();
+        postData.put("userId",  String.valueOf(userId));
+
+        String URL =  context.getResources().getString(R.string.PHP_Scripts_Buchungskategorien_Abfragen);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LinkedHashMap<Integer, Buchungshauptkategorie> returnMap = new LinkedHashMap<Integer, Buchungshauptkategorie>();
+
+                try {
+                    // Getting JSON Array node
+                    JSONArray hauptKategorienArray = response.getJSONArray("Hauptkategorien");
+
+                    //looping through all the elements in json array
+                    for (int i = 0; i < hauptKategorienArray.length(); i++) {
+                        //getting json object from the json array
+                        JSONObject objHauptkategorie = hauptKategorienArray.getJSONObject(i);
+
+                        JSONArray unterKategorieArray = objHauptkategorie.getJSONArray("Unterkategorien");
+                        LinkedHashMap<Integer, Buchungskategorie> unterkategorienMap = new LinkedHashMap<> ();
+
+                        for (int z = 0; z < unterKategorieArray.length(); z++) {
+                            //getting json object from the json array
+                            JSONObject unterkategorieJSONObject = unterKategorieArray.getJSONObject(z);
+                            Buchungskategorie newBuchungskategorie = new Buchungskategorie(unterkategorieJSONObject);
+                            unterkategorienMap.put(newBuchungskategorie.getId(), newBuchungskategorie);
+                        }
+                        Buchungshauptkategorie newHauptkategorie = new Buchungshauptkategorie(objHauptkategorie, unterkategorienMap);
+                        returnMap.put(newHauptkategorie.getId(), newHauptkategorie);
+                    }
+
+                  callback.onRequestCompleted(returnMap);
+
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context,"Konnte Kategoriedaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                    Log.d("Kategoriedaten Laden",e.getMessage());
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context,"Kategorien konnten nicht geladen werden",Toast.LENGTH_SHORT,true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
+    }
+
+    @Override
+    public void queryCooperations(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>> callback) {
+        HashMap<String, String> postData = new HashMap<>();
+        postData.put("userId",  String.valueOf(userId));
+
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Kooperationen_Abfragen);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LinkedHashMap<Integer, Kooperation> returnMap = new LinkedHashMap<Integer, Kooperation>();
+
+                try {
+                    // Getting JSON Array node
+                    JSONArray kooperationenArray = response.getJSONArray("Kooperation");
+
+                    //looping through all the elements in json array
+                    for (int i = 0; i < kooperationenArray.length(); i++) {
+                        //getting json object from the json array
+                        Kooperation koop = new Kooperation(kooperationenArray.getJSONObject(i));
+                        returnMap.put(koop.getId(), koop);
+                    }
+
+                    callback.onRequestCompleted(returnMap);
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context,"Konnte Kooperationsdaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                    Log.d("Kooperationsdaten Laden",e.getMessage());
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context,"Kooperationen konnten nicht geladen werden",Toast.LENGTH_SHORT,true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
+    }
+
+    @Override
+    public void queryTokens(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, FinanzbuchungToken>> callback) {
+        HashMap<String, String> postData = new HashMap<>();
+        postData.put("userId",  String.valueOf(userId));
+
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Tokens_Abfragen);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LinkedHashMap<Integer, FinanzbuchungToken> returnMap = new LinkedHashMap<Integer, FinanzbuchungToken>();
+
+                try {
+                    // Getting JSON Array node
+                    JSONArray kontenArray = response.getJSONArray("konten");
+
+                    //looping through all the elements in json array
+                    for (int i = 0; i < kontenArray.length(); i++) {
+                        Konto newKonto = new Konto(kontenArray.getJSONObject(i));
+                        returnMap.put(newKonto.getIdentifier(), newKonto);
+                    }
+
+                    callback.onRequestCompleted(returnMap);
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context,"Konnte Kontendaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                    Log.d("Kontendaten Laden",e.getMessage());
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context,"Konten konnten nicht geladen werden",Toast.LENGTH_SHORT,true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
+    }
+
 
     private void addToRequestQueue(Request request) {
         if(!isNetworkAvailable()) {

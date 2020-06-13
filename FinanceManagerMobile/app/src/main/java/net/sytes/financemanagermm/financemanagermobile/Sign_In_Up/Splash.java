@@ -18,6 +18,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.ApplicationController;
 import net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -86,8 +87,8 @@ public class Splash extends Activity {
             public void onRequestCompleted(User data) {
                 if (data != null) {
                     Intent intent = new Intent(Splash.this, Hauptmenu.class);
-                    System.out.println(data.getUserName());
-                    intent.putExtra("User", data);
+
+                    FinanceManagerMobileApplication.getInstance().getDataManagement().setCurrentUser(data);
 
                     Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(Splash.this,
                             R.anim.fade_in, R.anim.fade_out).toBundle();

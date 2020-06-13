@@ -29,6 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.klinker.android.link_builder.Link;
 import com.klinker.android.link_builder.LinkBuilder;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.ApplicationController;
 import net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -188,7 +189,7 @@ public class Sing_In extends AppCompatActivity {
                     editor.apply();
 
                     Intent intent = new Intent(Sing_In.this, Hauptmenu.class);
-                    intent.putExtra("User", data);
+                    FinanceManagerMobileApplication.getInstance().getDataManagement().setCurrentUser(data);
 
                     Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(Sing_In.this,
                             R.anim.fade_in, R.anim.fade_out).toBundle();

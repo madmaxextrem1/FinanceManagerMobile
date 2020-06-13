@@ -2,6 +2,7 @@ package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.content.Context;
 
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
@@ -17,8 +18,10 @@ import java.util.LinkedHashMap;
 public class DataManagement {
     private User currentUser;
     private Context context;
+    private boolean initialized;
     private ServerCommunication serverCommunication;
     private LinkedHashMap<Integer, Konto> accounts;
+    private LinkedHashMap<Integer, Buchungshauptkategorie> categories;
     private LinkedHashMap<Integer, FinanzbuchungToken> tokens;
     private LinkedHashMap<Integer, Dauerauftrag> recurringOrders;
     private LinkedHashMap<Integer, Finanzbuchung> financialEntries;
@@ -28,6 +31,9 @@ public class DataManagement {
     public DataManagement (Context context) {
         this.context = context;
         this.serverCommunication = new ServerCommunication(context);
+        this.accounts = new LinkedHashMap<>();
+        this.categories = new LinkedHashMap<>();
+
     }
 
     public DataManagement (Context context, User currentUser) {
@@ -37,14 +43,27 @@ public class DataManagement {
     }
 
     public void initializeData() {
-        //Initialisierung der Konten
-        serverCommunication.queryAccounts(currentUser.getUserId(), 0, new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Konto>>() {
-            @Override
-            public void onRequestCompleted(LinkedHashMap<Integer, Konto> data) {
-                DataManagement.this.accounts = data;
-            }
-        });
+        if(currentUser==null) throw new IllegalStateException("Der User darf nicht NULL sein.");
 
+        //Initialisierung der Konten
+        synchronized (accounts) {
+            serverCommunication.queryAccounts(currentUser.getUserId(), 0, new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Konto>>() {
+                @Override
+                public void onRequestCompleted(LinkedHashMap<Integer, Konto> data) {
+                    DataManagement.this.accounts = data;
+                }
+            });
+        }
+
+        //Initialisierung der Buchungskategorien
+        synchronized (categories) {
+            serverCommunication.queryCategories(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Buchungshauptkategorie>>() {
+                @Override
+                public void onRequestCompleted(LinkedHashMap<Integer, Buchungshauptkategorie> data) {
+                    DataManagement.this.categories = data;
+                }
+            });
+        }
     }
 
     public User getCurrentUser() {
