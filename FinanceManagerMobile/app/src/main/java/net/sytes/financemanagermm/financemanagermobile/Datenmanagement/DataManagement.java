@@ -2,6 +2,8 @@ package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.content.Context;
 
+import com.klinker.android.link_builder.Link;
+
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
@@ -13,6 +15,7 @@ import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class DataManagement {
@@ -22,7 +25,7 @@ public class DataManagement {
     private ServerCommunication serverCommunication;
     private LinkedHashMap<Integer, Konto> accounts;
     private LinkedHashMap<Integer, Buchungshauptkategorie> categories;
-    private LinkedHashMap<Integer, FinanzbuchungToken> tokens;
+    private HashMap<Integer, FinanzbuchungToken> tokens;
     private LinkedHashMap<Integer, Dauerauftrag> recurringOrders;
     private LinkedHashMap<Integer, Finanzbuchung> financialEntries;
     private LinkedHashMap<Integer, KooperationAnfrage> cooperationRequests;
@@ -33,7 +36,8 @@ public class DataManagement {
         this.serverCommunication = new ServerCommunication(context);
         this.accounts = new LinkedHashMap<>();
         this.categories = new LinkedHashMap<>();
-
+        this.tokens = new HashMap<>();
+        this.cooperations = new LinkedHashMap<>();
     }
 
     public DataManagement (Context context, User currentUser) {
@@ -63,6 +67,11 @@ public class DataManagement {
                     DataManagement.this.categories = data;
                 }
             });
+        }
+
+        //Initialisierung der Tokens
+        synchronized (tokens) {
+            serverCommunication.queryTokens();
         }
     }
 

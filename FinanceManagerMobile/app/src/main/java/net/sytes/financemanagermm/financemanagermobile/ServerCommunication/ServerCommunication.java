@@ -249,7 +249,7 @@ public final class ServerCommunication implements ServerCommunicationInterface {
     }
 
     @Override
-    public void queryTokens(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, FinanzbuchungToken>> callback) {
+    public void queryTokens(int userId, GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>> callback) {
         HashMap<String, String> postData = new HashMap<>();
         postData.put("userId",  String.valueOf(userId));
 
@@ -258,25 +258,25 @@ public final class ServerCommunication implements ServerCommunicationInterface {
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LinkedHashMap<Integer, FinanzbuchungToken> returnMap = new LinkedHashMap<Integer, FinanzbuchungToken>();
+                HashMap<Integer, FinanzbuchungToken> returnMap = new HashMap<>();
 
                 try {
                     // Getting JSON Array node
-                    JSONArray kontenArray = response.getJSONArray("konten");
+                    JSONArray tokenArray = response.getJSONArray("Merkmale");
 
                     //looping through all the elements in json array
-                    for (int i = 0; i < kontenArray.length(); i++) {
-                        Konto newKonto = new Konto(kontenArray.getJSONObject(i));
-                        returnMap.put(newKonto.getIdentifier(), newKonto);
+                    for (int i = 0; i < tokenArray.length(); i++) {
+                        FinanzbuchungToken newToken = new FinanzbuchungToken(tokenArray.getJSONObject(i));
+                        returnMap.put(newToken.getId(), newToken);
                     }
 
                     callback.onRequestCompleted(returnMap);
                 } catch (JSONException e) {
                     Log.d("JsonException", e.getMessage());
-                    Toasty.error(context,"Konnte Kontendaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
+                    Toasty.error(context,"Konnte Tokendaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
                 } catch (Exception e) {
                     Toasty.error(context, e.getMessage(),Toast.LENGTH_SHORT,true).show();
-                    Log.d("Kontendaten Laden",e.getMessage());
+                    Log.d("Tokendaten Laden",e.getMessage());
                 }
             }
         };
@@ -284,7 +284,7 @@ public final class ServerCommunication implements ServerCommunicationInterface {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(context,"Konten konnten nicht geladen werden",Toast.LENGTH_SHORT,true).show();
+                Toasty.error(context,"Tokens konnten nicht geladen werden",Toast.LENGTH_SHORT,true).show();
             }
         };
 
