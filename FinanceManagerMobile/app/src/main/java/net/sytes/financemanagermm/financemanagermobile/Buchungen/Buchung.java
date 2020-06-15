@@ -28,6 +28,7 @@ import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.tiper.MaterialSpinner;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
@@ -255,7 +256,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
 
         BuchungszeileAdapter = new Buchungszeile_Auswahl_SwipeAdapter(this, lvBuchungHinzufügen, Buchung.this::onBuchungszeileItemClicked);
         lvBuchungHinzufügen.setAdapter(BuchungszeileAdapter);
-        kontoAdapter = new Konto_Adapter(this, Konten.getAktiveKonten());
+        kontoAdapter = new Konto_Adapter(this, FinanceManagerMobileApplication.getInstance().getDataManagement().getActiveAccounts());
         cboKonto.setAdapter(kontoAdapter);
         kontoAdapter.notifyDataSetChanged();
 
@@ -268,7 +269,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
         });
 
         txtMerkmale = (ChipGroup) findViewById(R.id.Buchung_chgMerkmale);
-        for (FinanzbuchungToken eintrag : FinanzbuchungTokens.getTokens()) {
+        for (FinanzbuchungToken eintrag : FinanceManagerMobileApplication.getInstance().getDataManagement().getTokens().values()) {
             Chip chip = new Chip(Buchung.this);
             chip.setText(eintrag.getBeschreibung());
             chip.setChipBackgroundColorResource(R.color.ChipBackGroundUnchecked);

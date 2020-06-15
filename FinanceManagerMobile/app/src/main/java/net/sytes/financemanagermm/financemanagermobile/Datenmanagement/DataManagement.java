@@ -1,6 +1,7 @@
 package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 
 import com.klinker.android.link_builder.Link;
 
@@ -17,6 +18,7 @@ import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 public class DataManagement {
     private User currentUser;
@@ -41,9 +43,8 @@ public class DataManagement {
     }
 
     public DataManagement (Context context, User currentUser) {
+        this(context);
         this.currentUser =  currentUser;
-        this.context = context;
-        this.serverCommunication = new ServerCommunication(context);
     }
 
     public void initializeData() {
@@ -54,10 +55,11 @@ public class DataManagement {
             serverCommunication.queryAccounts(currentUser.getUserId(), 0, new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Konto>>() {
                 @Override
                 public void onRequestCompleted(LinkedHashMap<Integer, Konto> data) {
-                    DataManagement.this.accounts = data;
+                    data.values().forEach(account -> DataManagement.this.accounts.put(account.getIdentifier(), account));
                 }
             });
         }
+
 
         //Initialisierung der Buchungskategorien
         synchronized (categories) {
@@ -71,7 +73,22 @@ public class DataManagement {
 
         //Initialisierung der Tokens
         synchronized (tokens) {
-            serverCommunication.queryTokens();
+            serverCommunication.queryTokens(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>>() {
+                @Override
+                public void onRequestCompleted(HashMap<Integer, FinanzbuchungToken> data) {
+                    DataManagement.this.tokens = data;
+                }
+            });
+        }
+
+        //Initialisierung der Kooperationen
+        synchronized (cooperations) {
+            serverCommunication.queryCooperations(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
+                @Override
+                public void onRequestCompleted(LinkedHashMap<Integer, Kooperation> data) {
+                    DataManagement.this.cooperations = data;
+                }
+            });
         }
     }
 
@@ -87,15 +104,19 @@ public class DataManagement {
         return accounts;
     }
 
+    public LinkedHashMap<Integer, Konto> getActiveAccounts() {
+        return accounts.values().stream().filter(Konto::getAktiv).collect(Collectors.toMap(Konto::getIdentifier, konto -> konto, (prev, next) -> next, LinkedHashMap::new));
+    }
+
     public void setAccounts(LinkedHashMap<Integer, Konto> accounts) {
         this.accounts = accounts;
     }
 
-    public LinkedHashMap<Integer, FinanzbuchungToken> getTokens() {
+    public HashMap<Integer, FinanzbuchungToken> getTokens() {
         return tokens;
     }
 
-    public void setTokens(LinkedHashMap<Integer, FinanzbuchungToken> tokens) {
+    public void setTokens(HashMap<Integer, FinanzbuchungToken> tokens) {
         this.tokens = tokens;
     }
 

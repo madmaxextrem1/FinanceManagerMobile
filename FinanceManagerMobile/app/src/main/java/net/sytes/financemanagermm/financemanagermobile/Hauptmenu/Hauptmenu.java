@@ -67,6 +67,7 @@ import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanz
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Kooperationen;
+import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.Sing_In;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.CustomAlertDialog;
@@ -119,8 +120,6 @@ public class Hauptmenu extends AppCompatActivity {
         bottomNav = findViewById(R.id.mainmenu_navigation_bottom);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            ;
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Hauptmenu.this, Buchung.class);
@@ -160,9 +159,8 @@ public class Hauptmenu extends AppCompatActivity {
         toolbarMonth = (TextView) actionBar.getCustomView().findViewById(
                 R.id.Hauptmenu_Toolbar_Month);
         toolbarFilterButton = (AppCompatImageButton) actionBar.getCustomView().findViewById(R.id.Hauptmenu_Toolbar_FilterButton);
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
-        Date currentTime = new Date();
-        toolbarMonth.setText(formatter.format(currentTime));
+
+        toolbarMonth.setText(DateConversionHelper.getDE_DateFormat().format(new Date()));
         toolbar.setBackgroundColor(getResources().getColor(R.color.fm_Login_Background_Color));
 
         bottomNav.setOnNavigationItemSelectedListener(navListener);

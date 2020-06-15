@@ -99,7 +99,7 @@ public final class ServerCommunication implements ServerCommunicationInterface {
     public void queryAccounts(int userId, int kooperationId, GeneralCommunicationCallback<LinkedHashMap<Integer, Konto>> callback) {
         HashMap<String, String> postData = new HashMap<>();
         postData.put("userId",  String.valueOf(userId));
-        postData.put("kooperationId", String.valueOf(kooperationId));
+        if(kooperationId != 0) postData.put("kooperationId", String.valueOf(kooperationId));
 
         String URL = context.getResources().getString(R.string.PHP_Scripts_Konten_Abfragen);
 
@@ -124,7 +124,8 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                     Toasty.error(context,"Konnte Kontendaten nicht verarbeiten: " + e.getMessage(),Toast.LENGTH_SHORT,true).show();
                 } catch (Exception e) {
                     Toasty.error(context, e.getMessage(),Toast.LENGTH_SHORT,true).show();
-                    Log.d("Kontendaten Laden",e.getMessage());
+                    e.printStackTrace();
+                    Log.d("Kontendaten Laden", e.getMessage());
                 }
             }
         };

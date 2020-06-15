@@ -98,24 +98,6 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
 
         KontenAufstellungGenerieren();
 
-        if(!Kooperationen.getKooperationenInitialized()) {
-            Kooperationen.initializeKooperationen(new KooperationenCallback() {
-                @Override
-                public void onKooperationenSuccessfullyLoaded(LinkedHashMap<Integer, Kooperation> Kooperationen) {
-
-                }
-            });
-        }
-
-        if(!FinanzbuchungTokens.getTokensInitialized()) {
-            FinanzbuchungTokens.initializeTokens(new TokensCallback() {
-                @Override
-                public void onTokensSuccessfullyLoaded(ArrayList<FinanzbuchungToken> Tokens) {
-
-                }
-            });
-        }
-
         Ergebnisse_Abfragen();
         Überkategorie_Ergebnisse_Abfragen();
 
@@ -130,11 +112,8 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         rcvKontenAufstellungAdapter.notifyDataSetChanged();
     }
     private void Ergebnisse_Abfragen() {
-        GlobaleVariablen globaleVariablen = GlobaleVariablen.getInstance();
         HashMap PostDataBuchungen = new HashMap();
-        PostDataBuchungen.put("userid", String.valueOf(globaleVariablen.getUserId()));
-        PostDataBuchungen.put("txtUsername", globaleVariablen.getUserName());
-        PostDataBuchungen.put("txtPassword", globaleVariablen.getPwd());
+        PostDataBuchungen.put("userid", String.valueOf(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId()));
 
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(getContext(), PostDataBuchungen, false, new AsyncResponse() {
             @Override
@@ -191,11 +170,8 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         return s;
     }
     private void Überkategorie_Ergebnisse_Abfragen() {
-        GlobaleVariablen globaleVariablen = GlobaleVariablen.getInstance();
         HashMap postDataHauptkategorien = new HashMap();
-        postDataHauptkategorien.put("userid", String.valueOf(globaleVariablen.getUserId()));
-        postDataHauptkategorien.put("txtUsername", globaleVariablen.getUserName());
-        postDataHauptkategorien.put("txtPassword", globaleVariablen.getPwd());
+        postDataHauptkategorien.put("userid", String.valueOf(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId()));
 
         PostResponseAsyncTask ÜberKategorien_Abfragen_Task = new PostResponseAsyncTask(getContext(), postDataHauptkategorien,false, new AsyncResponse() {
             @Override
