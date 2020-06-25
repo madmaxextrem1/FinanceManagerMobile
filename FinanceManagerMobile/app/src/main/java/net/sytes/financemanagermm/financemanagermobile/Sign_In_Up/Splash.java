@@ -5,34 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.transition.Transition;
 import android.util.Log;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.ApplicationController;
 import net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunication;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunicationInterface;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-
-import es.dmoral.toasty.Toasty;
 
 public class Splash extends Activity {
     private final int SPLASH_DISPLAY_LENGTH = 800;

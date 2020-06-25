@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.otaliastudios.autocomplete.RecyclerViewPresenter;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.R;
 

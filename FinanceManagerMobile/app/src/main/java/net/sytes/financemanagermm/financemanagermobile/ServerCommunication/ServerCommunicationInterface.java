@@ -1,8 +1,7 @@
 package net.sytes.financemanagermm.financemanagermobile.ServerCommunication;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;

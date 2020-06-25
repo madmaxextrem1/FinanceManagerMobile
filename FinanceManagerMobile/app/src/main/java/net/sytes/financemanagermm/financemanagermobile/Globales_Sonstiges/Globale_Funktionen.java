@@ -16,8 +16,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungPosition;
-import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungPosition;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.FinanceManagerData_Edited_Interface;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
@@ -28,10 +27,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.TimeZone;
-import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -13,17 +13,15 @@ import androidx.core.content.ContextCompat;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter extends BaseSwipeAdapter {
     private ArrayList<Finanzbuchung_Buchung> eintragListe;

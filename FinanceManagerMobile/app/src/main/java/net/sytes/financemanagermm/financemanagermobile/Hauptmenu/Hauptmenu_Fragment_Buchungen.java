@@ -13,6 +13,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.daimajia.swipe.SwipeLayout;
 import com.google.android.material.button.MaterialButton;
 import com.kosalgeek.genasync12.AsyncResponse;
@@ -20,19 +26,11 @@ import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.mikepenz.materialdrawer.Drawer;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungenCallback;
 import net.sytes.financemanagermm.financemanagermobile.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import es.dmoral.toasty.Toasty;
 
@@ -44,24 +42,25 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
     private static AppCompatImageButton ToolbarFilterButton;
     private static Drawer SideSheetDrawer;
 
-    public static Hauptmenu_Fragment_Buchungen newInstance (AppCompatImageButton toolbarFilterButton, Drawer sideSheetDrawer) {
+    public static Hauptmenu_Fragment_Buchungen newInstance(AppCompatImageButton toolbarFilterButton, Drawer sideSheetDrawer) {
         Hauptmenu_Fragment_Buchungen fragment = new Hauptmenu_Fragment_Buchungen();
         ToolbarFilterButton = toolbarFilterButton;
         SideSheetDrawer = sideSheetDrawer;
 
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View ReturnView =  inflater.inflate(R.layout.hauptmenu_fragment_buchungen, container, false);
-        View SwipeView = inflater.inflate(R.layout.hauptmenu_fragment_buchungen_listitem_swipelayout,container,false);
+        View ReturnView = inflater.inflate(R.layout.hauptmenu_fragment_buchungen, container, false);
+        View SwipeView = inflater.inflate(R.layout.hauptmenu_fragment_buchungen_listitem_swipelayout, container, false);
         lv_Buchungen = (ListView) ReturnView.findViewById(R.id.lv_Buchungen);
 
         swipeRefreshLayout = (SwipeRefreshLayout) ReturnView.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setColorSchemeColors(
                 getResources().getColor(R.color.fm_Login_Background_Color),
-                        getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.colorPrimary),
                 Color.GREEN);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -73,7 +72,7 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
                         Buchungen_Laden();
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                },1000);
+                }, 1000);
             }
         });
 
@@ -119,34 +118,32 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
         ToolbarFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             SideSheetDrawer.openDrawer();
+                SideSheetDrawer.openDrawer();
             }
         });
 
         Buchungen_Laden();
         return ReturnView;
     }
+
     public void Buchungen_Laden() {
-        Finanzbuchungen.initializeFinanzbuchungen(new FinanzbuchungenCallback() {
-                @Override
-                public void onFinanzbuchungenSuccessfullyLoaded(ArrayList<Finanzbuchung_Buchung> finanzbuchungen) {
-                    hauptmenu_buchungen_liste_adapter = new Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter(getContext(), Hauptmenu_Fragment_Buchungen.this, finanzbuchungen);
-                    lv_Buchungen.setAdapter(hauptmenu_buchungen_liste_adapter);
-                    System.out.println(hauptmenu_buchungen_liste_adapter.getCount());
-                    hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
-                }
-            });
+        hauptmenu_buchungen_liste_adapter = new Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter(getContext(),
+                Hauptmenu_Fragment_Buchungen.
+                        this, finanzbuchungen);
+        lv_Buchungen.setAdapter(hauptmenu_buchungen_liste_adapter);
+        hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
     }
+
     @Override
     public void onBuchungtemClicked(int pos, Finanzbuchung_Buchung BuchungEintrag, boolean EditMode) {
-        if(EditMode) {
+        if (EditMode) {
             System.out.println(BuchungEintrag);
             Intent intent = new Intent(getContext(), Buchung.class);
-            intent.putExtra("EditMode",true);
-            intent.putExtra("BuchungEintrag",BuchungEintrag);
+            intent.putExtra("EditMode", true);
+            intent.putExtra("BuchungEintrag", BuchungEintrag);
             int requestCode = 1; // Or some number you choose
             startActivityForResult(intent, requestCode, ActivityOptions.makeBasic().toBundle());
-            swipeLayout.close(false,true);
+            swipeLayout.close(false, true);
 
             Buchung.setBuchungCreatedCallback(new Buchung.Buchung_Created_Interface() {
                 @Override
@@ -163,27 +160,27 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
             TextView txtTitel = (TextView) dialog.findViewById(R.id.Titel);
             txtTitel.setText("Buchung löschen?");
             TextView txtMessage = (TextView) dialog.findViewById(R.id.Message);
-            txtMessage.setText("Buchung mit dem Titel '" + BuchungEintrag.getBeschreibung() + "' wirklich löschen?" );
+            txtMessage.setText("Buchung mit dem Titel '" + BuchungEintrag.getBeschreibung() + "' wirklich löschen?");
 
             MaterialButton löschenButton = (MaterialButton) dialog.findViewById(R.id.btnLöschen);
             löschenButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     HashMap BuchungDaten = new HashMap();
-                    BuchungDaten.put("BuchungID",String.valueOf(BuchungEintrag.getId()));
+                    BuchungDaten.put("BuchungID", String.valueOf(BuchungEintrag.getId()));
 
                     PostResponseAsyncTask LöschenTask =
-                            new PostResponseAsyncTask(getContext(), BuchungDaten, false,  new AsyncResponse() {
+                            new PostResponseAsyncTask(getContext(), BuchungDaten, false, new AsyncResponse() {
                                 @Override
                                 public void processFinish(String s) {
-                                    if(s.equals("success")) {
+                                    if (s.equals("success")) {
                                         hauptmenu_buchungen_liste_adapter.getEintragListe().remove(BuchungEintrag);
                                         swipeLayout.close(false, true);
-                                        Toasty.success(getContext(),"Gelöscht", Toast.LENGTH_SHORT,true).show();
+                                        Toasty.success(getContext(), "Gelöscht", Toast.LENGTH_SHORT, true).show();
                                         hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
                                         dialog.dismiss();
                                     } else {
-                                        Toasty.error(getContext(), "Error: " + s, Toast.LENGTH_SHORT,true).show();
+                                        Toasty.error(getContext(), "Error: " + s, Toast.LENGTH_SHORT, true).show();
                                     }
                                 }
                             });

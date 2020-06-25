@@ -46,32 +46,21 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.tiper.MaterialSpinner;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Umbuchung;
-import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.ApplicationController;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.BuchungskategorienCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.DauerauftragCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Daueraufträge;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanceManagerCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungenCallback;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Kooperationen;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.Sing_In;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.CustomAlertDialog;
-import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto_Adapter;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
@@ -82,12 +71,10 @@ import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kon
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.Objects;
 
 import static java.util.Calendar.YEAR;
@@ -266,64 +253,29 @@ public class Hauptmenu extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
-
+                        Intent intent = null;
                         switch (Integer.valueOf(String.valueOf(drawerItem.getIdentifier()))) {
                             case 2:
-                                Intent intent = new Intent(Hauptmenu.this, Umbuchung.class);
+                                intent = new Intent(Hauptmenu.this, Umbuchung.class);
                                 startActivity(intent);
                                 break;
                             case 4:
-                                if (!Buchungskategorien.getBuchungskategorienInitialized()) {
-                                    Buchungskategorien.initializeBuchungskategorien(new BuchungskategorienCallback() {
-                                        @Override
-                                        public void onBuchungskategorienSuccessfullyLoaded(LinkedHashMap<Integer, Buchungshauptkategorie> Buchungskategorien) {
-                                            Intent intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                                } else {
-                                    intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
-                                    startActivity(intent);
-                                }
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
                                 break;
                             case 3:
-                                if (!Konten.getKontenInitialized()) {
-                                    Konten.initializeKonten(new FinanceManagerCallback<Integer, Konto>() {
-                                        @Override
-                                        public void onDataUpdated(LinkedHashMap<Integer, Konto> linkedHashMap) {
-                                            Intent intent = new Intent(Hauptmenu.this, Verwaltung_Konten_Übersicht.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                                } else {
-                                    intent = new Intent(Hauptmenu.this, Verwaltung_Konten_Übersicht.class);
-                                    startActivity(intent);
-                                }
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Konten_Übersicht.class);
                                 break;
                             case 5:
-                                if (!Daueraufträge.getDaueraufträgeInitialized()) {
-                                    Daueraufträge.initializeDaueraufträge(new DauerauftragCallback() {
-                                        @Override
-                                        public void onDaueraufträgeSuccessfullyLoaded(LinkedHashMap<Integer, Dauerauftrag> daueraufträge) {
-                                            Intent intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                                } else {
-                                    intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
-                                    startActivity(intent);
-                                }
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
                                 break;
                             case 6:
                                 intent = new Intent(Hauptmenu.this, Gemeinsame_Finanzen.class);
-                                startActivity(intent);
                                 break;
                             case 7:
                                 CustomAlertDialog logOutDialog = new CustomAlertDialog(Hauptmenu.this, "Abmelden",
                                         "Möchten Sie sich wirklich abmelden?", "Abmelden", "Abbrechen", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        ApplicationController.getInstance().resetAllVariableInitializations();
                                         Intent intent = new Intent(Hauptmenu.this, Sing_In.class);
                                         intent.putExtra("Abmelden", true);
                                         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(Hauptmenu.this,
@@ -335,7 +287,7 @@ public class Hauptmenu extends AppCompatActivity {
                                 logOutDialog.show();
                                 break;
                         }
-
+                        startActivity(intent);
                         return false;
                     }
                 })
@@ -422,11 +374,11 @@ public class Hauptmenu extends AppCompatActivity {
                     Hauptmenu_Fragment_Buchungen_Filter.setFilterDataTitelfilterTyp(GlobaleVariablen.BuchungstitelFilter.GLEICH);
 
                     ArrayList<Integer> ArrayToken = new ArrayList<Integer>();
-                    for (FinanzbuchungToken Eintrag : FinanzbuchungTokens.getTokens()) {
+                    for (FinanzbuchungToken Eintrag : FinanceManagerMobileApplication.getInstance().getDataManagement().getTokens().values()) {
                         View chipView = (View) getLayoutInflater().inflate(R.layout.hauptmenu_fragment_buchungen_filterfragment_merkmalchip, null);
                         Chip chip = (Chip) chipView.findViewById(R.id.Chip);
                         chip.setText(Eintrag.getBeschreibung());
-                        chip.setId(Eintrag.getId());
+                        chip.setId(Eintrag.getTokenId());
                         chipGroup.addView(chip);
                         chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
@@ -507,7 +459,7 @@ public class Hauptmenu extends AppCompatActivity {
                     cboKonto.setAdapter(konto__adapter);
                     Konto keinKontoFilter = new Konto(0, "Kein Kontofilter", Konto.KontoArt.BANKKONTO, 0.00, 0.00, Date.from(Instant.now()), false, 0, 0.00);
                     konto__adapter.getLinkedMap().put(keinKontoFilter.getIdentifier(), keinKontoFilter);
-                    konto__adapter.getLinkedMap().putAll(Konten.getAktiveKonten());
+                    konto__adapter.getLinkedMap().putAll(FinanceManagerMobileApplication.getInstance().getDataManagement().getActiveAccounts());
                     konto__adapter.notifyDataSetChanged();
 
                     cboKonto.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -532,7 +484,7 @@ public class Hauptmenu extends AppCompatActivity {
 
                     Kooperation_Adapter kooperationAdapter = new Kooperation_Adapter(Hauptmenu.this);
                     kooperationAdapter.getLinkedMap().put(0, new Kooperation());
-                    kooperationAdapter.getLinkedMap().putAll(Kooperationen.getAktiveKooperationen());
+                    kooperationAdapter.getLinkedMap().putAll(FinanceManagerMobileApplication.getInstance().getDataManagement().getCooperations());
                     cboKooperation.setAdapter(kooperationAdapter);
                     kooperationAdapter.notifyDataSetChanged();
                     cboKooperation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -678,25 +630,11 @@ public class Hauptmenu extends AppCompatActivity {
                     break;
             }
             String finalTag = Tag;
-            if (!Finanzbuchungen.getFinanzbuchungenInitialized()) {
-                Finanzbuchungen.initializeFinanzbuchungen(new FinanzbuchungenCallback() {
-                    @Override
-                    public void onFinanzbuchungenSuccessfullyLoaded(ArrayList<Finanzbuchung_Buchung> finanzbuchungen) {
-                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                        ft.replace(R.id.hauptmenu_framelayout, selectedFragment, finalTag);
-                        ft.addToBackStack(finalTag);
-                        ft.commit();
-                    }
-                });
-            } else {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.hauptmenu_framelayout, selectedFragment, finalTag);
-                ft.addToBackStack(finalTag);
-                ft.commit();
-            }
-
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.replace(R.id.hauptmenu_framelayout, selectedFragment, finalTag);
+            ft.addToBackStack(finalTag);
+            ft.commit();
             toolbarTitle.setText(menuItem.getTitle());
             return true;
         }

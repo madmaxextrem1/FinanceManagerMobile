@@ -6,9 +6,8 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.R;
-import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class FinanzbuchungTokens {
     private static ArrayList<FinanzbuchungToken> tokens;
@@ -69,7 +67,7 @@ public class FinanzbuchungTokens {
         tokensAlreadyLoaded = false;
     }
     public static FinanzbuchungToken getTokenById(int TokenID) {
-        return tokens.stream().filter(token -> token.getId() == TokenID).findFirst().orElse(null);
+        return tokens.stream().filter(token -> token.getTokenId() == TokenID).findFirst().orElse(null);
     }
 }
 

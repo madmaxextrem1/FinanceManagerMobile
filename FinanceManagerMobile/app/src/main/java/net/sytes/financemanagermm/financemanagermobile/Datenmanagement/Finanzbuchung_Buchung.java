@@ -1,11 +1,10 @@
-package net.sytes.financemanagermm.financemanagermobile.Buchungen;
+package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
-import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.FinanceManagerData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +14,6 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Finanzbuchung_Buchung extends Finanzbuchung implements Parcelable {
     private int kontoId;

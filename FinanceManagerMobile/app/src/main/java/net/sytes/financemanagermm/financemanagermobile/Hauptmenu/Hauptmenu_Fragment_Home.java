@@ -26,24 +26,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
-import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
-import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.BuchungskategorienCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.DauerauftragCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Daueraufträge;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanceManagerCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Kooperationen;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.KooperationenCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.TokensCallback;
-import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.R;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
-import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +38,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;

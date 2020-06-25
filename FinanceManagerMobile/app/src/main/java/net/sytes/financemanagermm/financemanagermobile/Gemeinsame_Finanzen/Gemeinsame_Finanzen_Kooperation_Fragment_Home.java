@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungenCallback;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen_Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.R;

@@ -3,29 +3,19 @@ package net.sytes.financemanagermm.financemanagermobile.Verwaltung;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ExpandableListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung_Kategorie_Dialog_lvKategorien_Adapter;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie_Update_Interface;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.BuchungskategorienCallback;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.R;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 
 public class Verwaltung_Kategorien_Übersicht extends AppCompatActivity {
     private ExpandableListView lvKategorien;
@@ -44,45 +34,23 @@ public class Verwaltung_Kategorien_Übersicht extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(!Buchungskategorien.getBuchungskategorienInitialized()) {
-            Buchungskategorien.initializeBuchungskategorien(new BuchungskategorienCallback() {
-                @Override
-                public void onBuchungskategorienSuccessfullyLoaded(LinkedHashMap<Integer, Buchungshauptkategorie> Buchungskategorien) {
-                    adapter = new Verwaltung_Kategorien_Übersicht_KategorieAdapter(Verwaltung_Kategorien_Übersicht.this);
-                    lvKategorien.setAdapter(adapter);
-                    lvKategorien.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                        @Override
-                        public void onGroupExpand(int groupPosition) {
-                            if (lastExpandedPosition != -1
-                                    && groupPosition != lastExpandedPosition) {
-                                lvKategorien.collapseGroup(lastExpandedPosition);
-                            }
-                            lastExpandedPosition = groupPosition;
-                            lvKategorien.setSelectionFromTop(groupPosition,0);
-                        }
-                    });
-                    adapter.notifyDataSetChanged();
+        adapter = new Verwaltung_Kategorien_Übersicht_KategorieAdapter(Verwaltung_Kategorien_Übersicht.this, FinanceManagerMobileApplication.getInstance().getDataManagement().getCategories());
+        lvKategorien.setAdapter(adapter);
+        lvKategorien.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (lastExpandedPosition != -1
+                        && groupPosition != lastExpandedPosition) {
+                    lvKategorien.collapseGroup(lastExpandedPosition);
                 }
-            });
-        } else {
-            adapter = new Verwaltung_Kategorien_Übersicht_KategorieAdapter(Verwaltung_Kategorien_Übersicht.this);
-            lvKategorien.setAdapter(adapter);
-            lvKategorien.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                @Override
-                public void onGroupExpand(int groupPosition) {
-                    if (lastExpandedPosition != -1
-                            && groupPosition != lastExpandedPosition) {
-                        lvKategorien.collapseGroup(lastExpandedPosition);
-                    }
-                    lastExpandedPosition = groupPosition;
-                    lvKategorien.setSelectionFromTop(groupPosition,0);
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
+                lastExpandedPosition = groupPosition;
+                lvKategorien.setSelectionFromTop(groupPosition, 0);
+            }
+        });
+        adapter.notifyDataSetChanged();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {;
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showEditDialog(null, false);
@@ -90,14 +58,16 @@ public class Verwaltung_Kategorien_Übersicht extends AppCompatActivity {
         });
 
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         finishAfterTransition();
         if (callback != null) {
             callback.onBuchungskategorieChanged(null);
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -107,6 +77,7 @@ public class Verwaltung_Kategorien_Übersicht extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onResume() {
         super.onResume();

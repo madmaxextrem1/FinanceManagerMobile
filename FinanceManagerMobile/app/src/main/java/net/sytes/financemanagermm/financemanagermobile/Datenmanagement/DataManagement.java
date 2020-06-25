@@ -1,13 +1,8 @@
 package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.content.Context;
-import android.provider.ContactsContract;
-
-import com.klinker.android.link_builder.Link;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.KooperationAnfrage;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunication;
@@ -66,7 +61,7 @@ public class DataManagement {
             serverCommunication.queryCategories(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Buchungshauptkategorie>>() {
                 @Override
                 public void onRequestCompleted(LinkedHashMap<Integer, Buchungshauptkategorie> data) {
-                    DataManagement.this.categories = data;
+                    data.values().forEach(category -> DataManagement.this.categories.put(category.getId(), category));
                 }
             });
         }
@@ -76,7 +71,7 @@ public class DataManagement {
             serverCommunication.queryTokens(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>>() {
                 @Override
                 public void onRequestCompleted(HashMap<Integer, FinanzbuchungToken> data) {
-                    DataManagement.this.tokens = data;
+                    data.values().forEach(token -> DataManagement.this.tokens.put(token.getIdentifier(), token));
                 }
             });
         }
@@ -86,10 +81,21 @@ public class DataManagement {
             serverCommunication.queryCooperations(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
                 @Override
                 public void onRequestCompleted(LinkedHashMap<Integer, Kooperation> data) {
-                    DataManagement.this.cooperations = data;
+                    data.values().forEach(coop -> DataManagement.this.cooperations.put(coop.getIdentifier(), coop));
                 }
             });
         }
+
+        //Initialisierung der Buchungsdaten
+        synchronized (cooperations) {
+            serverCommunication.queryCooperations(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
+                @Override
+                public void onRequestCompleted(LinkedHashMap<Integer, Kooperation> data) {
+                    data.values().forEach(coop -> DataManagement.this.cooperations.put(coop.getIdentifier(), coop));
+                }
+            });
+        }
+
     }
 
     public User getCurrentUser() {
@@ -108,47 +114,28 @@ public class DataManagement {
         return accounts.values().stream().filter(Konto::getAktiv).collect(Collectors.toMap(Konto::getIdentifier, konto -> konto, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    public void setAccounts(LinkedHashMap<Integer, Konto> accounts) {
-        this.accounts = accounts;
+    public LinkedHashMap<Integer, Buchungshauptkategorie> getCategories() {
+        return categories;
     }
 
     public HashMap<Integer, FinanzbuchungToken> getTokens() {
         return tokens;
     }
 
-    public void setTokens(HashMap<Integer, FinanzbuchungToken> tokens) {
-        this.tokens = tokens;
-    }
-
     public LinkedHashMap<Integer, Dauerauftrag> getRecurringOrders() {
         return recurringOrders;
-    }
-
-    public void setRecurringOrders(LinkedHashMap<Integer, Dauerauftrag> recurringOrders) {
-        this.recurringOrders = recurringOrders;
     }
 
     public LinkedHashMap<Integer, Finanzbuchung> getFinancialEntries() {
         return financialEntries;
     }
 
-    public void setFinancialEntries(LinkedHashMap<Integer, Finanzbuchung> financialEntries) {
-        this.financialEntries = financialEntries;
-    }
-
     public LinkedHashMap<Integer, KooperationAnfrage> getCooperationRequests() {
         return cooperationRequests;
-    }
-
-    public void setCooperationRequests(LinkedHashMap<Integer, KooperationAnfrage> cooperationRequests) {
-        this.cooperationRequests = cooperationRequests;
     }
 
     public LinkedHashMap<Integer, Kooperation> getCooperations() {
         return cooperations;
     }
 
-    public void setCooperations(LinkedHashMap<Integer, Kooperation> cooperations) {
-        this.cooperations = cooperations;
-    }
 }

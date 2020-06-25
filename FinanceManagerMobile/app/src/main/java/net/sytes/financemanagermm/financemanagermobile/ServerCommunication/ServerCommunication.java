@@ -14,7 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
@@ -268,7 +268,7 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                     //looping through all the elements in json array
                     for (int i = 0; i < tokenArray.length(); i++) {
                         FinanzbuchungToken newToken = new FinanzbuchungToken(tokenArray.getJSONObject(i));
-                        returnMap.put(newToken.getId(), newToken);
+                        returnMap.put(newToken.getTokenId(), newToken);
                     }
 
                     callback.onRequestCompleted(returnMap);

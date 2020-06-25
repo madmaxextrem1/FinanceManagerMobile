@@ -1,6 +1,8 @@
-package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
+package net.sytes.financemanagermm.financemanagermobile.Sign_In_Up;
 
 import android.app.Application;
+
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.DataManagement;
 
 public class FinanceManagerMobileApplication extends Application {
     private static FinanceManagerMobileApplication instance;

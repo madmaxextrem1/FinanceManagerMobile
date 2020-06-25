@@ -1,6 +1,6 @@
 package net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Koope
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen_Anfrage_Benutzer;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen_Anfrage_NeueAnfrage_Benutzer_Eintrag;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
@@ -159,7 +159,7 @@ public class GlobaleVariablen {
     public FinanzbuchungToken findTokenById(Integer TokenId) {
         FinanzbuchungToken eintrag = null;
         for(int i = 0; i < TokenListe.size(); i++){
-            Integer Id= TokenListe.get(i).getId();
+            Integer Id= TokenListe.get(i).getTokenId();
             if(TokenId.equals(Id)) {
                 eintrag = TokenListe.get(i);
             }

@@ -16,8 +16,10 @@ import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptka
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie_Update_Interface;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
+import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanceManagerApplication;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kategorien_Übersicht;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog;
 
@@ -33,7 +35,7 @@ public abstract class Kategorie_Expandable_BaseAdapter extends BaseExpandableLis
     public Kategorie_Expandable_BaseAdapter(Context context) {
         super();
         this.hauptkategorieMap = new LinkedHashMap<>();
-        this.hauptkategorieMap = Buchungskategorien.getBuchungskategorien();
+        this.hauptkategorieMap = FinanceManagerMobileApplication.getInstance().getDataManagement().getCategories();
         this.context = context;
     }
 

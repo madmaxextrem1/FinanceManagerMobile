@@ -20,7 +20,7 @@ import com.tiper.MaterialSpinner;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
@@ -176,7 +176,7 @@ public class Verwaltung_Daueraufträge_Fragment_Details extends Fragment {
             for (int i = 0; i < chgrpMerkmale.getChildCount(); i++) {
                 FinanzbuchungToken TokenEintrag = (FinanzbuchungToken) chgrpMerkmale.getChildAt(i).getTag();
                 Chip MerkmalChip = (Chip) chgrpMerkmale.getChildAt(i);
-                if (TokenEintrag.getId() == dauerauftrag.getTokenID()) {
+                if (TokenEintrag.getTokenId() == dauerauftrag.getTokenID()) {
                     MerkmalChip.setChecked(true);
                     break;
                 }
@@ -198,7 +198,7 @@ public class Verwaltung_Daueraufträge_Fragment_Details extends Fragment {
     }
 
     public int getTokenID () {
-        return (chgrpMerkmale.getTag() != null) ? ((FinanzbuchungToken) chgrpMerkmale.getTag()).getId() : 0;
+        return (chgrpMerkmale.getTag() != null) ? ((FinanzbuchungToken) chgrpMerkmale.getTag()).getTokenId() : 0;
     }
 
     public int getKategorieId() {

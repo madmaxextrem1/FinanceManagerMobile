@@ -17,6 +17,7 @@ import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Global
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class Verwaltung_Konten_Übersicht extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        adapter = new Verwaltung_Konten_Übersicht_KontenRecyclerViewAdapter(this, Konten.getKonten());
+        adapter = new Verwaltung_Konten_Übersicht_KontenRecyclerViewAdapter(this, FinanceManagerMobileApplication.getInstance().getDataManagement().getAccounts());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         lvKonten.setLayoutManager(layoutManager);
         lvKonten.setAdapter(adapter);

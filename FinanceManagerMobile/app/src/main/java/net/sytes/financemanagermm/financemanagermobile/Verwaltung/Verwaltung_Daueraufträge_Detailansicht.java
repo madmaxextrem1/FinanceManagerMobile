@@ -23,19 +23,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.google.android.material.textfield.TextInputLayout;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.tiper.MaterialSpinner;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Umbuchung;
-import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen_Anfrage_BearbeitenDialog_Fragment_Benutzer;
-import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen_Anfrage_BearbeitenDialog_Fragment_Konten;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Daueraufträge;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
@@ -43,11 +34,8 @@ import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.CustomAlertDialog;
 
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;

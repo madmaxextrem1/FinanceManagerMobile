@@ -1,28 +1,29 @@
-package net.sytes.financemanagermm.financemanagermobile.Buchungen;
+package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
+import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.FinanceManagerData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 
-public class FinanzbuchungToken implements Parcelable {
-    private int id;
+public class FinanzbuchungToken implements Parcelable, FinanceManagerData {
+    private int tokenId;
     private String Beschreibung;
     private TokenTyp Typ;
     private int kooperationId;
     private int benutzerId;
 
-    public int getId() {
-        return id;
+    public int getTokenId() {
+        return tokenId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTokenId(int tokenId) {
+        this.tokenId = tokenId;
     }
 
     public int getBenutzerId() {
@@ -49,8 +50,8 @@ public class FinanzbuchungToken implements Parcelable {
         this.Beschreibung = Merkmal;
     }
 
-    public FinanzbuchungToken(int id, String Beschreibung, TokenTyp Typ, int KooperationID, int BenutzerID) {
-        this.id = id;
+    public FinanzbuchungToken(int tokenId, String Beschreibung, TokenTyp Typ, int KooperationID, int BenutzerID) {
+        this.tokenId = tokenId;
         this.Beschreibung = Beschreibung;
         this.Typ = Typ;
         this.benutzerId = BenutzerID;
@@ -62,7 +63,7 @@ public class FinanzbuchungToken implements Parcelable {
             int ID = Tokendaten.getInt("ID");
             String Merkmal = Tokendaten.getString("Token");
 
-            this.id = ID;
+            this.tokenId = ID;
             this.Beschreibung = Merkmal;
             this.Typ = TokenTyp.PERSOENLICH;
             this.benutzerId = GlobaleVariablen.getInstance().getUserId();
@@ -93,7 +94,7 @@ public class FinanzbuchungToken implements Parcelable {
     };
 
     protected FinanzbuchungToken(Parcel in) throws ParseException {
-        id = in.readInt();
+        tokenId = in.readInt();
         Beschreibung = in.readString();
         Typ = (TokenTyp) in.readSerializable();
         benutzerId = in.readInt();
@@ -107,11 +108,16 @@ public class FinanzbuchungToken implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeInt(tokenId);
         dest.writeString(Beschreibung);
         dest.writeSerializable(Typ);
         dest.writeInt(benutzerId);
         dest.writeInt(kooperationId);
+    }
+
+    @Override
+    public int getIdentifier() {
+        return tokenId;
     }
 
     public enum TokenTyp {

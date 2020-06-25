@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.R;
 
 
@@ -56,7 +56,7 @@ public class Token_Auswahl_Adapter extends FilteredArrayAdapter<FinanzbuchungTok
     public FinanzbuchungToken getTokenById(int TokenID) {
         FinanzbuchungToken Eintrag = null;
         for (int i = 0; i < eintragListe.size(); i++) {
-            if(getItem(i).getId() ==TokenID) {
+            if(getItem(i).getTokenId() ==TokenID) {
                 Eintrag = getItem(i);
                 break;
             }

@@ -34,8 +34,8 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.tiper.MaterialSpinner;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Finanzbuchung_Buchung;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungenCallback;
@@ -201,7 +201,7 @@ public class Gemeinsame_Finanzen_Kooperation extends AppCompatActivity {
                         View chipView = (View) getLayoutInflater().inflate(R.layout.hauptmenu_fragment_buchungen_filterfragment_merkmalchip, null);
                         Chip chip = (Chip) chipView.findViewById(R.id.Chip);
                         chip.setText(Eintrag.getBeschreibung());
-                        chip.setId(Eintrag.getId());
+                        chip.setId(Eintrag.getTokenId());
                         chipGroup.addView(chip);
                         chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override

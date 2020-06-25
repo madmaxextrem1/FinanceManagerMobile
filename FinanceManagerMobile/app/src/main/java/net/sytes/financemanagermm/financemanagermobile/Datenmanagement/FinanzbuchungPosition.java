@@ -1,4 +1,4 @@
-package net.sytes.financemanagermm.financemanagermobile.Buchungen;
+package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,6 +1,5 @@
 package net.sytes.financemanagermm.financemanagermobile.Buchungen;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,18 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungPosition;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.BuchungskategorienCallback;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.DecimalDigitsInputFilter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
-import net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kategorien_Übersicht;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Currency;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -147,17 +144,6 @@ public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnC
                 lv_Kategorien.setSelectionFromTop(groupPosition,0);
             }
         });
-
-        if(!Buchungskategorien.getBuchungskategorienInitialized()) {
-            Buchungskategorien.initializeBuchungskategorien(new BuchungskategorienCallback() {
-                @Override
-                public void onBuchungskategorienSuccessfullyLoaded(LinkedHashMap<Integer, Buchungshauptkategorie> Buchungskategorien) {
-                    adapter.notifyDataSetChanged();
-                }
-            });
-        } else {
-            adapter.notifyDataSetChanged();
-        }
 
         Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         return view;

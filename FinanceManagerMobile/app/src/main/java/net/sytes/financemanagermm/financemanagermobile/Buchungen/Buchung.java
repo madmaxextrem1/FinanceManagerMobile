@@ -28,14 +28,15 @@ import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.tiper.MaterialSpinner;
 
-import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanceManagerMobileApplication;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungPosition;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.FinanzbuchungTokens;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Kooperationen;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -55,7 +56,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.TimeZone;
 
 import es.dmoral.toasty.Toasty;
 
@@ -99,7 +99,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
 
         kooperationAdapter = new Kooperation_Adapter(this);
         kooperationAdapter.getLinkedMap().put(0, new Kooperation());
-        kooperationAdapter.getLinkedMap().putAll(Kooperationen.getAktiveKooperationen());
+        kooperationAdapter.getLinkedMap().putAll(FinanceManagerMobileApplication.getInstance().getDataManagement().getCooperations());
         cboKooperation.setAdapter(kooperationAdapter);
         kooperationAdapter.notifyDataSetChanged();
         cboKooperation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -342,7 +342,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
                 for (int z = 0; z < txtMerkmale.getChildCount(); z++) {
                     FinanzbuchungToken eintrag = (FinanzbuchungToken) txtMerkmale.getChildAt(z).getTag();
                     Chip chip = (Chip) txtMerkmale.getChildAt(z);
-                    if (eintrag.getId() == token.getId()) {
+                    if (eintrag.getTokenId() == token.getTokenId()) {
                         chip.setChecked(true);
                         break;
                     }
@@ -484,7 +484,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
             for (FinanzbuchungToken eintrag : CheckedMerkmalListe) {
                 HashMap TokenData = new HashMap();
                 TokenData.put("BuchungID", String.valueOf(buchungID));
-                TokenData.put("TokenID", String.valueOf(eintrag.getId()));
+                TokenData.put("TokenID", String.valueOf(eintrag.getTokenId()));
 
                 PostResponseAsyncTask TokenBuchenTask =
                         new PostResponseAsyncTask(Buchung.this, TokenData, false,

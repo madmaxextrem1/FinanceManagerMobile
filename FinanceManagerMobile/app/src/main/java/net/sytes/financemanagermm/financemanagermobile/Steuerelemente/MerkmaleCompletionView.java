@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.tokenautocomplete.TokenCompleteTextView;
 
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.FinanzbuchungToken;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.R;
 
 public class MerkmaleCompletionView extends TokenCompleteTextView<FinanzbuchungToken> {
