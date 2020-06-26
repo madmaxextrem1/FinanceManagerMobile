@@ -1,6 +1,7 @@
 package net.sytes.financemanagermm.financemanagermobile.ServerCommunication;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
@@ -16,6 +17,7 @@ public interface ServerCommunicationInterface {
     void queryCategories(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, Buchungshauptkategorie>> callback);
     void queryCooperations(int userId, GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>> callback);
     void queryTokens(int userId, GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>> callback);
+    void queryFinancialEntries(QueryFilter filter, GeneralCommunicationCallback<HashMap<Integer, Finanzbuchung>> callback);
 
     interface GeneralCommunicationCallback<T> {
         void onRequestCompleted(T data);

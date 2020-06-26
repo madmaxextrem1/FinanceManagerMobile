@@ -87,8 +87,8 @@ public class DataManagement {
         }
 
         //Initialisierung der Buchungsdaten
-        synchronized (cooperations) {
-            serverCommunication.queryCooperations(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
+        synchronized (financialEntries) {
+            serverCommunication.queryFinancialEntries(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
                 @Override
                 public void onRequestCompleted(LinkedHashMap<Integer, Kooperation> data) {
                     data.values().forEach(coop -> DataManagement.this.cooperations.put(coop.getIdentifier(), coop));

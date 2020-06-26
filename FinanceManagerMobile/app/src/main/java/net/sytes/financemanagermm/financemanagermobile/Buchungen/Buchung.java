@@ -431,7 +431,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
 
             data.put("BuchungID", String.valueOf(buchungID));
             data.put("Pos", String.valueOf(firstPosition.getId()));
-            data.put("BenutzerID", String.valueOf(GlobaleVariablen.getInstance().getUserId()));
+            data.put("BenutzerID", String.valueOf(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId()));
             data.put("KatID", String.valueOf(kategorieId));
             data.put("KontoID", String.valueOf(konto.getIdentifier()));
             data.put("Datum", GlobaleVariablen.getInstance().getSQL_DateFormat().format(buchungsdatum));
@@ -461,7 +461,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
 
                 data.put("BuchungID", String.valueOf(buchungID));
                 data.put("Pos", String.valueOf(position.getId()));
-                data.put("BenutzerID", String.valueOf(GlobaleVariablen.getInstance().getUserId()));
+                data.put("BenutzerID", String.valueOf(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId()));
                 data.put("KatID", String.valueOf(kategorieId));
                 data.put("KontoID", String.valueOf(konto.getIdentifier()));
                 data.put("Datum", GlobaleVariablen.getInstance().getSQL_DateFormat().format(buchungsdatum));
