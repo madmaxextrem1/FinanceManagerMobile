@@ -5,6 +5,7 @@ import android.content.Context;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.KooperationAnfrage;
+import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.QueryFilter;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunication;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunicationInterface;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Dauerauftrag;
@@ -24,7 +25,7 @@ public class DataManagement {
     private LinkedHashMap<Integer, Buchungshauptkategorie> categories;
     private HashMap<Integer, FinanzbuchungToken> tokens;
     private LinkedHashMap<Integer, Dauerauftrag> recurringOrders;
-    private LinkedHashMap<Integer, Finanzbuchung> financialEntries;
+    private HashMap<Integer, Finanzbuchung> financialEntries;
     private LinkedHashMap<Integer, KooperationAnfrage> cooperationRequests;
     private LinkedHashMap<Integer, Kooperation> cooperations;
 
@@ -88,10 +89,12 @@ public class DataManagement {
 
         //Initialisierung der Buchungsdaten
         synchronized (financialEntries) {
-            serverCommunication.queryFinancialEntries(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
+            QueryFilter filter = new QueryFilter();
+
+            serverCommunication.queryFinancialEntries(filter, new ServerCommunicationInterface.GeneralCommunicationCallback<HashMap<Integer, Finanzbuchung>>() {
                 @Override
-                public void onRequestCompleted(LinkedHashMap<Integer, Kooperation> data) {
-                    data.values().forEach(coop -> DataManagement.this.cooperations.put(coop.getIdentifier(), coop));
+                public void onRequestCompleted(HashMap<Integer, Finanzbuchung> data) {
+                    data.values().forEach(entry -> DataManagement.this.financialEntries.put(entry.getIdentifier(), entry));
                 }
             });
         }
@@ -126,7 +129,7 @@ public class DataManagement {
         return recurringOrders;
     }
 
-    public LinkedHashMap<Integer, Finanzbuchung> getFinancialEntries() {
+    public HashMap<Integer, Finanzbuchung> getFinancialEntries() {
         return financialEntries;
     }
 

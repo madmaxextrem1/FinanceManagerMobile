@@ -19,7 +19,7 @@ public interface ServerCommunicationInterface {
     void queryTokens(int userId, GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>> callback);
     void queryFinancialEntries(QueryFilter filter, GeneralCommunicationCallback<HashMap<Integer, Finanzbuchung>> callback);
 
-    interface GeneralCommunicationCallback<T> {
+    public interface GeneralCommunicationCallback<T> {
         void onRequestCompleted(T data);
     }
 }

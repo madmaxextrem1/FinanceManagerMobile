@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -293,6 +294,11 @@ public final class ServerCommunication implements ServerCommunicationInterface {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
 
         addToRequestQueue(request);
+    }
+
+    @Override
+    public void queryFinancialEntries(QueryFilter filter, GeneralCommunicationCallback<HashMap<Integer, Finanzbuchung>> callback) {
+
     }
 
 
