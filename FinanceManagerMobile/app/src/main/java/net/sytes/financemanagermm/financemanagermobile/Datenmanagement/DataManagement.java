@@ -36,6 +36,7 @@ public class DataManagement {
         this.categories = new LinkedHashMap<>();
         this.tokens = new HashMap<>();
         this.cooperations = new LinkedHashMap<>();
+        this.financialEntries = new HashMap<>();
     }
 
     public DataManagement (Context context, User currentUser) {

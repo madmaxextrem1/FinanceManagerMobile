@@ -26,11 +26,16 @@ import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.mikepenz.materialdrawer.Drawer;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import es.dmoral.toasty.Toasty;
 
@@ -129,18 +134,19 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
     public void Buchungen_Laden() {
         hauptmenu_buchungen_liste_adapter = new Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter(getContext(),
                 Hauptmenu_Fragment_Buchungen.
-                        this, finanzbuchungen);
+                        this, new ArrayList<Finanzbuchung>(FinanceManagerMobileApplication.getInstance().getDataManagement().getFinancialEntries()
+                .values()));
         lv_Buchungen.setAdapter(hauptmenu_buchungen_liste_adapter);
         hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onBuchungtemClicked(int pos, Finanzbuchung_Buchung BuchungEintrag, boolean EditMode) {
+    public void onBuchungtemClicked(int pos, Finanzbuchung BuchungEintrag, boolean EditMode) {
         if (EditMode) {
             System.out.println(BuchungEintrag);
             Intent intent = new Intent(getContext(), Buchung.class);
             intent.putExtra("EditMode", true);
-            intent.putExtra("BuchungEintrag", BuchungEintrag);
+            intent.putExtra("BuchungEintrag", (Serializable) BuchungEintrag);
             int requestCode = 1; // Or some number you choose
             startActivityForResult(intent, requestCode, ActivityOptions.makeBasic().toBundle());
             swipeLayout.close(false, true);
@@ -148,7 +154,7 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
             Buchung.setBuchungCreatedCallback(new Buchung.Buchung_Created_Interface() {
                 @Override
                 public void onBuchungCreated(Finanzbuchung_Buchung buchung) {
-                    Finanzbuchungen.getFinanzbuchungen().set(pos, BuchungEintrag);
+                    FinanceManagerMobileApplication.getInstance().getDataManagement().getFinancialEntries().put(BuchungEintrag.getIdentifier(), BuchungEintrag);
                     Finanzbuchungen.reorderBuchungen();
                     hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
                 }

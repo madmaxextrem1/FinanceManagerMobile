@@ -1,6 +1,8 @@
 package net.sytes.financemanagermm.financemanagermobile.Hauptmenu;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import androidx.core.content.ContextCompat;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Umbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Konten;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -24,18 +28,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter extends BaseSwipeAdapter {
-    private ArrayList<Finanzbuchung_Buchung> eintragListe;
+    private ArrayList<Finanzbuchung> eintragListe;
     private Context context;
     private final Hauptmenu_Fragment_Buchungen_Liste_ItemClickListener BuchungItemClickListener;
 
-    public Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter(Context context, Hauptmenu_Fragment_Buchungen_Liste_ItemClickListener BuchungItemClickListener, ArrayList<Finanzbuchung_Buchung> buchungListe) {
+    public Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter(Context context, Hauptmenu_Fragment_Buchungen_Liste_ItemClickListener BuchungItemClickListener, ArrayList<Finanzbuchung> buchungListe) {
         super();
         this.eintragListe = buchungListe;
         this.context = context;
         this.BuchungItemClickListener = BuchungItemClickListener;
     }
 
-    public ArrayList<Finanzbuchung_Buchung> getEintragListe() {
+    public ArrayList<Finanzbuchung> getEintragListe() {
         return eintragListe;
     }
 
@@ -60,7 +64,20 @@ public class Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter extends BaseSwipeAd
         TextView txtDatum = (TextView) view.findViewById(R.id.hauptmenu_buchungen_lv_item_datum);
 
         LocalDate date = eintragListe.get(position).getDatum();
-        Konto konto = Konten.getKontoById(eintragListe.get(position).getKontoId());
+        Konto konto = null;
+        Konto  kontoAuf = null;
+        Konto kontoVon = null;
+        Drawable circleImage = null;
+
+        if(eintragListe.get(position) instanceof Finanzbuchung_Buchung) {
+            konto = Konten.getKontoById(((Finanzbuchung_Buchung) eintragListe.get(position)).getKontoId());
+            circleImage = konto.getKontoArt().getKonto_Image();
+        } else {
+            kontoAuf = Konten.getKontoById(((Finanzbuchung_Umbuchung) eintragListe.get(position)).getKontoAufId());
+            kontoVon = Konten.getKontoById(((Finanzbuchung_Umbuchung) eintragListe.get(position)).getKontoVonId());
+            circleImage = ContextCompat.getDrawable(context, R.drawable.ic_swap_horizontal_orientation_arrows);
+        }
+
         DecimalFormat formatter = new DecimalFormat("#,###,###.00");
         Double Betrag = Double.valueOf(eintragListe.get(position).getBetrag().toString());
         String sBetrag = formatter.format(Betrag);
@@ -80,7 +97,7 @@ public class Hauptmenu_Fragment_Buchungen_Liste_SwipeAdapter extends BaseSwipeAd
             txtBetrag.setTextColor(ContextCompat.getColor(context,R.color.fab_Color_Hauptmenu));
         } else { txtBetrag.setTextColor(ContextCompat.getColor(context,R.color.betrag_negativ));}
 
-        BuchungImage.setImageDrawable(konto.getKontoArt().getKonto_Image());
+        BuchungImage.setImageDrawable(circleImage);
 
         RelativeLayout bottomLayout = (RelativeLayout) view.findViewById(R.id.bottom_wrapper);
         RelativeLayout topLayout = (RelativeLayout) view.findViewById(R.id.topView);
