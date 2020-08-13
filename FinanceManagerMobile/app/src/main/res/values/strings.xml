@@ -78,7 +78,10 @@
     <string name="PHP_Scripts_Buchungskategorien_Abfragen">http://financemanagermm.sytes.net/fmclient/hauptkategorien_abfragen.php</string>
     <string name="PHP_Scripts_Kooperationen_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_abfragen.php</string>
     <string name="PHP_Scripts_Anfragen_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_anfrage_abfragen.php</string>
-    <string name="PHP_Scripts_Tokens_Abfragen">"http://financemanagermm.sytes.net/fmclient/tokens_abfragen.php"</string>
+    <string name="PHP_Scripts_Tokens_Abfragen">http://financemanagermm.sytes.net/fmclient/tokens_abfragen.php</string>
+    <string name="PHP_Scripts_Finanzbuchung_Post_Entry">http://financemanagermm.sytes.net/fmclient/buchen_kategorien.php</string>
+    <string name="PHP_Scripts_Finanzbuchung_Post_Token">http://financemanagermm.sytes.net/fmclient/buchen_tokens.php</string>
+    <string name="PHP_Scripts_Finanzbuchung_Delete">http://financemanagermm.sytes.net/fmclient/buchung_löschen.php</string>
     <string name="PHP_Scripts_Finanzbuchungen_Abfragen">http://financemanagermm.sytes.net/fmclient/buchungen_abfragen.php</string>
     <string name="PHP_Scripts_Kooperation_Anfrage_Benutzer_Abfragen">http://financemanagermm.sytes.net/fmclient/kooperation_anfrage_benutzer_abfragen.php</string>
     <string name="PHP_Scripts_Kategorie_Update">http://financemanagermm.sytes.net/fmclient/kategorie_update.php</string>

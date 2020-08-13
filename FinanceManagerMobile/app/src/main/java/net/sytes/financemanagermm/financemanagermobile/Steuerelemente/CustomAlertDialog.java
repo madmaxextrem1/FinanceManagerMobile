@@ -20,7 +20,8 @@ import es.dmoral.toasty.Toasty;
 
 public class CustomAlertDialog extends Dialog {
     private MaterialButton okButton;
-    MaterialButton cancelButton;
+    private MaterialButton cancelButton;
+
     public CustomAlertDialog(Context context, String Title, String Message, String OkButtonMessage, String CancelButtonMessage, View.OnClickListener OkClickListener, View.OnClickListener CancelClickListener) {
         super(context);
         setContentView(R.layout.gemeinsame_finanzen_fragment_anfrage_alertdialog);

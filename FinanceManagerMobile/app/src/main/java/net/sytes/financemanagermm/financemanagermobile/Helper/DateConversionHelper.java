@@ -48,6 +48,10 @@ public final class DateConversionHelper {
         return DateTimeFormatter.ofPattern(DE_DateFormatPattern);
     }
 
+    public static DateTimeFormatter getSQLDateFormatter() {
+        return DateTimeFormatter.ofPattern(SQL_DateFormatPattern);
+    }
+
     public static LocalDate convertToLocalDate(String dateString, SimpleDateFormat dateFormat) {
         LocalDate returnDate = null;
         try {

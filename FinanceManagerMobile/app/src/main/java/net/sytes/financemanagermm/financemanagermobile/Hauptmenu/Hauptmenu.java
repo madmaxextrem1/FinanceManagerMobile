@@ -112,17 +112,6 @@ public class Hauptmenu extends AppCompatActivity {
                 Intent intent = new Intent(Hauptmenu.this, Buchung.class);
                 int requestCode = 1; // Or some number you choose
                 startActivityForResult(intent, requestCode);
-                Buchung.setBuchungCreatedCallback(new Buchung.Buchung_Created_Interface() {
-                    @Override
-                    public void onBuchungCreated(Finanzbuchung_Buchung buchung) {
-                        Finanzbuchungen.addBuchung(buchung);
-                        System.out.println(selectedFragment);
-                        if (selectedFragment instanceof Hauptmenu_Fragment_Buchungen) {
-                            System.out.println(selectedFragment);
-                            ((Hauptmenu_Fragment_Buchungen) selectedFragment).getBuchungAdapter().notifyDataSetChanged();
-                        }
-                    }
-                });
             }
         });
 

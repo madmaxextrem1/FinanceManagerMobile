@@ -151,14 +151,6 @@ public class Hauptmenu_Fragment_Buchungen extends Fragment implements Hauptmenu_
             startActivityForResult(intent, requestCode, ActivityOptions.makeBasic().toBundle());
             swipeLayout.close(false, true);
 
-            Buchung.setBuchungCreatedCallback(new Buchung.Buchung_Created_Interface() {
-                @Override
-                public void onBuchungCreated(Finanzbuchung_Buchung buchung) {
-                    FinanceManagerMobileApplication.getInstance().getDataManagement().getFinancialEntries().put(BuchungEintrag.getIdentifier(), BuchungEintrag);
-                    Finanzbuchungen.reorderBuchungen();
-                    hauptmenu_buchungen_liste_adapter.notifyDataSetChanged();
-                }
-            });
         } else {
             Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.gemeinsame_finanzen_fragment_anfrage_alertdialog);

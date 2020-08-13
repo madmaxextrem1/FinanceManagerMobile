@@ -134,38 +134,65 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:fillViewport="true"
-            android:scrollbars="none">
+            android:scrollbars="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="8dp"
                 android:background="@color/white"
                 android:backgroundTint="@color/white">
 
+                <TextView
+                    android:id="@+id/lblAusgabenChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Ausgaben"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"/>
+
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chartAusgaben"
+                    android:layout_below="@id/lblAusgabenChart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:minHeight="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="-190dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="0dp">
+                    android:layout_marginRight="16dp">
 
                 </com.github.mikephil.charting.charts.PieChart>
+
+                <TextView
+                    android:id="@+id/lblEinnahmenChart"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/chartAusgaben"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Einnahmen"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"/>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chartEinnahmen"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="95dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginRight="95dp"
-                    android:layout_marginBottom="0dp"
-                    android:visibility="visible">
+                    android:layout_height="250dp"
+                    android:layout_below="@id/lblEinnahmenChart"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
 
                 </com.github.mikephil.charting.charts.PieChart>
 

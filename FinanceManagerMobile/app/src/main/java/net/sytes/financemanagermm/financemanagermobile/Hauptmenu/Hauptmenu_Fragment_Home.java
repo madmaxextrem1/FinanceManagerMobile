@@ -1,5 +1,6 @@
 package net.sytes.financemanagermm.financemanagermobile.Hauptmenu;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,8 +27,10 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.DataManagement;
 import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +39,16 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +56,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSelectedListener {
+public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSelectedListener, Observer {
     private PieChart chartAusgaben;
     private PieChart chartEinnahmen;
     private TextView lblErgebnis;
@@ -60,6 +70,7 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View returnView = (View) inflater.inflate(R.layout.hauptmenu_fragment_home, container, false);
+        FinanceManagerMobileApplication.getInstance().getDataManagement().registerView(this);
 
         lblErgebnis = (TextView) returnView.findViewById(R.id.lblGesamtergebnis);
         lblEinnahmen = (TextView) returnView.findViewById(R.id.lblEinnahmen);
@@ -79,21 +90,21 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         chartEinnahmen.setExtraOffsets(0, 0, 0, 0);
         chartEinnahmen.setBackgroundColor(Color.TRANSPARENT);
 
-        KontenAufstellungGenerieren();
-
+        generateAccountOverview(FinanceManagerMobileApplication.getInstance().getDataManagement().getAccounts());
         Ergebnisse_Abfragen();
         Überkategorie_Ergebnisse_Abfragen();
 
         return returnView;
     }
 
-    private void KontenAufstellungGenerieren() {
-        rcvKontenAufstellungAdapter  = new Hauptmenu_Fragment_Home_KontenRecyclerViewAdapter(getContext(), FinanceManagerMobileApplication.getInstance().getDataManagement().getAccounts());
+    private void generateAccountOverview(LinkedHashMap<Integer, Konto> accounts) {
+        rcvKontenAufstellungAdapter  = new Hauptmenu_Fragment_Home_KontenRecyclerViewAdapter(getContext(), accounts);
         rcvKontenAufstellung.setAdapter(rcvKontenAufstellungAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         rcvKontenAufstellung.setLayoutManager(layoutManager);
         rcvKontenAufstellungAdapter.notifyDataSetChanged();
     }
+
     private void Ergebnisse_Abfragen() {
         HashMap PostDataBuchungen = new HashMap();
         PostDataBuchungen.put("userid", String.valueOf(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId()));
@@ -192,46 +203,52 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         }
 
         chartAusgaben.setUsePercentValues(true);
-        chartAusgaben.getDescription().setEnabled(false);
         chartAusgaben.setCenterTextTypeface(Typeface.DEFAULT);
         chartAusgaben.setCenterText(generateCenterSpannableText());
         chartAusgaben.setDrawHoleEnabled(true);
         chartAusgaben.setHoleColor(Color.TRANSPARENT);
         chartAusgaben.setTransparentCircleColor(Color.WHITE);
         chartAusgaben.setTransparentCircleAlpha(110);
-        chartAusgaben.setHoleRadius(68f);
-        chartAusgaben.setTransparentCircleRadius(71f);
-        chartAusgaben.setDrawCenterText(false);
+        chartAusgaben.setHoleRadius(50f);
+        chartAusgaben.setTransparentCircleRadius(53f);
+        chartAusgaben.getDescription().setEnabled(false);
+        chartAusgaben.setCenterText(lblAusgaben.getText());
+        chartAusgaben.setCenterTextColor(Color.BLACK);
+        chartAusgaben.setCenterTextSize(18f);
+        chartAusgaben.setCenterTextTypeface(Typeface.SANS_SERIF);
+        chartAusgaben.setDrawCenterText(true);
         chartAusgaben.setRotationEnabled(false);
         chartAusgaben.setHighlightPerTapEnabled(true);
         chartAusgaben.setMaxAngle(360); // HALF CHART
         chartAusgaben.setRotationAngle(360);
-        chartAusgaben.setCenterTextOffset(0, -20);
         Legend l = chartAusgaben.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setYOffset(10f);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+        l.setTextSize(14f);
         l.setWordWrapEnabled(true);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
-        l.setYOffset(190f);
+
         // entry label styling
         chartAusgaben.setEntryLabelColor(Color.BLACK);
-        chartAusgaben.setEntryLabelTypeface(Typeface.DEFAULT);
-        chartAusgaben.setEntryLabelTextSize(12f);
+        chartAusgaben.setEntryLabelTypeface(Typeface.SANS_SERIF);
+        chartAusgaben.setEntryLabelTextSize(14f);
         chartAusgaben.setDrawEntryLabels(false);
-        PieDataSet dataSet = new PieDataSet(AusgabenEntries, "Ausgaben");
+        PieDataSet dataSet = new PieDataSet(AusgabenEntries, "");
         dataSet.setDrawIcons(false);
         dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(10f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        //dataSet.setSelectionShift(0f);
+        dataSet.setSelectionShift(12f);
+        List<Integer> ausgabenColorList = Arrays.stream(getResources().getIntArray(R.array.AusgabenColorTemplate)).boxed().collect(Collectors.toList());
+        dataSet.setColors(ColorTemplate.createColors(getResources().getIntArray(R.array.AusgabenColorTemplate)));
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLACK);
-        data.setValueTypeface(Typeface.DEFAULT);
+        data.setValueTextSize(13f);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTypeface(Typeface.SANS_SERIF);
         chartAusgaben.setData(data);
         chartAusgaben.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         chartAusgaben.invalidate();
@@ -241,7 +258,10 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         chartEinnahmen.setUsePercentValues(true);
         chartEinnahmen.getDescription().setEnabled(false);
         chartEinnahmen.setCenterTextTypeface(Typeface.DEFAULT);
-        chartEinnahmen.setCenterText("Einnahmen");
+        chartEinnahmen.setCenterText(lblEinnahmen.getText());
+        chartEinnahmen.setCenterTextColor(Color.BLACK);
+        chartEinnahmen.setCenterTextSize(18f);
+        chartEinnahmen.setCenterTextTypeface(Typeface.SANS_SERIF);
         chartEinnahmen.setDrawHoleEnabled(true);
         chartEinnahmen.setHoleColor(Color.WHITE);
         chartEinnahmen.setTransparentCircleColor(Color.WHITE);
@@ -255,30 +275,28 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
         chartEinnahmen.setRotationAngle(360);
         chartEinnahmen.setCenterTextOffset(0, 0);
         Legend legendEinnahmen = chartEinnahmen.getLegend();
-        chartEinnahmen.getLegend().mNeededHeight = 0;
+        legendEinnahmen.setYOffset(10f);
         legendEinnahmen.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legendEinnahmen.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         legendEinnahmen.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legendEinnahmen.setWordWrapEnabled(true);
         legendEinnahmen.setDrawInside(false);
-        legendEinnahmen.setFormSize(0f);
+        legendEinnahmen.setTextSize(14f);
         legendEinnahmen.setXEntrySpace(7f);
         legendEinnahmen.setYEntrySpace(0f);
-        legendEinnahmen.setYOffset(0f);
-        legendEinnahmen.setEnabled(false);
 
         // entry label styling
         chartEinnahmen.setEntryLabelColor(Color.WHITE);
         chartEinnahmen.setEntryLabelTypeface(Typeface.DEFAULT);
-        chartEinnahmen.setEntryLabelTextSize(12f);
-        PieDataSet dataSetEinnahmen = new PieDataSet(EinnahmenEntries, "Einnahmen");
+        chartEinnahmen.setEntryLabelTextSize(13f);
+        chartEinnahmen.setDrawEntryLabels(false);
+        PieDataSet dataSetEinnahmen = new PieDataSet(EinnahmenEntries, "");
         dataSetEinnahmen.setDrawIcons(false);
         dataSetEinnahmen.setSliceSpace(3f);
-        dataSetEinnahmen.setSelectionShift(10f);
         dataSetEinnahmen.setColors(ColorTemplate.PASTEL_COLORS);
-        //dataSet.setSelectionShift(0f);
         PieData Einnahmen = new PieData(dataSetEinnahmen);
         Einnahmen.setValueFormatter(new PercentFormatter());
-        Einnahmen.setValueTextSize(11f);
+        Einnahmen.setValueTextSize(13f);
         Einnahmen.setValueTextColor(Color.WHITE);
         Einnahmen.setValueTypeface(Typeface.DEFAULT);
         chartEinnahmen.setData(Einnahmen);
@@ -294,5 +312,11 @@ public class Hauptmenu_Fragment_Home extends Fragment implements OnChartValueSel
     @Override
     public void onNothingSelected() {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        DataManagement dataManagement = (DataManagement) o;
+        generateAccountOverview(dataManagement.getAccounts());
     }
 }

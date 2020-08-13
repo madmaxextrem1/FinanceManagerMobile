@@ -1,7 +1,9 @@
 package net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen;
 
+import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinancialStatisticObject;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen_Kooperation;
+import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class Gemeinsame_Finanzen_Kooperation_BenutzerBilanzen_Statistik {
         this.kooperation = kooperation;
     }
 
-    public ArrayList<Gemeinsame_Finanzen_Kooperation_BenutzerBilanzen_Statistik_Objekt> getStatisticOfMonth(int month, int year) {
+    public ArrayList<FinancialStatisticObject> getStatisticOfMonth(int month, int year) {
         LocalDate firstDate = LocalDate.of(year, month, 1);
         LocalDate lastDate = LocalDate.of(year, month, firstDate.lengthOfMonth());
         Predicate<LocalDate> datePredicate = date -> (date.isAfter(firstDate) || date.isEqual(firstDate)) && (date.isBefore(lastDate) || date.isEqual(lastDate));
@@ -30,42 +32,5 @@ public class Gemeinsame_Finanzen_Kooperation_BenutzerBilanzen_Statistik {
         return null;
     }
 
-    public class Gemeinsame_Finanzen_Kooperation_BenutzerBilanzen_Statistik_Objekt {
-        private double einzahlungen, auszahlungen, ergebnis;
-        private KooperationBenutzer benutzer;
-        private LocalDate fromDate, toDate;
 
-        public Gemeinsame_Finanzen_Kooperation_BenutzerBilanzen_Statistik_Objekt (KooperationBenutzer benutzer, LocalDate fromDate, LocalDate toDate, double einzahlungen, double auszahlungen, double ergebnis) {
-            this.benutzer = benutzer;
-            this.fromDate = fromDate;
-            this.toDate = toDate;
-            this.einzahlungen = einzahlungen;
-            this.auszahlungen = auszahlungen;
-            this.ergebnis = ergebnis;
-        }
-
-        public LocalDate getFromDate() {
-            return fromDate;
-        }
-
-        public LocalDate getToDate() {
-            return toDate;
-        }
-
-        public double getEinzahlungen() {
-            return einzahlungen;
-        }
-
-        public double getAuszahlungen() {
-            return auszahlungen;
-        }
-
-        public double getErgebnis() {
-            return ergebnis;
-        }
-
-        public KooperationBenutzer getBenutzer() {
-            return benutzer;
-        }
-    }
 }

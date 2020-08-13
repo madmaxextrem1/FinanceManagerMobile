@@ -10,7 +10,13 @@
     <color name="black">#000000</color>
     <color name="Login_Textbox_Underline">#39daf7</color>
     <color name="NeueBuchung_background">#4b65af</color>
-
+    <array name="AusgabenColorTemplate">
+        <item>@color/md_red_900</item>
+        <item>@color/md_red_500</item>
+        <item>@color/md_orange_600</item>
+        <item>@color/md_orange_300</item>
+        <item>@color/md_yellow_500</item>
+    </array>
 
 
     <color name="ListItem_HeaderTextColor">#212121</color>
