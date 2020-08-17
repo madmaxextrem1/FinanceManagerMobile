@@ -53,8 +53,7 @@ public class DataManagement extends Observable {
     public void initializeData() {
         if(initialized) return;
 
-        if (currentUser == null)
-            throw new IllegalStateException("Der User darf nicht NULL sein.");
+        if (currentUser == null) throw new IllegalStateException("Der User darf nicht NULL sein.");
 
         //Initialisierung der Konten
         serverCommunication.queryAccounts(currentUser.getUserId(), 0, new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Konto>>() {
@@ -73,7 +72,6 @@ public class DataManagement extends Observable {
             }
         });
 
-
         //Initialisierung der Tokens
         serverCommunication.queryTokens(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<HashMap<Integer, FinanzbuchungToken>>() {
             @Override
@@ -82,7 +80,6 @@ public class DataManagement extends Observable {
             }
         });
 
-
         //Initialisierung der Kooperationen
         serverCommunication.queryCooperations(currentUser.getUserId(), new ServerCommunicationInterface.GeneralCommunicationCallback<LinkedHashMap<Integer, Kooperation>>() {
             @Override
@@ -90,7 +87,6 @@ public class DataManagement extends Observable {
                 data.values().forEach(coop -> DataManagement.this.cooperations.put(coop.getIdentifier(), coop));
             }
         });
-
 
         //Initialisierung der Buchungsdaten
         QueryFilter filter = new QueryFilter();
@@ -105,7 +101,6 @@ public class DataManagement extends Observable {
                 updateObservers();
             }
         });
-
     }
 
     public void registerView(Observer observer) {
@@ -165,4 +160,13 @@ public class DataManagement extends Observable {
         return cooperations;
     }
 
+    public void removeMainCategory(int categoryId) {
+        categories.remove(categoryId);
+        updateObservers();
+    }
+
+    public void removeSubCategory(int mainCategoryId, int subCategoryId) {
+        categories.get(mainCategoryId).getUnterkategorien().remove(subCategoryId);
+        updateObservers();
+    }
 }

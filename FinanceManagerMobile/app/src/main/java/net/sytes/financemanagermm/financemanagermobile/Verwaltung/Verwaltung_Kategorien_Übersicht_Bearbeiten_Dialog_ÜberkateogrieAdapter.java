@@ -36,10 +36,12 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog_ÜberkateogrieAd
 
     public int getItemPosition (Buchungskategorie kategorie) {
         int i = -1;
+
         for(Integer key:hauptkategorieMap.keySet()) {
             i++;
             if(kategorie.getÜKatId() == key) return i;
         }
+
         return i;
     }
 

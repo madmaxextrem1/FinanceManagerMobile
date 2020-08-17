@@ -37,6 +37,9 @@ import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Applic
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunication;
+import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunicationInterface;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.CustomAlertDialog;
 
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +70,7 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
     private MaterialRadioButton rdbÜberkategorie;
     private MaterialRadioButton rdbUnterkategorie;
     private Buchungskategorie_Update_Interface callback;
+    private ServerCommunication serverCommunication;
 
     public Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog (Buchungskategorie buchungskategorie, boolean update, Buchungskategorie_Update_Interface callback) {
         this.kategorie = buchungskategorie;
@@ -82,6 +86,8 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.verwaltung_kategorien_uebersicht_bearbeiten_dialog, container,false);
+
+        serverCommunication = new ServerCommunication(getContext());
 
         btnSave = view.findViewById(R.id.btnSpeichern);
         btnClose = view.findViewById(R.id.btnAbbrechen);
@@ -180,7 +186,7 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
             }
         });
 
-        adapterÜberkategorie = new Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog_ÜberkateogrieAdapter(getContext(), Buchungskategorien.getBuchungskategorien());
+        adapterÜberkategorie = new Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog_ÜberkateogrieAdapter(getContext(), FinanceManagerMobileApplication.getInstance().getDataManagement().getCategories());
         cboÜberkategorie.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(@NotNull MaterialSpinner materialSpinner, @org.jetbrains.annotations.Nullable View view, int i, long l) {
@@ -257,62 +263,8 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
     }
 
     private void updateOrCreateKategorie() {
-        HashMap<String, String> postData = new HashMap<String, String>();
-        postData.put("kategorieId", String.valueOf((update) ? kategorie.getId() : 0));
-        postData.put("red", String.valueOf(Color.red(actColor))) ;
-        postData.put("green", String.valueOf(Color.green(actColor)));
-        postData.put("blue", String.valueOf(Color.blue(actColor))) ;
-        if(!update) postData.put("UserID", String.valueOf(GlobaleVariablen.getInstance().getUserId()));
-        if(update) {
-            postData.put("üKatId", String.valueOf((!kategorie.isÜberkategorie()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0));
-        } else {
-            postData.put("üKatId", String.valueOf((rdbUnterkategorie.isChecked()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0));
-        }
-        postData.put("kategorieName", txtKategorieName.getEditText().getText().toString());
-        postData.put("buchtyp", (swtAusgabe.isChecked()) ? "0" :  "1");
-
-        updateURL =  getContext().getResources().getString(R.string.PHP_Scripts_Kategorie_Update);
-        createURL = getContext().getResources().getString(R.string.PHP_Scripts_Kategorie_Anlegen);
-
-        // the response listener
-        JsonObjectRequest kategorieUpdateRequest = new JsonObjectRequest(Request.Method.POST, updateURL, new JSONObject(postData),
-                response -> {
-                    kategorie.setBeschreibung(txtKategorieName.getEditText().getText().toString());
-                    kategorie.updateColor(actColor);
-                    if(!kategorie.isÜberkategorie()) {
-                        kategorie.setBuchtyp((swtAusgabe.isChecked()) ? Buchungskategorie.BuchTyp.AUSGABE : Buchungskategorie.BuchTyp.EINNAHME);
-                        kategorie.setÜKatId(((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId());
-                    }
-                    callback.onBuchungskategorieChanged(kategorie);
-                    dismiss();
-                    Toasty.success(getContext(), "Gespeichert", Toast.LENGTH_SHORT, true).show();
-                },
-                error -> Log.e("Kategorie_Update_Error", error.getMessage()));
-
-        // the response listener
-        JsonObjectRequest kategorieAnlegenRequest = new JsonObjectRequest(Request.Method.POST, createURL, new JSONObject(postData),
-                response -> {
-                    try {
-                        kategorie = (rdbUnterkategorie.isChecked()) ?  new Buchungskategorie(response.getInt("Id"),
-                                Integer.valueOf(postData.get("üKatId")),
-                                postData.get("kategorieName"),
-                                Integer.valueOf(postData.get("red")),
-                                Integer.valueOf(postData.get("green")),
-                                Integer.valueOf(postData.get("blue")),
-                                (swtAusgabe.isChecked()) ? Buchungskategorie.BuchTyp.AUSGABE :  Buchungskategorie.BuchTyp.EINNAHME
-                        ) : new Buchungshauptkategorie(response.getInt("Id"),
-                                0,
-                                postData.get("kategorieName"),
-                                Integer.valueOf(postData.get("red")),
-                                Integer.valueOf(postData.get("green")),
-                                Integer.valueOf(postData.get("blue")),
-                                new LinkedHashMap<>()
-                        ) ;
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    if(rdbUnterkategorie.isChecked()) {
+        Buchungskategorie category = assembleCategory(update);
+        if(rdbUnterkategorie.isChecked()) {
                         Buchungskategorien.
                                 getBuchungskategorien().
                                 get(kategorie.getÜKatId()).
@@ -324,16 +276,58 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
                     callback.onBuchungskategorieChanged(kategorie);
                     dismiss();
                     Toasty.success(getContext(), "Gespeichert", Toast.LENGTH_SHORT, true).show();
-                },
-                error -> Log.e("Kategorie_Anlegen_Error", error.getMessage()));
+
 
         if(update) {
-            ApplicationController.getInstance().addToRequestQueue(kategorieUpdateRequest);
+            serverCommunication.updateCategory(category, new ServerCommunicationInterface.GeneralCommunicationCallback<Buchungskategorie>() {
+                @Override
+                public void onRequestCompleted(Buchungskategorie data) {
+
+                }
+            });
         } else {
-            ApplicationController.getInstance().addToRequestQueue(kategorieAnlegenRequest);
+            serverCommunication.createCategory(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserId(),
+                    category, new ServerCommunicationInterface.GeneralCommunicationCallback<Buchungskategorie>() {
+                        @Override
+                        public void onRequestCompleted(Buchungskategorie data) {
+                            
+                        }
+                    });
         }
-        ApplicationController.getInstance().getRequestQueue().start();
     }
+    private Buchungskategorie assembleCategory(boolean update) {
+        int categoryId = (update) ? kategorie.getId() : 0;
+        int red = Color.red(actColor);
+        int green = Color.green(actColor);
+        int blue = Color.blue(actColor);
+        int mainCategoryId;
+        if(update) {
+            mainCategoryId = (!kategorie.isÜberkategorie()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0;
+        } else {
+            mainCategoryId = (rdbUnterkategorie.isChecked()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0;
+        }
+        String categoryName = txtKategorieName.getEditText().getText().toString();
+        Buchungskategorie.BuchTyp buchTyp = Buchungskategorie.BuchTyp.createFromDataBaseValue(!swtAusgabe.isChecked());
+
+        Buchungskategorie category = (rdbUnterkategorie.isChecked()) ?  new Buchungskategorie(categoryId,
+                mainCategoryId,
+                categoryName,
+                red,
+                green,
+                blue,
+                buchTyp
+        ) : new Buchungshauptkategorie(categoryId,
+                mainCategoryId,
+                categoryName,
+                red,
+                green,
+                blue,
+                new LinkedHashMap<>()
+        ) ;
+
+        return category;
+    }
+
     private void deleteKategorie(Buchungskategorie kategorie, Buchungskategorie_Update_Interface callback) {
         final CustomAlertDialog confirmDialog = new CustomAlertDialog(getContext(), "Bestätigen", "Wollen Sie diese Kategorie wirklich löschen?", "Löschen", "Abbrechen");
 
@@ -345,38 +339,26 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
                     return;
                 }
 
-                HashMap<String, String> postData = new HashMap<String, String>();
-                postData.put("kategorieId", String.valueOf(kategorie.getId()));
-                CustomAlertDialog dialog = confirmDialog;
-                deleteURL =  getContext().getResources().getString(R.string.PHP_Scripts_Kategorie_Löschen);
-
-                // the response listener
-                JsonObjectRequest kategorieDeleteRequest = new JsonObjectRequest(Request.Method.POST, deleteURL, new JSONObject(postData),
-                        response -> {
-                            try {
-                                if(response.getInt("Result") == 0) {
-                                    Toasty.error(getContext(), "Kategorie konnte nicht gelöscht werden. Es existieren Buchungen mit dieser Kategorie.", Toast.LENGTH_LONG, true).show();
-                                } else {
-                                    if(kategorie.isÜberkategorie()) {
-                                        Buchungskategorien.getBuchungskategorien().remove(kategorie.getId());
-                                    } else {
-                                        Buchungskategorien.getBuchungskategorien().get(kategorie.getÜKatId()).getUnterkategorien().remove(kategorie.getId());
-                                    }
-                                    Toasty.success(getContext(), "Gelöscht", Toast.LENGTH_SHORT, true).show();
-                                    callback.onBuchungskategorieChanged(kategorie);
-                                }
-                                confirmDialog.dismiss();
-                                dismiss();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                serverCommunication.deleteCategory(kategorie.getId(), new ServerCommunicationInterface.GeneralCommunicationCallback<Boolean>() {
+                    @Override
+                    public void onRequestCompleted(Boolean data) {
+                        if(!data) {
+                            Toasty.error(getContext(), "Kategorie konnte nicht gelöscht werden. Es existieren Buchungen mit dieser Kategorie.", Toast.LENGTH_LONG, true).show();
+                        } else {
+                            if(kategorie.isÜberkategorie()) {
+                                FinanceManagerMobileApplication.getInstance().getDataManagement()
+                                        .removeMainCategory(kategorie.getId());
+                            } else {
+                                FinanceManagerMobileApplication.getInstance().getDataManagement()
+                                        .removeSubCategory(kategorie.getÜKatId(), kategorie.getId());
                             }
-                        },
-                        error -> {
-                            Log.e("Kategorie_Delete_Error", error.getMessage());
-                        });
-
-                ApplicationController.getInstance().addToRequestQueue(kategorieDeleteRequest);
-                ApplicationController.getInstance().getRequestQueue().start();
+                            Toasty.success(getContext(), "Gelöscht", Toast.LENGTH_SHORT, true).show();
+                            callback.onBuchungskategorieChanged(kategorie);
+                        }
+                        confirmDialog.dismiss();
+                        dismiss();
+                    }
+                });
             }
         };
         confirmDialog.setOkButtonClickListener(okListener);

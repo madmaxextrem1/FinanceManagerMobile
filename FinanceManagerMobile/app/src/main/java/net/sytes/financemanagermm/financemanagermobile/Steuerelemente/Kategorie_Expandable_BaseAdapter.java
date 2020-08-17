@@ -34,7 +34,6 @@ public abstract class Kategorie_Expandable_BaseAdapter extends BaseExpandableLis
 
     public Kategorie_Expandable_BaseAdapter(Context context) {
         super();
-        this.hauptkategorieMap = new LinkedHashMap<>();
         this.hauptkategorieMap = FinanceManagerMobileApplication.getInstance().getDataManagement().getCategories();
         this.context = context;
     }

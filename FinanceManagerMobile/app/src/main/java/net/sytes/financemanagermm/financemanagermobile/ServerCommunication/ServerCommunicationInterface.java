@@ -1,6 +1,7 @@
 package net.sytes.financemanagermm.financemanagermobile.ServerCommunication;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
@@ -21,6 +22,11 @@ public interface ServerCommunicationInterface {
     void queryFinancialEntries(QueryFilter filter, GeneralCommunicationCallback<HashMap<Integer, Finanzbuchung>> callback);
     void postFinancialEntry(Finanzbuchung_Buchung entry, boolean editMode, GeneralCommunicationCallback<Finanzbuchung_Buchung> callback);
     void deleteFinancialEntry(Finanzbuchung_Buchung entry, GeneralCommunicationCallback<Boolean> callback);
+
+    void updateCategory(Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback);
+    void createCategory(int userId, Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback);
+    void deleteCategory(int categoryId, GeneralCommunicationCallback<Boolean> callback);
+
     public interface GeneralCommunicationCallback<T> {
         void onRequestCompleted(T data);
     }

@@ -24,6 +24,7 @@ import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Buchun
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.DecimalDigitsInputFilter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.ServerCommunicationInterface;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kategorien_Übersicht;
 
 import java.text.DecimalFormat;
@@ -42,28 +43,25 @@ import es.dmoral.toasty.Toasty;
 import static java.util.Currency.getInstance;
 
 public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnClickListener {
-    public Context c;
-    public Dialog d;
     private ExpandableListView lv_Kategorien;
     private Buchung_Kategorie_Dialog_lvKategorien_Adapter adapter;
     private TextInputLayout txtBetrag;
     private Button btnHinzufügen;
     private RadioButton rdbEinnahme;
     private int lastExpandedPosition = -1;
-    private Buchung_Kategorie_Dialog.Callback callback;
+    private ServerCommunicationInterface.GeneralCommunicationCallback<FinanzbuchungPosition> callback;
     private TextView DialogTitle;
     private AppCompatImageButton btnClose;
     private AppCompatImageButton btnEditKategorien;
+    private int entryCount;
 
-    static Buchung_Kategorie_Dialog newInstance(String title, FinanzbuchungPosition eintrag, Integer anzahlVorhandenerBuchungszeilen) {
+    static Buchung_Kategorie_Dialog newInstance(int entryCount, ServerCommunicationInterface.GeneralCommunicationCallback<FinanzbuchungPosition> callback) {
         Buchung_Kategorie_Dialog frag = new Buchung_Kategorie_Dialog();
-        Bundle args = new Bundle();
-        args.putInt("AnzahlBuchungszeilen", anzahlVorhandenerBuchungszeilen);
-        args.putString("title", title);
-        args.putParcelable("eintrag",eintrag);
-        frag.setArguments(args);
+        frag.entryCount = entryCount;
+        frag.callback = callback;
         return frag;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +82,7 @@ public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnC
         rdbEinnahme = view.findViewById(R.id.Buchung_Hinzufügen_Kategorie_Dialog_rdbEinnahme);
         btnClose = view.findViewById(R.id.Kontendetails_btnDialogClose);
         btnEditKategorien = view.findViewById(R.id.btnEditKategorien);
+
         btnEditKategorien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,13 +96,13 @@ public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnC
                 });
             }
         });
+
         btnClose.setOnClickListener(this);
 
         btnHinzufügen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int SelectedKategorieListID = lv_Kategorien.getSelectedItemPosition();
-                int id = getArguments().getInt("AnzahlBuchungszeilen") + 1;
+                int id = entryCount + 1;
                 Buchungskategorie kategorie = adapter.getChild(adapter.getSelectedGroupIndex(), adapter.getSelectedPosition());
                 int KategorieID = kategorie.getId();
 
@@ -126,12 +125,12 @@ public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnC
 
                 FinanzbuchungPosition NeuerEintrag = new FinanzbuchungPosition(id,KategorieID,Kategorie, Überkategorie,Betrag,Rot,Grün,Blau);
 
-                callback.onActionClick(NeuerEintrag);
+                callback.onRequestCompleted(NeuerEintrag);
                 dismiss();
             }
         });
 
-        adapter = new Buchung_Kategorie_Dialog_lvKategorien_Adapter(c);
+        adapter = new Buchung_Kategorie_Dialog_lvKategorien_Adapter(getContext());
         lv_Kategorien.setAdapter(adapter);
         lv_Kategorien.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
@@ -195,11 +194,5 @@ public class Buchung_Kategorie_Dialog extends DialogFragment implements View.OnC
                 txtBetrag.getEditText().addTextChangedListener(this);
             }
         };
-    }
-    public void setCallback(Buchung_Kategorie_Dialog.Callback callback) {
-        this.callback = callback;
-    }
-    public interface Callback {
-        void onActionClick(FinanzbuchungPosition Eintrag);
     }
 }

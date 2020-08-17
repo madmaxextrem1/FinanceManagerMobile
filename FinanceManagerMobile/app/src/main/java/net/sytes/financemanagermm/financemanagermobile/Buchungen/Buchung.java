@@ -63,7 +63,7 @@ import java.util.Optional;
 
 import es.dmoral.toasty.Toasty;
 
-public class Buchung extends AppCompatActivity implements View.OnClickListener, Observer, Buchungszeile_Auswahl_Eintrag_ItemClickListener {
+public class Buchung extends AppCompatActivity implements Observer, View.OnClickListener {
     private TextView lblActivityTitle;
     private TextInputLayout txtTitel;
     private TextInputLayout txtDatum;
@@ -86,6 +86,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
     private Boolean editMode = false;
     private Finanzbuchung_Buchung buchungEintrag;
     private ServerCommunication serverCommunication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,18 +143,15 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
             }
         });
 
-        btnBuchen.requestFocus();
-
         addCategorieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                Buchung_Kategorie_Dialog dialog = Buchung_Kategorie_Dialog.newInstance("Kategorie hinzufügen", null, financialEntriesListAdapter.getCount());
-                dialog.setCallback(new Buchung_Kategorie_Dialog.Callback() {
+                Buchung_Kategorie_Dialog dialog = Buchung_Kategorie_Dialog.newInstance(financialEntriesListAdapter.getCount(), new ServerCommunicationInterface.GeneralCommunicationCallback<FinanzbuchungPosition>() {
                     @Override
-                    public void onActionClick(FinanzbuchungPosition Eintrag) {
-                        if (Eintrag != null) {
-                            financialEntriesListAdapter.getEintragListe().add(Eintrag);
+                    public void onRequestCompleted(FinanzbuchungPosition data) {
+                        if (data != null) {
+                            financialEntriesListAdapter.getEintragListe().add(0, data);
                             financialEntriesListAdapter.notifyDataSetChanged();
                             financialEntriesListView.smoothScrollToPosition(0);
                         }
@@ -162,6 +160,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
                 dialog.show(fragmentManager, "fragment_kategorie_auswahl");
             }
         });
+
         View SwipeView = getLayoutInflater().inflate(R.layout.buchung_hinzufuegen_lvbuchungszeilen_lvitem, null);
         swipeLayout = (SwipeLayout) SwipeView.findViewById(R.id.buchung_buchungszeile_lvItem_SwipeLayout);
 
@@ -214,7 +213,7 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
             }
         });
 
-        financialEntriesListAdapter = new Buchungszeile_Auswahl_SwipeAdapter(this, financialEntriesListView, Buchung.this::onBuchungszeileItemClicked);
+        financialEntriesListAdapter = new Buchungszeile_Auswahl_SwipeAdapter(this, financialEntriesListView, null);
         financialEntriesListView.setAdapter(financialEntriesListAdapter);
 
         financialEntriesListAdapter.registerDataSetObserver(new DataSetObserver() {
@@ -292,25 +291,6 @@ public class Buchung extends AppCompatActivity implements View.OnClickListener, 
             lblZusammenfassung.setTextColor(getResources().getColor(R.color.buchung_view_headerlabel_textcolor, null));
         }
         lblZusammenfassung.setText(sSumme);
-    }
-
-    @Override
-    public void onBuchungszeileItemClicked(int pos, FinanzbuchungPosition BuchungszeileEintrag, View shareCardView) {
-        if (BuchungszeileEintrag.getId() == 0) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            Buchung_Kategorie_Dialog dialog = Buchung_Kategorie_Dialog.newInstance("Kategorie hinzufügen", BuchungszeileEintrag, financialEntriesListAdapter.getCount());
-            dialog.setCallback(new Buchung_Kategorie_Dialog.Callback() {
-                @Override
-                public void onActionClick(FinanzbuchungPosition Eintrag) {
-                    if (Eintrag != null) {
-                        financialEntriesListAdapter.getEintragListe().add(Eintrag);
-                        financialEntriesListAdapter.notifyDataSetChanged();
-                        financialEntriesListView.smoothScrollToPosition(0);
-                    }
-                }
-            });
-            dialog.show(fragmentManager, "fragment_kategorie_auswahl");
-        }
     }
 
     private boolean checkInputData() {

@@ -1,18 +1,17 @@
 package net.sytes.financemanagermm.financemanagermobile.ServerCommunication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
@@ -24,6 +23,7 @@ import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuc
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
+import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -409,7 +409,8 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                 public void onResponse(JSONObject response) {
 
                     try {
-                        if(response.getString("Result").equals("success")) postSuccessProtocol.add(true);
+                        if (response.getString("Result").equals("success"))
+                            postSuccessProtocol.add(true);
                         String responseString = response.getString("BuchungId");
 
                         if (Globale_Funktionen.isNumeric(responseString)) {
@@ -439,7 +440,8 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         try {
-                                            if(response.getString("Result").equals("success")) postSuccessProtocol.add(true);
+                                            if (response.getString("Result").equals("success"))
+                                                postSuccessProtocol.add(true);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -510,7 +512,8 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.getString("Result").equals("success")) postSuccessProtocol.add(true);
+                            if (response.getString("Result").equals("success"))
+                                postSuccessProtocol.add(true);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -531,11 +534,11 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                 addToRequestQueue(request);
             }
 
-            while(postSuccessProtocol.size() < postCount) {
+            while (postSuccessProtocol.size() < postCount) {
 
             }
             //Falls eine Position nicht gebucht werden konnte -> Rollback
-            if(postSuccessProtocol.stream().anyMatch(val -> !val)) {
+            if (postSuccessProtocol.stream().anyMatch(val -> !val)) {
                 deleteFinancialEntry(entry, new GeneralCommunicationCallback<Boolean>() {
                     @Override
                     public void onRequestCompleted(Boolean data) {
@@ -595,7 +598,84 @@ public final class ServerCommunication implements ServerCommunicationInterface {
 
         addToRequestQueue(request);
     }
-    
+
+    @Override
+    public void updateCategory(Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback) {
+
+    }
+
+    @Override
+    public void createCategory(int userId, Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback) {
+        HashMap<String, String> postData = new HashMap<String, String>();
+        postData.put("UserID", String.valueOf(userId));
+        postData.put("üKatId", String.valueOf(category.getÜKatId()));
+        postData.put("red", String.valueOf(category.getRot())) ;
+        postData.put("green", String.valueOf(category.getGrün()));
+        postData.put("blue", String.valueOf(category.getBlau()));
+        postData.put("kategorieName", category.getBeschreibung());
+        postData.put("buchtyp", String.valueOf(category.getBuchtyp().getDatabaseValue()));
+
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Kategorie_Anlegen);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    int categoryId = response.getInt("Id");
+                    category.setId(categoryId);
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    e.printStackTrace();
+                    Log.d("Kategorie erstellen: ", e.getMessage());
+                }
+
+                callback.onRequestCompleted(category);
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + error.getMessage(), Toast.LENGTH_SHORT, true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
+    }
+
+    @Override
+    public void deleteCategory(int categoryId, GeneralCommunicationCallback<Boolean> callback) {
+        HashMap<String, String> postData = new HashMap<String, String>();
+        postData.put("kategorieId", String.valueOf(categoryId));
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Kategorie_Löschen);
+
+        JsonObjectRequest kategorieDeleteRequest = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData),
+                response -> {
+                    try {
+                        if (response.getInt("Result") == 0) {
+                            callback.onRequestCompleted(false);
+                        } else {
+                            callback.onRequestCompleted(true);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    Toasty.error(context, "Kategorie konnte nicht gelöscht werden: " + error.getMessage(), Toasty.LENGTH_LONG, true).show();
+                    Log.e("Kategorie_Delete_Error", error.getMessage());
+                });
+
+        addToRequestQueue(kategorieDeleteRequest);
+    }
+
     private void addToRequestQueue(Request request) {
         if (!isNetworkAvailable()) {
             Toasty.error(context, "Keine Internetverbindung", Toast.LENGTH_SHORT, true).show();
