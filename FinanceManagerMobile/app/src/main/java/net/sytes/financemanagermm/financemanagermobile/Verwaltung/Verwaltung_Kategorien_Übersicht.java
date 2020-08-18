@@ -13,7 +13,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie_Update_Interface;
-import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorien;
 import net.sytes.financemanagermm.financemanagermobile.R;
 import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 
@@ -87,12 +86,8 @@ public class Verwaltung_Kategorien_Übersicht extends AppCompatActivity {
         Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog dialog = new Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog(kategorie, update, new Buchungskategorie_Update_Interface() {
             @Override
             public void onBuchungskategorieChanged(Buchungskategorie Kategorie) {
-                Buchungskategorien.rebuildKategorieHierarchy(new Buchungskategorie_Update_Interface() {
-                    @Override
-                    public void onBuchungskategorieChanged(Buchungskategorie Kategorie) {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+                FinanceManagerMobileApplication.getInstance().getDataManagement().rebuildCategoryHierarchy();
+                adapter.notifyDataSetChanged();
             }
         });
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -169,7 +169,7 @@
         android:layout_below="@id/Buchung_txtDatum"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/ic_merkmal_white_24dp"></ImageView>
+        android:src="@drawable/ic_merkmal_grey_24dp"></ImageView>
 
     <TextView
         android:layout_width="wrap_content"

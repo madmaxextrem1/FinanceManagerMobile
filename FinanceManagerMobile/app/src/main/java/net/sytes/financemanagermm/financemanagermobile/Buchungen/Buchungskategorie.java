@@ -195,14 +195,14 @@ public class Buchungskategorie implements Parcelable {
     }
 
     public enum BuchTyp {
-        AUSGABE("Ausgabe", -1, 0),
-        EINNAHME("Einnahme", 1, 1),
-        NEUTRAL("Neutral", 0, 1);
+        AUSGABE("Ausgabe", -1, false),
+        EINNAHME("Einnahme", 1, true),
+        NEUTRAL("Neutral", 0, true);
 
         private String name;
         private int faktorBetrag;
-        private int databaseValue;
-        BuchTyp(String Name, int FaktorBetrag, int databaseValue) {
+        private boolean databaseValue;
+        BuchTyp(String Name, int FaktorBetrag, boolean databaseValue) {
             this.name = Name;
             this.databaseValue = databaseValue;
             this.faktorBetrag = FaktorBetrag;
@@ -216,7 +216,7 @@ public class Buchungskategorie implements Parcelable {
             return faktorBetrag;
         }
 
-        public int getDatabaseValue() {
+        public boolean getDatabaseValue() {
             return databaseValue;
         }
 

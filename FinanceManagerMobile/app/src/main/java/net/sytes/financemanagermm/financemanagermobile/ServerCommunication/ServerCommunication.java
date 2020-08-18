@@ -601,7 +601,48 @@ public final class ServerCommunication implements ServerCommunicationInterface {
 
     @Override
     public void updateCategory(Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback) {
+        HashMap<String, String> postData = new HashMap<String, String>();
+        postData.put("Id", String.valueOf(category.getId()));
+        postData.put("üKatId", String.valueOf(category.getÜKatId()));
+        postData.put("red", String.valueOf(category.getRot())) ;
+        postData.put("green", String.valueOf(category.getGrün()));
+        postData.put("blue", String.valueOf(category.getBlau()));
+        postData.put("kategorieName", category.getBeschreibung());
+        postData.put("buchtyp", String.valueOf(category.getBuchtyp().getDatabaseValue()));
 
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Kategorie_Update);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getString("Result").equals("error")) {
+                        Toasty.error(context, "Kategorie konnte nicht geupdated werden", Toast.LENGTH_SHORT, true).show();
+                    }
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context, "Kategorie konnte nicht geupdated werden: " + e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    e.printStackTrace();
+                    Log.d("Kategorie update: ", e.getMessage());
+                }
+
+                callback.onRequestCompleted(category);
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context, "Kategorie konnte nicht geupdated werden: " + error.getMessage(), Toast.LENGTH_SHORT, true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
     }
 
     @Override

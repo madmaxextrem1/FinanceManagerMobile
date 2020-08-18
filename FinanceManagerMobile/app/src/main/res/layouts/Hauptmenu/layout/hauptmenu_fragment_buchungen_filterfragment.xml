@@ -350,7 +350,7 @@
         android:layout_marginTop="24dp"
         android:id="@+id/ico_Merkmal"
         android:layout_marginStart="28dp"
-        android:src="@drawable/ic_merkmal_white_24dp">
+        android:src="@drawable/ic_merkmal_grey_24dp">
     </ImageView>
     <TextView
         android:layout_width="wrap_content"

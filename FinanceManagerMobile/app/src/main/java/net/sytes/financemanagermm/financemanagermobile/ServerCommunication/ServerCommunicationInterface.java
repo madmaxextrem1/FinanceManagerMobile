@@ -27,6 +27,10 @@ public interface ServerCommunicationInterface {
     void createCategory(int userId, Buchungskategorie category, GeneralCommunicationCallback<Buchungskategorie> callback);
     void deleteCategory(int categoryId, GeneralCommunicationCallback<Boolean> callback);
 
+    void createToken(FinanzbuchungToken token, GeneralCommunicationCallback<FinanzbuchungToken> callback);
+    void updateToken(FinanzbuchungToken token, GeneralCommunicationCallback<FinanzbuchungToken> callback);
+    void deleteToken(int tokenId, GeneralCommunicationCallback<Boolean> callback);
+    
     public interface GeneralCommunicationCallback<T> {
         void onRequestCompleted(T data);
     }

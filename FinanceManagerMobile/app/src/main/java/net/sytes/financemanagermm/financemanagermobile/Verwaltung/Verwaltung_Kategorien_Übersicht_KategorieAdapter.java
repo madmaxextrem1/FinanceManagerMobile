@@ -23,6 +23,7 @@ import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategor
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu_Fragment_Buchungen_Filter;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 import net.sytes.financemanagermm.financemanagermobile.Steuerelemente.Kategorie_Expandable_BaseAdapter;
 
 import java.util.ArrayList;
@@ -128,12 +129,8 @@ public class Verwaltung_Kategorien_Übersicht_KategorieAdapter extends Kategorie
         Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog dialog = new Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog(kategorie, update, new Buchungskategorie_Update_Interface() {
             @Override
             public void onBuchungskategorieChanged(Buchungskategorie Kategorie) {
-                Buchungskategorien.rebuildKategorieHierarchy(new Buchungskategorie_Update_Interface() {
-                    @Override
-                    public void onBuchungskategorieChanged(Buchungskategorie Kategorie) {
-                        notifyDataSetChanged();
-                    }
-                });
+                FinanceManagerMobileApplication.getInstance().getDataManagement().rebuildCategoryHierarchy();
+                notifyDataSetChanged();
             }
         });
         FragmentManager fragmentManager = ((Verwaltung_Kategorien_Übersicht) getContext()).getSupportFragmentManager();

@@ -447,6 +447,7 @@ public class Buchung extends AppCompatActivity implements Observer, View.OnClick
             accountsAdapter = new Konto_Adapter(this, dataManagement.getActiveAccounts());
             cboKonto.setAdapter(accountsAdapter);
             accountsAdapter.notifyDataSetChanged();
+            financialEntriesListAdapter.notifyDataSetChanged();
         }
     }
 }

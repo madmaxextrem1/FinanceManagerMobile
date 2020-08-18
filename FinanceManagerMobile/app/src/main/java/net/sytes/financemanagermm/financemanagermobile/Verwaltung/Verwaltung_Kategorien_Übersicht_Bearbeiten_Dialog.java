@@ -63,9 +63,6 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
     private Buchungskategorie kategorie;
     private boolean update;
     private int actColor;
-    private String updateURL;
-    private String createURL;
-    private String deleteURL;
     private RadioGroup rdbGroupKategorieArt;
     private MaterialRadioButton rdbÜberkategorie;
     private MaterialRadioButton rdbUnterkategorie;
@@ -133,25 +130,6 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int Rot = Color.red(actColor);
-                int Grün = Color.green(actColor);
-                int Blau = Color.blue(actColor);
-
-                if(rdbÜberkategorie.isChecked()) {
-                    kategorie = new Buchungshauptkategorie(0,
-                            0,
-                            txtKategorieName.getEditText().getText().toString().trim(),
-                            Rot, Grün, Blau,
-                            new LinkedHashMap<Integer, Buchungskategorie>()
-                            );
-                } else {
-                    kategorie = new Buchungskategorie(0,
-                            ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId(),
-                            txtKategorieName.getEditText().getText().toString().trim(),
-                            Rot, Grün, Blau,
-                            (swtAusgabe.isChecked()) ? Buchungskategorie.BuchTyp.AUSGABE : Buchungskategorie.BuchTyp.EINNAHME);
-                }
-
                 if(!validateInput()) return;
                 updateOrCreateKategorie();
             }
@@ -208,6 +186,7 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
             cboÜberkategorie.setSelection(adapterÜberkategorie.getItemPosition(kategorie));
             actColor = kategorie.getColor();
             setColorOfColorPickerButton(actColor);
+            swtAusgabe.setChecked(!kategorie.getBuchtyp().getDatabaseValue());
 
             if(kategorie.isÜberkategorie()) {
                 swtAusgabe.setChecked(true);
@@ -264,25 +243,19 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
 
     private void updateOrCreateKategorie() {
         Buchungskategorie category = assembleCategory(update);
-        if(rdbUnterkategorie.isChecked()) {
-                        Buchungskategorien.
-                                getBuchungskategorien().
-                                get(kategorie.getÜKatId()).
-                                getUnterkategorien().
-                                put(kategorie.getId(), kategorie);
-                    } else {
-                        Buchungskategorien.getBuchungskategorien().put(kategorie.getId(), (Buchungshauptkategorie) kategorie);
-                    }
-                    callback.onBuchungskategorieChanged(kategorie);
-                    dismiss();
-                    Toasty.success(getContext(), "Gespeichert", Toast.LENGTH_SHORT, true).show();
-
 
         if(update) {
             serverCommunication.updateCategory(category, new ServerCommunicationInterface.GeneralCommunicationCallback<Buchungskategorie>() {
                 @Override
                 public void onRequestCompleted(Buchungskategorie data) {
-
+                    if(!category.isÜberkategorie()) {
+                        FinanceManagerMobileApplication.getInstance().getDataManagement().updateCreateSubCategory(category);
+                    } else {
+                        FinanceManagerMobileApplication.getInstance().getDataManagement().updateCreateMainCategory((Buchungshauptkategorie) category);
+                    }
+                    callback.onBuchungskategorieChanged(kategorie);
+                    dismiss();
+                    Toasty.success(getContext(), "Gespeichert", Toast.LENGTH_SHORT, true).show();
                 }
             });
         } else {
@@ -290,7 +263,14 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
                     category, new ServerCommunicationInterface.GeneralCommunicationCallback<Buchungskategorie>() {
                         @Override
                         public void onRequestCompleted(Buchungskategorie data) {
-                            
+                            if(rdbUnterkategorie.isChecked()) {
+                                FinanceManagerMobileApplication.getInstance().getDataManagement().updateCreateSubCategory(category);
+                            } else {
+                                FinanceManagerMobileApplication.getInstance().getDataManagement().updateCreateMainCategory((Buchungshauptkategorie) category);
+                            }
+                            callback.onBuchungskategorieChanged(kategorie);
+                            dismiss();
+                            Toasty.success(getContext(), "Gespeichert", Toast.LENGTH_SHORT, true).show();
                         }
                     });
         }
@@ -300,16 +280,12 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
         int red = Color.red(actColor);
         int green = Color.green(actColor);
         int blue = Color.blue(actColor);
-        int mainCategoryId;
-        if(update) {
-            mainCategoryId = (!kategorie.isÜberkategorie()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0;
-        } else {
-            mainCategoryId = (rdbUnterkategorie.isChecked()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0;
-        }
+        int mainCategoryId = (!kategorie.isÜberkategorie()) ? ((Buchungshauptkategorie) cboÜberkategorie.getTag()).getId() : 0;
+
         String categoryName = txtKategorieName.getEditText().getText().toString();
         Buchungskategorie.BuchTyp buchTyp = Buchungskategorie.BuchTyp.createFromDataBaseValue(!swtAusgabe.isChecked());
 
-        Buchungskategorie category = (rdbUnterkategorie.isChecked()) ?  new Buchungskategorie(categoryId,
+        Buchungskategorie category = (!this.kategorie.isÜberkategorie()) ?  new Buchungskategorie(categoryId,
                 mainCategoryId,
                 categoryName,
                 red,
@@ -322,7 +298,7 @@ public class Verwaltung_Kategorien_Übersicht_Bearbeiten_Dialog extends DialogFr
                 red,
                 green,
                 blue,
-                new LinkedHashMap<>()
+                ((Buchungshauptkategorie) kategorie).getUnterkategorien()
         ) ;
 
         return category;
