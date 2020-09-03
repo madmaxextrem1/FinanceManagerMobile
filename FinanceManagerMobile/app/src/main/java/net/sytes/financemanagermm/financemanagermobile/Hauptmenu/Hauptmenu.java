@@ -49,12 +49,10 @@ import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Umbuchung;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungToken;
-import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.Finanzbuchung_Buchung;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Gemeinsame_Finanzen;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation_Adapter;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.ApplicationController;
-import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Finanzbuchungen;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.GlobaleVariablen;
 import net.sytes.financemanagermm.financemanagermobile.Helper.DateConversionHelper;
 import net.sytes.financemanagermm.financemanagermobile.R;
@@ -68,6 +66,7 @@ import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Dau
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Daueraufträge_Übersicht;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Kategorien_Übersicht;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Konten_Übersicht;
+import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Verwaltung_Token_Übersicht;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -157,7 +156,7 @@ public class Hauptmenu extends AppCompatActivity {
                 .withDividerBelowHeader(true)
                 .withTextColor(Color.WHITE)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(globalevariablen.getUserName()).withEmail(globalevariablen.getEmail()).withIcon(getResources().getDrawable(R.drawable.ic_user_icon))
+                        new ProfileDrawerItem().withName(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getUserName()).withEmail(FinanceManagerMobileApplication.getInstance().getDataManagement().getCurrentUser().getEmail()).withIcon(getResources().getDrawable(R.drawable.ic_user_icon))
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -195,22 +194,29 @@ public class Hauptmenu extends AppCompatActivity {
                 .withIcon(getResources().getDrawable(R.drawable.ic_list_white_24dp))
                 .withSelectedTextColor(getResources().getColor(R.color.Login_Textbox_Underline))
                 .withName(getString(R.string.activity_title_kategorien));
-        SecondaryDrawerItem daueraufträgeitem = new SecondaryDrawerItem()
+        SecondaryDrawerItem tokenItem = new SecondaryDrawerItem()
                 .withIdentifier(5)
+                .withDescriptionTextColor(Color.WHITE)
+                .withTextColor(Color.WHITE)
+                .withIcon(getResources().getDrawable(R.drawable.ic_merkmal_white_24dp))
+                .withSelectedTextColor(getResources().getColor(R.color.Login_Textbox_Underline))
+                .withName("Merkmale");
+        SecondaryDrawerItem daueraufträgeitem = new SecondaryDrawerItem()
+                .withIdentifier(6)
                 .withDescriptionTextColor(Color.WHITE)
                 .withTextColor(Color.WHITE)
                 .withIcon(getResources().getDrawable(R.drawable.ic_dauerauftraege))
                 .withSelectedTextColor(getResources().getColor(R.color.Login_Textbox_Underline))
                 .withName(getString(R.string.hauptmenu_sidedrawer_daueraufträge));
         SecondaryDrawerItem GemeinsameFinanzenItem = new SecondaryDrawerItem()
-                .withIdentifier(6)
+                .withIdentifier(7)
                 .withDescriptionTextColor(Color.WHITE)
                 .withTextColor(Color.WHITE)
                 .withIcon(getResources().getDrawable(R.drawable.ic_group_white_24dp))
                 .withSelectedTextColor(getResources().getColor(R.color.Login_Textbox_Underline))
                 .withName(getString(R.string.hauptmenu_sidedrawer_gemeinsamefinanzen));
         SecondaryDrawerItem LogOutItem = new SecondaryDrawerItem()
-                .withIdentifier(7)
+                .withIdentifier(8)
                 .withDescriptionTextColor(Color.WHITE)
                 .withTextColor(Color.WHITE)
                 .withIcon(getResources().getDrawable(R.drawable.ic_exit_to_app_white_24dp))
@@ -233,6 +239,7 @@ public class Hauptmenu extends AppCompatActivity {
                         umbuchungitem,
                         kontenitem,
                         kategorienitem,
+                        tokenItem,
                         daueraufträgeitem,
                         GemeinsameFinanzenItem,
                         new DividerDrawerItem(),
@@ -248,19 +255,22 @@ public class Hauptmenu extends AppCompatActivity {
                                 intent = new Intent(Hauptmenu.this, Umbuchung.class);
                                 startActivity(intent);
                                 break;
-                            case 4:
-                                intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
-                                break;
                             case 3:
                                 intent = new Intent(Hauptmenu.this, Verwaltung_Konten_Übersicht.class);
                                 break;
+                            case 4:
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Kategorien_Übersicht.class);
+                                break;
                             case 5:
-                                intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Token_Übersicht.class);
                                 break;
                             case 6:
-                                intent = new Intent(Hauptmenu.this, Gemeinsame_Finanzen.class);
+                                intent = new Intent(Hauptmenu.this, Verwaltung_Daueraufträge_Übersicht.class);
                                 break;
                             case 7:
+                                intent = new Intent(Hauptmenu.this, Gemeinsame_Finanzen.class);
+                                break;
+                            case 8:
                                 CustomAlertDialog logOutDialog = new CustomAlertDialog(Hauptmenu.this, "Abmelden",
                                         "Möchten Sie sich wirklich abmelden?", "Abmelden", "Abbrechen", new View.OnClickListener() {
                                     @Override

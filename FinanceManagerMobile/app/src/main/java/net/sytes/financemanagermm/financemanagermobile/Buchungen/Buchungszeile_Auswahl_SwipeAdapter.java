@@ -17,6 +17,7 @@ import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import net.sytes.financemanagermm.financemanagermobile.Datenmanagement.FinanzbuchungPosition;
 import net.sytes.financemanagermm.financemanagermobile.Globales_Sonstiges.Globale_Funktionen;
 import net.sytes.financemanagermm.financemanagermobile.R;
+import net.sytes.financemanagermm.financemanagermobile.Sign_In_Up.FinanceManagerMobileApplication;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -95,9 +96,10 @@ public class Buchungszeile_Auswahl_SwipeAdapter extends BaseSwipeAdapter {
                 notifyDataSetChanged();
             }
         });
-        int Rot = getEintragListe().get(position).getRot();
-        int Grün = getEintragListe().get(position).getGrün();
-        int Blau = getEintragListe().get(position).getBlau();
+        Buchungskategorie category = FinanceManagerMobileApplication.getInstance().getDataManagement().getCategoryById(getItem(position).getKategorieId());
+        int Rot = category.getRot();
+        int Grün = category.getGrün();
+        int Blau = category.getBlau();
         float alpha = new Globale_Funktionen().Helligkeit_Berechnen(Rot,Grün,Blau);
         Color backgroundTint = Color.valueOf(Color.rgb(Rot,Grün,Blau));
         int foregroundTint;

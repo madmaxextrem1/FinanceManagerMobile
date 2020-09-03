@@ -3,6 +3,8 @@ package net.sytes.financemanagermm.financemanagermobile.Datenmanagement;
 import android.content.Context;
 
 import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungshauptkategorie;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie;
+import net.sytes.financemanagermm.financemanagermobile.Buchungen.Buchungskategorie_Update_Interface;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.Kooperation;
 import net.sytes.financemanagermm.financemanagermobile.Gemeinsame_Finanzen.KooperationAnfrage;
 import net.sytes.financemanagermm.financemanagermobile.ServerCommunication.QueryFilter;
@@ -13,11 +15,13 @@ import net.sytes.financemanagermm.financemanagermobile.Verwaltung.Konto;
 import net.sytes.financemanagermm.financemanagermobile.Verwaltung.User;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DataManagement extends Observable {
@@ -168,5 +172,40 @@ public class DataManagement extends Observable {
     public void removeSubCategory(int mainCategoryId, int subCategoryId) {
         categories.get(mainCategoryId).getUnterkategorien().remove(subCategoryId);
         updateObservers();
+    }
+
+    public void updateCreateMainCategory(Buchungshauptkategorie category) {
+        categories.put(category.getId(), category);
+        updateObservers();
+    }
+
+    public void updateCreateSubCategory(Buchungskategorie category) {
+        categories.get(category.getÜKatId()).getUnterkategorien().put(category.getId(), category);
+        updateObservers();
+    }
+
+    public boolean rebuildCategoryHierarchy() {
+        Set<Buchungskategorie> buchungungskategorien = categories
+                .values()
+                .stream()
+                .flatMap(hauptkategorie -> hauptkategorie.getUnterkategorien().values().stream()).collect(Collectors.toSet());
+                categories.values().forEach(Buchungshauptkategorie::clearUnterkategorien);
+        buchungungskategorien.stream().sorted(Comparator.comparing(Buchungskategorie::getBeschreibung)).forEach(unterkategorie ->
+                categories.get(unterkategorie.getÜKatId()).getUnterkategorien().put(unterkategorie.getId(), unterkategorie)
+        );
+
+        return true;
+    }
+
+    public Buchungskategorie getCategoryById(int categoryId) {
+        List<Buchungskategorie> list = new ArrayList<Buchungskategorie>();
+        list.addAll(categories.values()
+                .stream().flatMap(hauptkategorie -> hauptkategorie.getUnterkategorien().values().stream()).collect(Collectors.toSet()));
+        list.addAll(categories.values()
+                .stream().map(hauptkategorie -> (Buchungskategorie) hauptkategorie).collect(Collectors.toSet()));
+
+        updateObservers();
+        return list.stream().filter(kategorie -> kategorie.getId() == categoryId).findFirst().orElse(null);
+
     }
 }

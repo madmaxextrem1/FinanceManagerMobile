@@ -88,6 +88,16 @@
                 android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
         </activity>
         <activity
+            android:name=".Verwaltung.Verwaltung_Token_Übersicht"
+            android:label="@string/title_activity_token_uebersicht"
+            android:parentActivityName=".Hauptmenu.Hauptmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sytes.financemanagermm.financemanagermobile.Hauptmenu.Hauptmenu" />
+        </activity>
+        <activity
             android:name=".Verwaltung.Verwaltung_Kategorien_Übersicht"
             android:label="@string/activity_title_kategorien"
             android:parentActivityName=".Hauptmenu.Hauptmenu"
