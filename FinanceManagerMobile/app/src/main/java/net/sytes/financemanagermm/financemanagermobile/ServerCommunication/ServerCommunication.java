@@ -667,9 +667,9 @@ public final class ServerCommunication implements ServerCommunicationInterface {
                     category.setId(categoryId);
                 } catch (JSONException e) {
                     Log.d("JsonException", e.getMessage());
-                    Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + e.getMessage(), Toast.LENGTH_LONG, true).show();
                 } catch (Exception e) {
-                    Toasty.error(context, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    Toasty.error(context, e.getMessage(), Toast.LENGTH_LONG, true).show();
                     e.printStackTrace();
                     Log.d("Kategorie erstellen: ", e.getMessage());
                 }
@@ -681,7 +681,7 @@ public final class ServerCommunication implements ServerCommunicationInterface {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + error.getMessage(), Toast.LENGTH_SHORT, true).show();
+                Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + error.getMessage(), Toast.LENGTH_LONG, true).show();
             }
         };
 
@@ -720,40 +720,34 @@ public final class ServerCommunication implements ServerCommunicationInterface {
     @Override
     public void createToken(FinanzbuchungToken token, GeneralCommunicationCallback<FinanzbuchungToken> callback) {
         HashMap<String, String> postData = new HashMap<String, String>();
-        postData.put("UserID", String.valueOf(userId));
-        postData.put("üKatId", String.valueOf(category.getÜKatId()));
-        postData.put("red", String.valueOf(category.getRot())) ;
-        postData.put("green", String.valueOf(category.getGrün()));
-        postData.put("blue", String.valueOf(category.getBlau()));
-        postData.put("kategorieName", category.getBeschreibung());
-        postData.put("buchtyp", String.valueOf(category.getBuchtyp().getDatabaseValue()));
+        postData.put("UserId", String.valueOf(token.getBenutzerId()));
+        postData.put("Beschreibung", token.getBeschreibung());
 
-        String URL = context.getResources().getString(R.string.PHP_Scripts_Kategorie_Anlegen);
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Tokens_Create);
 
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try {
-                    int categoryId = response.getInt("Id");
-                    category.setId(categoryId);
+                    int tokenId = response.getInt("Id");
+                    token.setTokenId(tokenId);
                 } catch (JSONException e) {
                     Log.d("JsonException", e.getMessage());
-                    Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    Toasty.error(context, "Token konnte nicht erstellt werden: " + e.getMessage(), Toast.LENGTH_LONG, true).show();
                 } catch (Exception e) {
-                    Toasty.error(context, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    Toasty.error(context, e.getMessage(), Toast.LENGTH_LONG, true).show();
                     e.printStackTrace();
-                    Log.d("Kategorie erstellen: ", e.getMessage());
+                    Log.d("Token erstellen: ", e.getMessage());
                 }
 
-                callback.onRequestCompleted(category);
+                callback.onRequestCompleted(token);
             }
         };
 
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(context, "Kategorie konnte nicht erstellt werden: " + error.getMessage(), Toast.LENGTH_SHORT, true).show();
+                Toasty.error(context, "Token konnte nicht erstellt werden: " + error.getMessage(), Toast.LENGTH_LONG, true).show();
             }
         };
 
@@ -765,7 +759,43 @@ public final class ServerCommunication implements ServerCommunicationInterface {
 
     @Override
     public void updateToken(FinanzbuchungToken token, GeneralCommunicationCallback<FinanzbuchungToken> callback) {
+        HashMap<String, String> postData = new HashMap<String, String>();
+        postData.put("Id", String.valueOf(token.getTokenId()));
+        postData.put("Beschreibung", token.getBeschreibung());
 
+        String URL = context.getResources().getString(R.string.PHP_Scripts_Tokens_Update);
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getString("Result").equals("error")) {
+                        Toasty.error(context, "Token konnte nicht geupdated werden", Toast.LENGTH_LONG, true).show();
+                    }
+                } catch (JSONException e) {
+                    Log.d("JsonException", e.getMessage());
+                    Toasty.error(context, "Token konnte nicht geupdated werden: " + e.getMessage(), Toast.LENGTH_LONG, true).show();
+                } catch (Exception e) {
+                    Toasty.error(context, e.getMessage(), Toast.LENGTH_LONG, true).show();
+                    e.printStackTrace();
+                    Log.d("Token update: ", e.getMessage());
+                }
+
+                callback.onRequestCompleted(token);
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(context, "Kategorie konnte nicht geupdated werden: " + error.getMessage(), Toast.LENGTH_SHORT, true).show();
+            }
+        };
+
+        // the response listener
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postData), responseListener, errorListener);
+
+        addToRequestQueue(request);
     }
 
     @Override
